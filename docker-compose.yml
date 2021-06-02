@@ -3,11 +3,10 @@ version: "3"
 
 services:
   ckan-web:
-    build:
-      context: ckan/
-      args:
-        REQUIREMENTS_FILE: requirements.txt
-    command: "/srv/app/start_ckan_web_dev.sh"
+    image: doi-ckan:latest
+    # image: doi-ckan:dev
+    command: "/srv/app/start_ckan_web.sh"
+    # command: "/srv/app/start_ckan_web_dev.sh"
     env_file:
       - .env
     depends_on:
@@ -22,9 +21,9 @@ services:
       - ./requirements:/requirements
 
   ckan-worker:
-    build:
-      context: ckan/
-    command: "/srv/app/start_ckan_worker.sh"
+    image: doi-ckan:latest
+    # image: doi-ckan:dev
+    command: "/srv/app/start_ckan_worker.sh wait_for_init ckan-web 5000"
     env_file:
       - .env
     depends_on:
@@ -32,6 +31,8 @@ services:
       - solr
       - redis
       - ckan-web
+    volumes:
+      - ./src:/srv/app/src_extensions
 
   db:
     env_file:
@@ -47,7 +48,7 @@ services:
     ports:
       - "8983:8983"
     volumes:
-      - solr_data:/opt/solr/server/solr/ckan/data/index
+      - solr_data:/opt/solr/server/solr/ckan/data
 
   redis:
     image: redis:alpine

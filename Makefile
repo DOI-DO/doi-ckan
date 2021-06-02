@@ -1,6 +1,11 @@
 .PHONY: admin build clean finalize-harvest test prune up requirements
 
 build:
+	docker build -t doi-ckan:latest ckan/
+	docker-compose build
+
+build-dev:
+	docker build --build-arg CKAN_ENV=development -t doi-ckan:dev ckan/
 	docker-compose build
 
 check-harvests:
@@ -10,6 +15,9 @@ check-harvests:
 
 clean:
 	docker-compose down -v --remove-orphans
+
+debug:
+	docker-compose run --service-ports ckan-web
 
 finalize-harvest:
 	docker-compose exec ckan-worker supervisorctl start ckan-worker-run
@@ -21,11 +29,14 @@ prune:
 	docker system prune -a
 
 requirements:
-	docker-compose run --rm -T ckan-web pip --quiet freeze > ckan/requirements-freeze.txt
+	docker-compose run --rm -T ckan-web /requirements/requirements.sh
 
 seed-harvests:
 	python tools/harvest_source_import/import_harvest_sources.py
 	docker-compose exec ckan-worker bash -c 'paster --plugin=ckanext-harvest harvester job-all -c $CKAN_INI'
+
+test:
+	curl --silent --fail http://localhost:5000
 
 test-import-tool:
 	cd tools/harvest_source_import && \
