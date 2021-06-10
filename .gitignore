@@ -1,5 +1,7 @@
 *.key
 *.log
+*.png
 *.csv
 checks/
 videos/
+output.xml

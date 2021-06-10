@@ -4,6 +4,8 @@ services:
     ckan-web:
         environment:
             - CKAN_SITE_URL=http://ckan-web:5000 # Setup redirects to work inside docker-compose
+        volumes:
+            - ./e2e/00-setup-cypress-user.sh:/docker-entrypoint.d/00-setup-cypress-user.sh
     cypress:
         image: cypress/included:7.3.0
         entrypoint: []
