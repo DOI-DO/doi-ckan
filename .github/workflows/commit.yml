@@ -24,14 +24,9 @@ jobs:
       
       - name: build
         run: make build
-
-      - name: up
-        run: docker-compose up -d
       
       - name: test
-        run: |
-          sleep 90
-          make test
+        run: make test
 
   deploy-xentity:
     if: github.ref == 'refs/heads/production'
