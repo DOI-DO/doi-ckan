@@ -1,0 +1,17 @@
+it('Visit Harvest Page', () => {
+    cy.visit('/user/login')
+    cy.get('#field-login').type('cypress-user')
+    cy.get('#field-password').type('cypress-user-password')
+    cy.get('form').submit()
+    cy.visit('/organization/new')
+    cy.get('#field-name').type('cypress-test-org')
+    cy.screenshot()
+    //cy.get('#field-url').type('cypress-test-org')
+    cy.get('#field-description').type('cypress test description')
+    cy.screenshot()
+    cy.get('form').submit()
+    cy.screenshot()
+    //cy.request('/organization/cypress-test-org')
+    cy.visit('/harvest?organization=cypress-test-org')
+    cy.screenshot()
+});
