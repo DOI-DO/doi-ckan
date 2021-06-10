@@ -112,6 +112,12 @@ to be `./saxon-license-doi.lic:/etc/saxon-license.lic`
 1. Evaluate your local harvest sources compared with prod `make check-harvests`
 
 
+### Run the Cypress Tests
+1. Run `make clean build up`
+1. Create the cypress testing user with `make cypress-user`
+1. Run the `make test` command
+
+
 ### Useful Sites
 
 - [okfn-docker-ckan](https://github.com/okfn/docker-ckan)
