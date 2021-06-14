@@ -17,5 +17,7 @@ describe('Harvest', () => {
                         'datajson',
                         'cypress-test-org')
         cy.screenshot()
+        cy.visit('/harvest')
+        cy.screenshot()
     })
 })

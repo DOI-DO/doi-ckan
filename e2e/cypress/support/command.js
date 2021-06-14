@@ -70,5 +70,5 @@ Cypress.Commands.add('create_harvest', (harvestUrl, harvestTitle, harvestDesc, h
         force: true
     })*/
     cy.get('.btn-primary').should('contain', 'Save')
-    cy.get('form').submit()
+    cy.get('#save').click()
 })
