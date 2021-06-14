@@ -29,3 +29,46 @@ Cypress.Commands.add('login', (user, pw) => {
     cy.get('#field-password').type(pw)
     cy.get('form').submit()
 })
+
+
+Cypress.Commands.add('create_organization', (orgName, title, desc) => {
+    cy.request({
+        url: '/api/action/organization_create',
+        method: 'POST',
+        body: {
+            "description": desc,
+            "title": title,
+            "id": orgName,
+            "approval_status": "approved",
+            "state": "active",
+            "name": orgName
+        },
+        form: true
+    })
+})
+
+
+Cypress.Commands.add('delete_organization', (orgName) => {
+    cy.request({
+        url: '/api/action/organization_purge',
+        method: 'POST',
+        body: {
+            "id": orgName
+        },
+        form: false
+    })
+})
+
+
+Cypress.Commands.add('create_harvest', (harvestUrl, harvestTitle, harvestDesc, harvestType, org) => {
+    cy.visit('/harvest/new')
+    cy.get('#field-url').type(harvestUrl)
+    cy.get('#field-title').type(harvestTitle)
+    cy.get('#field-notes').type(harvestDesc)
+    cy.get('[type="radio"]').check(harvestType)
+    cy.get('#field-private_datasets').check('False')
+    cy.get('#select2-result-label-9').select(org, {
+        force: true
+    })
+    cy.get('#save').submit()
+})
