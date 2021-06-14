@@ -54,8 +54,7 @@ Cypress.Commands.add('delete_organization', (orgName) => {
         method: 'POST',
         body: {
             "id": orgName
-        },
-        form: false
+        }
     })
 })
 
