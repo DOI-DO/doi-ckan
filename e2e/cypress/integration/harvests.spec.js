@@ -1,4 +1,4 @@
-describe('Harvest Creation', () => {
+describe('Harvest', () => {
     before(() => {
         cy.login('cypress-user', 'cypress-user-password')
         cy.delete_organization('cypress-test-org')
@@ -7,10 +7,10 @@ describe('Harvest Creation', () => {
     beforeEach(() => {
         Cypress.Cookies.preserveOnce('auth_tkt', 'ckan')
     })
-    it('Create Harvest Source VALID', () => {
+    it('Create datajson Harvest Source VALID', () => {
         cy.create_harvest('https://ecos.fws.gov/ServCat/OpenData/FWS_ServCat_v1_1.json',
-                        'cypress-harvest',
-                        'cypress test',
+                        'cypress-harvest-datajson',
+                        'cypress test datajson',
                         'datajson',
                         'cypress-test-org')
         //cy.visit('/harvest/new')

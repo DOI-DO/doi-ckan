@@ -1,4 +1,4 @@
-describe('Create Organization', () => {
+describe('Organization', () => {
     before(() => {
         cy.login('cypress-user', 'cypress-user-password')
     })
