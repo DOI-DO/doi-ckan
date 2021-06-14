@@ -65,9 +65,10 @@ Cypress.Commands.add('create_harvest', (harvestUrl, harvestTitle, harvestDesc, h
     cy.get('#field-title').type(harvestTitle)
     cy.get('#field-notes').type(harvestDesc)
     cy.get('[type="radio"]').check(harvestType)
-    cy.get('#field-private_datasets').check('False')
-    cy.get('#select2-result-label-9').select(org, {
+    cy.get('#field-private_datasets').select('False')
+    /*cy.get('input[aria-activedescendant="select2-result-label-6"]').type(org+'{enter}', {
         force: true
-    })
-    cy.get('#save').submit()
+    })*/
+    cy.get('.btn-primary').should('contain', 'Save')
+    cy.get('form').submit()
 })

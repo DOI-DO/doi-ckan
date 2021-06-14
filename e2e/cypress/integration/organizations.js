@@ -5,6 +5,9 @@ describe('Organization', () => {
     beforeEach(() => {
         //Cypress.Cookies.preserveOnce('auth_tkt', 'ckan')
     })
+    after(() => {
+        cy.delete_organization('cypress-test-org')
+    })
     it('Create Organization', () => {
         //cy.visit('/organization/new')
         //cy.get('#field-name').type('cypress-test-org')
@@ -15,7 +18,7 @@ describe('Organization', () => {
         // cy.screenshot()
 
         // Organization creation not working, using API
-        cy.delete_organization('cypress-test-org')
+        //cy.delete_organization('cypress-test-org')
         cy.create_organization('cypress-test-org', 'cypress-test-org', 'cypress test description')
         cy.visit('/organization')
         cy.screenshot()
