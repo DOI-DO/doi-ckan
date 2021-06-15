@@ -32,19 +32,10 @@ Cypress.Commands.add('login', (user, pw) => {
 
 
 Cypress.Commands.add('create_organization', (orgName, title, desc) => {
-    cy.request({
-        url: '/api/action/organization_create',
-        method: 'POST',
-        body: {
-            "description": desc,
-            "title": title,
-            "id": orgName,
-            "approval_status": "approved",
-            "state": "active",
-            "name": orgName
-        },
-        form: true
-    })
+    cy.visit('/organization/new')
+    cy.get('#field-name').type(orgName)
+    cy.get('#field-description').type(desc)
+    cy.get('button[type=submit]').click()
 })
 
 
@@ -65,10 +56,10 @@ Cypress.Commands.add('create_harvest', (harvestUrl, harvestTitle, harvestDesc, h
     cy.get('#field-title').type(harvestTitle)
     cy.get('#field-notes').type(harvestDesc)
     cy.get('[type="radio"]').check(harvestType)
+    // Set harvest to be public always, per best practices
     cy.get('#field-private_datasets').select('False')
-    /*cy.get('input[aria-activedescendant="select2-result-label-6"]').type(org+'{enter}', {
-        force: true
-    })*/
-    cy.get('.btn-primary').should('contain', 'Save')
-    cy.get('#save').click()
+    
+    cy.get('input[name=save]').click()
+    // harvestTitle must not contain spaces, otherwise the URL redirect will not confirm
+    cy.location('pathname').should('eq', '/harvest/' + harvestTitle)
 })

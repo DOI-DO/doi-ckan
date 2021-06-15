@@ -6,7 +6,7 @@ describe('Organization', () => {
         //Cypress.Cookies.preserveOnce('auth_tkt', 'ckan')
     })
     after(() => {
-        cy.delete_organization('cypress-test-org')
+        // cy.delete_organization('cypress-test-org')
     })
     it('Create Organization', () => {
         //cy.visit('/organization/new')
