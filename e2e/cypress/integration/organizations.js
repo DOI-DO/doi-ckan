@@ -20,6 +20,7 @@ describe('Organization', () => {
         // Organization creation not working, using API
         //cy.delete_organization('cypress-test-org')
         cy.create_organization('cypress-test-org', 'cypress-test-org', 'cypress test description')
+        cy.screenshot()
         cy.visit('/organization')
         cy.screenshot()
 
