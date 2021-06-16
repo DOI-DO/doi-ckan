@@ -94,3 +94,8 @@ Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harv
 Cypress.Commands.add('delete_harvest_source', (harvestName) => {
     cy.visit('/harvest/delete/'+harvestName+'?clear=True')
 })
+
+
+Cypress.Commands.add('start_havest_job', (harvestName) => {
+    
+})
