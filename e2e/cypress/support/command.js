@@ -60,6 +60,7 @@ Cypress.Commands.add('delete_organization', (orgName) => {
     cy.request({
         url: '/api/action/organization_purge',
         method: 'POST',
+        failOnStatusCode: false,
         body: {
             "id": orgName
         }
@@ -99,6 +100,8 @@ Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harv
 
 Cypress.Commands.add('delete_harvest_source', (harvestName) => {
     cy.visit('/harvest/delete/'+harvestName+'?clear=True')
+    // TODO: purging harvest source with /api/action/dataset_purge
+    // https://docs.ckan.org/en/2.8/api/index.html#ckan.logic.action.delete.dataset_purge
 })
 
 

@@ -1,26 +1,24 @@
-describe('Harvest', () => {
+describe('Datajson Harvest', () => {
     const harvestOrg = 'cypress-harvest-org'
     const harvestSourceName = 'cypress-harvest-datajson'
 
     before(() => {
         cy.login('cypress-user', 'cypress-user-password')
-        //cy.delete_organization('cypress-harvest-org')
+        // Make sure organization does not exist before creating
+        cy.delete_organization(harvestOrg)
         cy.create_organization(harvestOrg, harvestOrg, 'cypress harvest org description')
-        //try {
-        //    cy.delete_harvest_source('cypress-harvest-datajson')
-        //} catch (error) {
-        //    console.log(error)
-        //}
     })
     beforeEach(() => {
+        // Keep session to stay logged in
         Cypress.Cookies.preserveOnce('auth_tkt', 'ckan')
     })
-    afterEach(() => {
-        // Need to remove all data by clearing harvest source, and purging
-        // harvest source with /api/action/dataset_purge
-        // https://docs.ckan.org/en/2.8/api/index.html#ckan.logic.action.delete.dataset_purge
-        // cy.delete_organization('cypress-test-org')
-        // cy.delete_harvest_source('cypress-harvest-datajson')
+    after(() => {
+        // Clear harvest source
+        cy.visit('/harvest/admin/' + harvestSourceName)
+        cy.contains('Clear').click({force:true})
+        
+        cy.delete_harvest_source(harvestSourceName)
+        cy.delete_organization(harvestOrg)
     })
     it('Create datajson Harvest Source VALID', () => {
         cy.create_harvest_source('https://ecos.fws.gov/ServCat/OpenData/FWS_ServCat_v1_1.json',
@@ -43,8 +41,5 @@ describe('Harvest', () => {
         cy.screenshot()
         // TODO: Should find Status row of table and validate that contains Finished
         cy.should('contain', 'Finished')
-        // cy.visit('/dataset')
-        // cy.screenshot()
-        // cy.get('.module-heading span').should('contain', 'Tags')
     })
 })
