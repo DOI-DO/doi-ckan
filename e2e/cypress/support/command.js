@@ -80,6 +80,12 @@ Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harv
     cy.visit('/harvest/new')
     cy.get('#field-url').type(dataSourceUrl)
     cy.get('#field-title').type(harvestTitle)
+    cy.get('#field-name').then($field_name => {
+        if($field_name.is(':visible')) {
+            $field_name.type(harvestTitle)
+        }
+    })
+
     cy.get('#field-notes').type(harvestDesc)
     cy.get('[type="radio"]').check(harvestType)
     // Set harvest to be public always, per best practices

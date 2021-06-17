@@ -20,7 +20,7 @@ describe('Harvest', () => {
         // harvest source with /api/action/dataset_purge
         // https://docs.ckan.org/en/2.8/api/index.html#ckan.logic.action.delete.dataset_purge
         // cy.delete_organization('cypress-test-org')
-        cy.delete_harvest_source('cypress-harvest-datajson')
+        // cy.delete_harvest_source('cypress-harvest-datajson')
     })
     it('Create datajson Harvest Source VALID', () => {
         cy.create_harvest_source('https://ecos.fws.gov/ServCat/OpenData/FWS_ServCat_v1_1.json',
@@ -33,20 +33,18 @@ describe('Harvest', () => {
         cy.screenshot()
     })
     it('Start datajson Harvest Job', () => {
-        cy.create_harvest_source('https://ecos.fws.gov/ServCat/OpenData/FWS_ServCat_v1_1.json',
-                        harvestSourceName,
-                        'cypress test datajson',
-                        'datajson',
-                        harvestOrg)
-        cy.screenshot()
-        cy.visit('/harvest/'+harvestSourceName+'/job')
-        cy.screenshot()
+        cy.visit('/harvest/admin/' + harvestSourceName)
+
         cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
-        //cy.wait(300000)
-        cy.exec('make check-harvests')
+        // Should re-check each minute up to 5 minutes for completion:
+        // https://stackoverflow.com/questions/62051641/cypress-reload-page-until-element-visible
+        cy.wait(120000)
+        cy.reload(true)
         cy.screenshot()
-        cy.visit('/dataset')
-        cy.screenshot()
-        cy.get('.module-heading span').should('contain', 'Tags')
+        // TODO: Should find Status row of table and validate that contains Finished
+        cy.should('contain', 'Finished')
+        // cy.visit('/dataset')
+        // cy.screenshot()
+        // cy.get('.module-heading span').should('contain', 'Tags')
     })
 })
