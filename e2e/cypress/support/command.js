@@ -47,6 +47,11 @@ Cypress.Commands.add('create_organization', (orgName, orgDesc) => {
     cy.visit('/organization/new')
     cy.get('#field-name').type(orgName)
     cy.get('#field-description').type(orgDesc)
+    cy.get('#field-url').then($field_url => {
+        if($field_url.is(':visible')) {
+            $field_url.type(orgName)
+        }
+    })
     cy.get('button[type=submit]').click()
 })
 
@@ -106,5 +111,7 @@ Cypress.Commands.add('delete_harvest_source', (harvestName) => {
 
 
 Cypress.Commands.add('start_havest_job', (harvestName) => {
-    
+    /**
+     * TODO: Implement this method to be resuable in future tests
+     */
 })
