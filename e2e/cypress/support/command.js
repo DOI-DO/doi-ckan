@@ -94,6 +94,15 @@ Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harv
 
     cy.get('#field-notes').type(harvestDesc)
     cy.get('[type="radio"]').check(harvestType)
+    if(harvestType == 'waf'){
+        //cy.get('#text').then($text => {
+        //    if($text.val() == 'Validation'){
+        //        
+        //    }
+        //})
+        cy.get('[type="radio"]').check('iso19139ngdc')
+    }
+
     // Set harvest to be public always, per best practices
     cy.get('#field-private_datasets').select('False')
     
@@ -104,14 +113,19 @@ Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harv
 
 
 Cypress.Commands.add('delete_harvest_source', (harvestName) => {
+    cy.visit('/harvest/admin/' + harvestName)
+    cy.contains('Clear').click({force:true})
     cy.visit('/harvest/delete/'+harvestName+'?clear=True')
-    // TODO: purging harvest source with /api/action/dataset_purge
-    // https://docs.ckan.org/en/2.8/api/index.html#ckan.logic.action.delete.dataset_purge
+    
 })
 
 
 Cypress.Commands.add('start_havest_job', (harvestName) => {
-    /**
-     * TODO: Implement this method to be resuable in future tests
-     */
+    cy.visit('/harvest/' + harvestName)
+    cy.contains('Admin').click()
+    cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
+    cy.wait(120000)
+    cy.reload(true)
+    cy.contains('0 not modified').should('have.class', 'label')
+    cy.get('td').should('contain', 'Finished')
 })
