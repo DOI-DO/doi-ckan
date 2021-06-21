@@ -67,14 +67,14 @@ describe('Datajson Harvest', () => {
         /**
          * Test running the datajson harvest job
          */
-        cy.visit('/harvest/' + dataJsonHarvestSoureName)
-        cy.contains('Admin').click()
-        cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
-        cy.wait(120000)
-        cy.reload(true)
-        cy.contains('0 not modified').should('have.class', 'label')
-        cy.get('td').should('contain', 'Finished')
-       // cy.start_harvest_job(dataJsonHarvestSoureName)
+        //cy.visit('/harvest/' + dataJsonHarvestSoureName)
+        //cy.contains('Admin').click()
+        //cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
+        //cy.wait(120000)
+        //cy.reload(true)
+        //cy.contains('0 not modified').should('have.class', 'label')
+        //cy.get('td').should('contain', 'Finished')
+        cy.start_harvest_job(dataJsonHarvestSoureName)
         // Should re-check each minute up to 5 minutes for completion:
         // https://stackoverflow.com/questions/62051641/cypress-reload-page-until-element-visible
         cy.screenshot()
@@ -91,15 +91,15 @@ describe('Datajson Harvest', () => {
     })
 
     it('Start WAF ISO Harvest Job', () => {
-        cy.visit('/harvest/' + wafIsoHarvestSourceName)
-        //cy.start_harvest_job(wafIsoHarvestSourceName)
-        cy.contains('Admin').click()
-        cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
-        cy.wait(120000)
-        cy.reload(true)
-        cy.contains('0 not modified').should('have.class', 'label')
-        cy.get('td').should('contain', 'Finished')
-        cy.screenshot()
+        //cy.visit('/harvest/' + wafIsoHarvestSourceName)
+        cy.start_harvest_job(wafIsoHarvestSourceName)
+        //cy.contains('Admin').click()
+        //cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
+        //cy.wait(120000)
+        //cy.reload(true)
+        //cy.contains('0 not modified').should('have.class', 'label')
+        //cy.get('td').should('contain', 'Finished')
+        //cy.screenshot()
         
     })
 })

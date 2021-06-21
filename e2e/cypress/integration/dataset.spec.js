@@ -44,8 +44,8 @@ describe('Harvest Dataset Validation', () => {
         cy.visit('/dataset')
         cy.contains('Tags')
         cy.contains('Formats')
-        cy.get('a').should('contain', 'Series of aerial images over Monte Vista National Wildlife Refuge, acquired in 1960').parent().click()
-        cy.screenshot()
+        cy.get('a').should('contain', 'Series of aerial images over Monte Vista National Wildlife Refuge, acquired in 1960')
+        cy.visit('/dataset/series-of-aerial-images-over-monte-vista-national-wildlife-refuge-acquired-in-1960')
     })
 
     //it('waf dataset validation', () => {

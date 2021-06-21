@@ -120,7 +120,7 @@ Cypress.Commands.add('delete_harvest_source', (harvestName) => {
 })
 
 
-Cypress.Commands.add('start_havest_job', (harvestName) => {
+Cypress.Commands.add('start_harvest_job', (harvestName) => {
     cy.visit('/harvest/' + harvestName)
     cy.contains('Admin').click()
     cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
