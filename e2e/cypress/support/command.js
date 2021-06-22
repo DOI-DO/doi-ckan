@@ -23,28 +23,35 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-Cypress.Commands.add('login', (userName, password) => {
+Cypress.Commands.add('login', (userName, password, loginTest) => {
     /**
      * Method to fill and submit the DOI CKAN Login form
      * :PARAM userName String: user name of that will be attempting to login
      * :PARAM password String: password for the user logging in
      * :RETURN null:
      */
-    cy.visit('/user/login')
+    if (!loginTest) {
+        cy.visit('/user/login')
+    }
     cy.get('#field-login').type(userName)
     cy.get('#field-password').type(password)
     cy.get('form').submit()
 })
 
 
-Cypress.Commands.add('create_organization', (orgName, orgDesc) => {
+Cypress.Commands.add('create_organization', (orgName, orgDesc, orgTest) => {
     /**
      * Method to fill out the form to create a DOI CKAN organization
      * :PARAM orgName String: Name of the organization being created
      * :PARAM orgDesc String: Description of the organization being created
+     * :PARAM orgTest Boolean: Control value to determine if to use UI to create organization 
+     *      for testing or to visit the organization creation page
      * :RETURN null:
      */
-    cy.visit('/organization/new')
+
+    if (!orgTest) {
+        cy.visit('/organization/new')
+    }
     cy.get('#field-name').type(orgName)
     cy.get('#field-description').type(orgDesc)
     cy.get('#field-url').then($field_url => {
@@ -73,7 +80,7 @@ Cypress.Commands.add('delete_organization', (orgName) => {
 })
 
 
-Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harvestDesc, harvestType, org) => {
+Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harvestDesc, harvestType, org, harvestTest) => {
     /**
      * Method to create a new CKAN DOI harvest source via the CKAN DOI harvest form
      * :PARAM dataSourceUrl String: URL to source the data that will be harvested
@@ -81,9 +88,12 @@ Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harv
      * :PARAM harvestDesc String: Description of the harvest being created
      * :PARAM harvestType String: Harvest source type. Ex: waf, datajson
      * :PARAM org String: Organization that is creating the harvest source
+     * :PARAM harvestTest Boolean: Determines if to use UI in harvest source creation test or to follow the UI to create a source
      * :RETURN null:
      */
-    cy.visit('/harvest/new')
+    if (!harvestTest) {
+        cy.visit('/harvest/new')
+    }
     cy.get('#field-url').type(dataSourceUrl)
     cy.get('#field-title').type(harvestTitle)
     cy.get('#field-name').then($field_name => {

@@ -30,11 +30,11 @@ describe('Datajson Harvest', () => {
         /**
          * Login as cypress user and create an organization for testing harvest source creation and running the jobs
          */
-        cy.login('cypress-user', 'cypress-user-password')
+        cy.login('cypress-user', 'cypress-user-password', false)
         // Make sure organization does not exist before creating
         cy.delete_organization(harvestOrg)
         // Create the organization
-        cy.create_organization(harvestOrg, harvestOrg, 'cypress harvest org description')
+        cy.create_organization(harvestOrg, 'cypress harvest org description', false)
     })
     beforeEach(() => {
         /**
@@ -54,11 +54,16 @@ describe('Datajson Harvest', () => {
         /**
          * Test creating a valid datajson harvest source
          */
+        //cy.get('a[href="/organization/edit/'+harvestOrg+'"]').click()
+        cy.get('a[class="btn btn-primary"]').click()
+        cy.get('a[href="/harvest?organization='+harvestOrg+'"]').click()
+        cy.get('a[class="btn btn-primary"]').click()
         cy.create_harvest_source('https://ecos.fws.gov/ServCat/OpenData/FWS_ServCat_v1_1.json',
                         dataJsonHarvestSoureName,
                         'cypress test datajson',
                         'datajson',
-                        harvestOrg)
+                        harvestOrg,
+                        true)
         cy.screenshot()
         cy.visit('/harvest/'+dataJsonHarvestSoureName)
         cy.screenshot()
@@ -83,11 +88,16 @@ describe('Datajson Harvest', () => {
         /**
          * Create a WAF ISO Harvest Source
          */
-         cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/california/iso2/',
-            wafIsoHarvestSourceName,
-            'cypress test waf iso',
-            'waf',
-            harvestOrg)
+        cy.visit('/organization/'+harvestOrg)
+        cy.get('a[class="btn btn-primary"]').click()
+        cy.get('a[href="/harvest?organization='+harvestOrg+'"]').click()
+        cy.get('a[class="btn btn-primary"]').click()
+        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/california/iso2/',
+           wafIsoHarvestSourceName,
+           'cypress test waf iso',
+           'waf',
+           harvestOrg,
+           true)
     })
 
     it('Start WAF ISO Harvest Job', () => {

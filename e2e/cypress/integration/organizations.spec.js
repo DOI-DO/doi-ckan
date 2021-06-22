@@ -1,6 +1,6 @@
 describe('Organization', () => {
     before(() => {
-        cy.login('cypress-user', 'cypress-user-password')
+        cy.login('cypress-user', 'cypress-user-password', false)
     })
     beforeEach(() => {
         //Cypress.Cookies.preserveOnce('auth_tkt', 'ckan')
@@ -9,7 +9,10 @@ describe('Organization', () => {
         // cy.delete_organization('cypress-test-org')
     })
     it('Create Organization', () => {
-        cy.create_organization('cypress-test-org', 'cypress-test-org', 'cypress test description')
+        cy.visit('/dataset')
+        cy.get('a[class="btn btn_new"]').click()
+        cy.get('a[class="btn btn-primary"]').click()
+        cy.create_organization('cypress-test-org', 'cypress test description', true)
         cy.screenshot()
         cy.visit('/organization/cypress-test-org')
         cy.screenshot()
