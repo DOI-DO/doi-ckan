@@ -18,13 +18,13 @@ describe('Harvest Dataset Validation', () => {
                         'cypress test datajson',
                         'datajson',
                         harvestOrg)
-        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/california/iso2/',
-                        wafIsoHarvestSourceName,
-                        'cypress test waf iso',
-                        'waf',
-                        harvestOrg)
+        //cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/california/iso2/',
+        //                wafIsoHarvestSourceName,
+        //                'cypress test waf iso',
+        //                'waf',
+        //                harvestOrg)
         cy.start_harvest_job(dataJsonHarvestSoureName)
-        cy.start_harvest_job(wafIsoHarvestSourceName)  
+        //cy.start_harvest_job(wafIsoHarvestSourceName)  
     })
     
     beforeEach(() => {
@@ -35,17 +35,30 @@ describe('Harvest Dataset Validation', () => {
     })
 
     after(() => {
-        cy.delete_harvest_source(wafIsoHarvestSourceName)
+        //cy.delete_harvest_source(wafIsoHarvestSourceName)
         cy.delete_harvest_source(dataJsonHarvestSoureName)
         cy.delete_organization(harvestOrg)
     })
 
     it('datajson dataset validation', () => {
+        /**
+         * Find a datajson data set, visit it, verify the publisher, publicity, bureau code, and bureau
+         */
         cy.visit('/dataset')
         cy.contains('Tags')
         cy.contains('Formats')
-        cy.get('a').should('contain', 'Series of aerial images over Monte Vista National Wildlife Refuge, acquired in 1960')
+        //cy.get('a[href*="/dataset/series-of-aerial-images-over-monte-vista-national-wildlife-refuge-acquired-in-1960]"').click()//.should('contain', 'Series of aerial images over Monte Vista National Wildlife Refuge, acquired in 1960')
         cy.visit('/dataset/series-of-aerial-images-over-monte-vista-national-wildlife-refuge-acquired-in-1960')
+        //cy.visit('/dataset/series-of-aerial-images-over-monte-vista-national-wildlife-refuge-acquired-in-1960')
+        cy.get('a').should('contain', 'Download Metadata')
+        cy.contains('Data.json Metadata')
+        cy.get('a[class="show-more"]').click()
+        cy.get('td').should('contain', 'public')
+        cy.get('td').should('contain', '010:18')
+        cy.get('a').should('contain', 'Todd Sutherland')
+        cy.get('span').should('contain', 'Fish and Wildlife Service')
+        //cy.visit('/harvest/object/f9a5a7de-b215-445d-97f2-6e8b086eaaec')
+        cy.screenshot()
     })
 
     //it('waf dataset validation', () => {
