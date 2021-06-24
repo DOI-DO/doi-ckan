@@ -1,5 +1,5 @@
 describe('Harvest Dataset Validation', () => {
-    const harvestOrg = 'cypress-harvest-org'
+    const harvestOrg = 'cypress-validation-org'
     const dataJsonHarvestSoureName = 'cypress-harvest-datajson'
     const wafIsoHarvestSourceName = 'cypress-harvest-waf-iso'
     
