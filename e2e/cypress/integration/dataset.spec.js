@@ -19,7 +19,7 @@ describe('Harvest Dataset Validation', () => {
                         'datajson',
                         harvestOrg,
                         false)
-        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/california/iso2/',
+        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/appalachian/iso2/',
                         wafIsoHarvestSourceName,
                         'cypress test waf iso',
                         'waf',
@@ -68,8 +68,9 @@ describe('Harvest Dataset Validation', () => {
         cy.get('a[class="logo"]').click()
         cy.contains('Tags')
         cy.contains('Formats')
-        cy.visit('/dataset/maps-projected-climate-change-and-urbanization-impacts-on-the-distribution-of-ceanothus-verruco')
+        cy.visit('/dataset/essential-forests-and-key-connectors-in-the-central-appalachians-whole-system')
         cy.get('a').should('contain', 'Download Metadata')
         cy.get('a[class="show-more"]').click()
+        cy.screenshot()
     })
 })
