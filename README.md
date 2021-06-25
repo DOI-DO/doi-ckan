@@ -113,9 +113,33 @@ to be `./saxon-license-doi.lic:/etc/saxon-license.lic`
 
 
 ### Run the Cypress Tests
-1. Run `make clean build up`
 1. Create the cypress testing user with `make cypress-user`
 1. Run the `make test` command
+## Current Test Cases
+### Base Case: Loading the Main Page
+- This test ensures that the /dataset page can be visited with no pre-requisite steps
+- /dataset is the base page when a user logs into data.doi.gov
+### Test Case: User Login
+- Uses UI elements to log a user in that is created when `make test` is executed. This is a valid user.
+- Uses UI elements to log a user in that does not have credentials in the database. This is an invalid user.
+### Test Case: Organization Creation
+- Logs the test user in before the test has begun
+- Uses UI Elements to navigate to the organization creation page
+- Uses form elements to create an organization
+- Deletes the organization after the test has concluded
+### Test Case: Harvest Source Creation
+- Logs the user in and creates an organization before tests are conducted
+- Uses the UI to create a data.json harvest source
+- Executes the data.json harvest job and validates completion
+- Uses the UI to create a WAF ISO harvest source
+- Executes the WAF ISO harvest source job and validates completion
+### Test Case: Dataset Validation
+- Logs the user in, creates an organization, creates a data.json harvest source, creates a WAF ISO harvest source, executes the data.json harvest job, and executes the WAF ISO harvest job
+- Uses the UI to navigate to the dataset page
+- Validates that datasets appear on the page
+- Visits a data.json dataset and validates key pieces of metadata
+- Visits a WAF ISO dataset and validates key pieces of metadata
+
 
 
 ### Useful Sites
