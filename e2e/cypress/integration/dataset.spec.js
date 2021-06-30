@@ -42,7 +42,7 @@ describe('Harvest Dataset Validation', () => {
         cy.delete_organization(harvestOrg)
     })
 
-    it('datajson dataset validation', () => {
+    it('show that datasets exist on main page', () => {
         /**
          * Find a datajson data set, visit it, verify the publisher, publicity, bureau code, and bureau
          */
@@ -50,11 +50,20 @@ describe('Harvest Dataset Validation', () => {
         cy.get('a[class="logo"]').click()
         cy.contains('Tags')
         //cy.contains('Formats')
-        cy.get('input[id="search-big"]').type('Series of aerial images over Baca National Wildlife Refuge, acquired November, 1941')
+        
         //cy.get('a[href*="/dataset/series-of-aerial-images-over-monte-vista-national-wildlife-refuge-acquired-in-1960]"').click()
         
         //.should('contain', 'Series of aerial images over Monte Vista National Wildlife Refuge, acquired in 1960')
         //cy.visit('/dataset/series-of-aerial-images-over-monte-vista-national-wildlife-refuge-acquired-in-1960')
+    })
+
+    it('test search functionality', () => {
+        cy.get('a[class="logo"]').click()
+        cy.get('input[id="search-big"]').type('Series of aerial images over Baca National Wildlife Refuge, acquired November, 1941')
+        cy.contains('datasets found')
+    })
+
+    it('validates data json metadata', () => {
         cy.visit('/dataset/series-of-aerial-images-over-monte-vista-national-wildlife-refuge-acquired-in-1960')
         cy.get('a').should('contain', 'Download Metadata')
         cy.contains('Data.json Metadata')
