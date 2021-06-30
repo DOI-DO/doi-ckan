@@ -63,9 +63,27 @@ describe('Datajson Harvest', () => {
                         'cypress test datajson',
                         'datajson',
                         harvestOrg,
-                        true)
+                        true,
+                        false)
         cy.screenshot()
-        cy.visit('/harvest/'+dataJsonHarvestSoureName)
+       // cy.visit('/harvest/'+dataJsonHarvestSoureName)
+        // harvestTitle must not contain spaces, otherwise the URL redirect will not confirm
+        cy.location('pathname').should('eq', '/harvest/' + dataJsonHarvestSoureName)
+        cy.screenshot()
+    })
+    it('Create a datajson harvest source INVALID', () => {
+        cy.visit('/organization/'+harvestOrg)
+        cy.get('a[class="btn btn-primary"]').click()
+        cy.get('a[href="/harvest?organization='+harvestOrg+'"]').click()
+        cy.get('a[class="btn btn-primary"]').click()
+        cy.create_harvest_source('😀',
+                        'invalid datajson',
+                        'invalid datajson',
+                        'datajson',
+                        harvestOrg,
+                        true,
+                        true)
+        cy.contains('URL: Missing value')
         cy.screenshot()
     })
     it('Start datajson Harvest Job', () => {
@@ -97,7 +115,10 @@ describe('Datajson Harvest', () => {
            'cypress test waf iso',
            'waf',
            harvestOrg,
-           true)
+           true,
+           false)
+        // harvestTitle must not contain spaces, otherwise the URL redirect will not confirm
+        cy.location('pathname').should('eq', '/harvest/' + wafIsoHarvestSourceName)
     })
 
     it('Start WAF ISO Harvest Job', () => {

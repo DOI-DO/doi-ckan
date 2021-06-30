@@ -17,4 +17,12 @@ describe('Organization', () => {
         cy.visit('/organization/cypress-test-org')
         cy.screenshot()
     })
+    it('Edit Organization Description', () => {
+        cy.visit('/organization/edit/cypress-test-org')
+        cy.get('a[class="btn btn-primary"]').click()
+        cy.get('#field-description').clear()
+        cy.get('#field-description').type('the new description')
+        cy.screenshot()
+        cy.get('button[type=submit]').click()
+    })
 })

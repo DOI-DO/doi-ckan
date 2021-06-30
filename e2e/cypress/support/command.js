@@ -82,7 +82,7 @@ Cypress.Commands.add('delete_organization', (orgName) => {
 })
 
 
-Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harvestDesc, harvestType, org, harvestTest) => {
+Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harvestDesc, harvestType, org, harvestTest, invalidTest) => {
     /**
      * Method to create a new CKAN DOI harvest source via the CKAN DOI harvest form
      * :PARAM dataSourceUrl String: URL to source the data that will be harvested
@@ -96,7 +96,9 @@ Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harv
     if (!harvestTest) {
         cy.visit('/harvest/new')
     }
-    cy.get('#field-url').type(dataSourceUrl)
+    if (!invalidTest) {
+        cy.get('#field-url').type(dataSourceUrl)
+    }
     cy.get('#field-title').type(harvestTitle)
     cy.get('#field-name').then($field_name => {
         if($field_name.is(':visible')) {
@@ -119,8 +121,6 @@ Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harv
     cy.get('#field-private_datasets').select('False')
     
     cy.get('input[name=save]').click()
-    // harvestTitle must not contain spaces, otherwise the URL redirect will not confirm
-    cy.location('pathname').should('eq', '/harvest/' + harvestTitle)
 })
 
 

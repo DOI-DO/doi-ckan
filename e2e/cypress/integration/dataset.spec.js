@@ -18,12 +18,14 @@ describe('Harvest Dataset Validation', () => {
                         'cypress test datajson',
                         'datajson',
                         harvestOrg,
+                        false,
                         false)
         cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/appalachian/iso2/',
                         wafIsoHarvestSourceName,
                         'cypress test waf iso',
                         'waf',
                         harvestOrg,
+                        false,
                         false)
         cy.start_harvest_job(dataJsonHarvestSoureName)
         cy.start_harvest_job(wafIsoHarvestSourceName)  
