@@ -41,6 +41,7 @@ RUN if [ "${CKAN_ENV}" = "development" ]; then \
         apk add vim; \
         pip install --no-binary :all: -r https://raw.githubusercontent.com/ckan/ckan/${GIT_BRANCH}/dev-requirements.txt; \
         mkdir $SRC_EXTENSIONS_DIR; \
+        sed -i 's/\*\/15/*\/1/g' /etc/crontabs/root; \
     fi
 
 COPY start_ckan_web_dev.sh ${APP_DIR}

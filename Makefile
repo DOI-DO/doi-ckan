@@ -36,7 +36,7 @@ seed-harvests:
 	docker-compose exec ckan-worker bash -c 'paster --plugin=ckanext-harvest harvester job-all -c $CKAN_INI'
 
 test:
-	curl --silent --fail http://localhost:5000
+	docker-compose -f docker-compose.yml -f docker-compose.test.yml run cypress
 
 test-import-tool:
 	cd tools/harvest_source_import && \

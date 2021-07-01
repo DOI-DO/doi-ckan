@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+    ckan-web:
+        image: doi-ckan:dev
+        command: "/srv/app/start_ckan_web_dev.sh"
+        environment:
+            - CKAN_SITE_URL=http://ckan-web:5000 # Setup redirects to work inside docker-compose
+        volumes:
+            - ./e2e/00-setup-cypress-user.sh:/docker-entrypoint.d/00-setup-cypress-user.sh
+            - ./src:/srv/app/src_extensions
+            - ckan_storage:/var/lib/ckan
+            - ./requirements:/requirements
+    ckan-worker:
+        image: doi-ckan:dev
+    cypress:
+        image: cypress/included:7.3.0
+        entrypoint: []
+        command: /bin/bash -c 'npx wait-on http://ckan-web:5000 && cypress run'
+        working_dir: /e2e
+        depends_on:
+        - ckan-web
+        - ckan-worker
+        volumes:
+        - ./e2e:/e2e
