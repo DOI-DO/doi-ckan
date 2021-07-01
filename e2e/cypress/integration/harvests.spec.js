@@ -86,6 +86,11 @@ describe('Datajson Harvest', () => {
         cy.contains('URL: Missing value')
         cy.screenshot()
     })
+    it('Search harvest source', () => {
+        cy.visit('/harvest')
+        cy.get('#field-giant-search').type('datajson')
+        cy.contains('1 harvest found')
+    })
     it('Start datajson Harvest Job', () => {
         /**
          * Test running the datajson harvest job
