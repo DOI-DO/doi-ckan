@@ -144,7 +144,8 @@
       "extra": true,
       "field": "Bureau Code",
       "split": ",",
-      "wrapper": "bureau_code"
+      "wrapper": "bureau_code",
+      "default": "010:00"
     },
     "programCode": {
       "type": "array",
