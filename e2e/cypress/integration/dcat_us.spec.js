@@ -48,11 +48,17 @@ describe('Harvest Dataset Validation', () => {
         /**
          * Request the dcat-us export from the site
          */
-        cy.request('/cache_data.json')
-        .should((response) => {
+
+        //cy.visit('/data.json')
+        //let query = document.querySelector('pre').innerHTML
+        //let jsonVar = JSON.parse(query)
+        //cy.wrap(jsonVar['dataset'].length).should('be.gte', 172)
+
+        cy.screenshot()
+        cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200)
-            dcat_us = JSON.parse(response.body)
-            expect(dcat_us.dataset).to.have.length(10)
+            //let dcat_us = JSON.parse(response.body)
+            cy.wrap(response.body['dataset'].length).should('be.gte', 172)
         })
     })
 })
