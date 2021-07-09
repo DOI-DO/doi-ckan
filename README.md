@@ -114,7 +114,7 @@ to be `./saxon-license-doi.lic:/etc/saxon-license.lic`
 
 ### Run the Cypress Tests
 1. Create the cypress testing user with `make cypress-user`
-1. Run the `make test` command
+1. Run the `make build-dev test` command
 ## Current Test Cases
 ### Base Case: Loading the Main Page
 - This test ensures that the /dataset page can be visited with no pre-requisite steps
