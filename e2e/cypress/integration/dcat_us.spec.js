@@ -44,6 +44,29 @@ describe('Harvest Dataset Validation', () => {
         cy.delete_organization(harvestOrg)
     })
 
+    it('Can validate that the dcat-us file is cached', () => {
+        let time0 = performance.now();
+        let firstVisit = 0;
+
+        cy.request('/data.json')
+        cy.wrap(performance.now()).then(time1 => {
+            firstVisit = time1-time0
+            cy.writeFile('performance_log.txt', `PERFORMANCE SPEED FOR FIRST VISIT: ${time1-time0}`)
+        })
+        cy.screenshot()
+
+        let time2 = performance.now();
+        let cachedVisit = 0
+
+        cy.request('/data.json')
+        cy.wrap(performance.now()).then(time3 => {
+            cachedVisit = time3-time2
+            cy.writeFile('performance_log1.txt', `PERFORMANCE SPEED FOR CACHED VISIT: ${time3-time2}`)
+        })
+        cy.wrap(firstVisit).should('be.gte', cachedVisit)
+        cy.screenshot()
+    })
+
     it('Can generate a dcat-us file', () => {
         /**
          * Request the dcat-us export from the site
