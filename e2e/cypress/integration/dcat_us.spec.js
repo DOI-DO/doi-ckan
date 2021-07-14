@@ -20,7 +20,7 @@ describe('Harvest Dataset Validation', () => {
                         harvestOrg,
                         false,
                         false)
-        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/appalachian/iso2/',
+        cy.create_harvest_source('https://www.sciencebase.gov/data/nccwsc/iso/',
                         wafIsoHarvestSourceName,
                         'cypress test waf iso',
                         'waf',
@@ -63,7 +63,7 @@ describe('Harvest Dataset Validation', () => {
             cachedVisit = time3-time2
             cy.writeFile('performance_log1.txt', `PERFORMANCE SPEED FOR CACHED VISIT: ${time3-time2}`)
         })
-        cy.wrap(firstVisit).should('be.gte', cachedVisit)
+        cy.wrap(firstVisit).should('be.gte', 1.5*cachedVisit)
         cy.screenshot()
     })
 
@@ -81,7 +81,7 @@ describe('Harvest Dataset Validation', () => {
         cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200)
             //let dcat_us = JSON.parse(response.body)
-            cy.wrap(response.body['dataset'].length).should('be.gte', 172)
+            cy.wrap(response.body['dataset'].length).should('be.gte', 175)
         })
     })
 })

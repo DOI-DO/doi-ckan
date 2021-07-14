@@ -20,7 +20,7 @@ describe('Harvest Dataset Validation', () => {
                         harvestOrg,
                         false,
                         false)
-        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/appalachian/iso2/',
+        cy.create_harvest_source('https://www.sciencebase.gov/data/nccwsc/iso',
                         wafIsoHarvestSourceName,
                         'cypress test waf iso',
                         'waf',
@@ -28,7 +28,8 @@ describe('Harvest Dataset Validation', () => {
                         false,
                         false)
         cy.start_harvest_job(dataJsonHarvestSoureName)
-        cy.start_harvest_job(wafIsoHarvestSourceName)  
+        cy.start_harvest_job(wafIsoHarvestSourceName)
+        cy.get('td').should('contain', '2 added')  
     })
     
     beforeEach(() => {
@@ -66,7 +67,7 @@ describe('Harvest Dataset Validation', () => {
     })
 
     it('validates data json metadata', () => {
-        cy.visit('/dataset/series-of-aerial-images-over-monte-vista-national-wildlife-refuge-acquired-in-1960')
+        cy.visit('/dataset/series-of-aerial-images-over-alamosa-national-wildlife-refuge-acquired-november-1941')
         cy.get('a').should('contain', 'Download Metadata')
         cy.contains('Data.json Metadata')
         cy.get('a[class="show-more"]').click()
@@ -82,10 +83,10 @@ describe('Harvest Dataset Validation', () => {
         cy.get('a[class="logo"]').click()
         cy.contains('Tags')
         //cy.contains('Formats')
-        cy.visit('/dataset/essential-forests-and-key-connectors-in-the-central-appalachians-whole-system')
+        cy.visit('/dataset/dynamical-downscaled-and-projected-climate-for-the-us-pacific-islands')
         cy.get('a').should('contain', 'Download Metadata')
         cy.get('a[class="show-more"]').click()
-        cy.get('td').contains('eng; USA')
+        cy.get('td').contains('eng')
         cy.get('td').contains('geospatial')
         cy.screenshot()
     })
