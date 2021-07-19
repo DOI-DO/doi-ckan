@@ -20,7 +20,7 @@ describe('Harvest Dataset Validation', () => {
                         harvestOrg,
                         false,
                         false)
-        cy.create_harvest_source('https://www.sciencebase.gov/data/nccwsc/iso/',
+        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/california/iso2/',
                         wafIsoHarvestSourceName,
                         'cypress test waf iso',
                         'waf',
@@ -51,7 +51,7 @@ describe('Harvest Dataset Validation', () => {
         cy.request('/data.json')
         cy.wrap(performance.now()).then(time1 => {
             firstVisit = time1-time0
-            cy.writeFile('performance_log.txt', `PERFORMANCE SPEED FOR FIRST VISIT: ${time1-time0}`)
+            //cy.writeFile('performance_log.txt', `PERFORMANCE SPEED FOR FIRST VISIT: ${time1-time0}`)
         })
         cy.screenshot()
 
@@ -61,7 +61,7 @@ describe('Harvest Dataset Validation', () => {
         cy.request('/data.json')
         cy.wrap(performance.now()).then(time3 => {
             cachedVisit = time3-time2
-            cy.writeFile('performance_log1.txt', `PERFORMANCE SPEED FOR CACHED VISIT: ${time3-time2}`)
+            //cy.writeFile('performance_log1.txt', `PERFORMANCE SPEED FOR CACHED VISIT: ${time3-time2}`)
         })
         cy.wrap(firstVisit).should('be.gte', 1.5*cachedVisit)
         cy.screenshot()
@@ -81,7 +81,7 @@ describe('Harvest Dataset Validation', () => {
         cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200)
             //let dcat_us = JSON.parse(response.body)
-            cy.wrap(response.body['dataset'].length).should('be.gte', 175)
+            cy.wrap(response.body['dataset'].length).should('be.gte', 172)
         })
     })
 })

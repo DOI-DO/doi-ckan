@@ -115,7 +115,7 @@ describe('Datajson Harvest', () => {
         cy.get('a[class="btn btn-primary"]').click()
         cy.get('a[href="/harvest?organization='+harvestOrg+'"]').click()
         cy.get('a[class="btn btn-primary"]').click()
-        cy.create_harvest_source('https://www.sciencebase.gov/data/nccwsc/iso/',
+        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/california/iso2/',
            wafIsoHarvestSourceName,
            'cypress test waf iso',
            'waf',

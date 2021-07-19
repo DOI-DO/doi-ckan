@@ -20,7 +20,7 @@ describe('Harvest Dataset Validation', () => {
                         harvestOrg,
                         false,
                         false)
-        cy.create_harvest_source('https://www.sciencebase.gov/data/nccwsc/iso',
+        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/california/iso2/',
                         wafIsoHarvestSourceName,
                         'cypress test waf iso',
                         'waf',
@@ -29,7 +29,7 @@ describe('Harvest Dataset Validation', () => {
                         false)
         cy.start_harvest_job(dataJsonHarvestSoureName)
         cy.start_harvest_job(wafIsoHarvestSourceName)
-        cy.get('td').should('contain', '2 added')  
+        //cy.get('td').should('contain', '2 added')  
     })
     
     beforeEach(() => {
@@ -83,10 +83,10 @@ describe('Harvest Dataset Validation', () => {
         cy.get('a[class="logo"]').click()
         cy.contains('Tags')
         //cy.contains('Formats')
-        cy.visit('/dataset/dynamical-downscaled-and-projected-climate-for-the-us-pacific-islands')
+        cy.visit('/dataset/tidal-marsh-elevation-models')
         cy.get('a').should('contain', 'Download Metadata')
         cy.get('a[class="show-more"]').click()
-        cy.get('td').contains('eng')
+        cy.get('td').contains('eng; USA')
         cy.get('td').contains('geospatial')
         cy.screenshot()
     })
