@@ -20,7 +20,7 @@ describe('Harvest Dataset Validation', () => {
                         harvestOrg,
                         false,
                         false)
-        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/california/iso2/',
+        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/south-atlantic/iso2/',
                         wafIsoHarvestSourceName,
                         'cypress test waf iso',
                         'waf',
@@ -83,7 +83,7 @@ describe('Harvest Dataset Validation', () => {
         cy.get('a[class="logo"]').click()
         cy.contains('Tags')
         //cy.contains('Formats')
-        cy.visit('/dataset/tidal-marsh-elevation-models')
+        cy.visit('/dataset/blueprint-1-0-map')
         cy.get('a').should('contain', 'Download Metadata')
         cy.get('a[class="show-more"]').click()
         cy.get('td').contains('eng; USA')
