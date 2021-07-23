@@ -40,9 +40,10 @@ do
         fi
 
         # Add configuration file to testing data json extension if applicable
-        if [ -f $i = 'ckanext-datajson' ];
+        if [ $i = 'ckanext-datajson' ];
         then
             # Add configuration file
+            echo "Copying datajson configuration export map to development space"
             cp src/ckanext-datajson/ckanext/datajson/export_map/export.map.json $i/ckanext-datajson/ckanext/datajson/export_map/export.map.json
         fi
     fi
