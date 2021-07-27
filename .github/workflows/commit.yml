@@ -26,7 +26,7 @@ jobs:
         run: make build-dev
       
       - name: test
-        run: make test
+        run: make clean test
 
   deploy:
     if: github.ref == 'refs/heads/production'
