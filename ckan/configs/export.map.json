@@ -26,7 +26,7 @@
     },
     "identifier": {
       "extra": true,
-      "field": "identifier",
+      "field": "guid",
       "wrapper": "ckan_identifier"
     },
     "dataQuality": {
