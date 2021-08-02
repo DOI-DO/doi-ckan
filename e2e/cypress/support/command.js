@@ -23,6 +23,38 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+function verify_element_exists() {
+
+    /* for (let i = 0; i < 5; i++) {
+
+        if(tdText == 'Finishe') {
+            cy.wrap(tdText).should('eq', 'Finished');
+            break;
+        }
+        
+        cy.wait(30000);
+        cy.reload(true);
+        tdText = cy.get('td').eq(4).then(($td) => {
+
+            cy.log(`tdText1=${$td.text()}`);
+            let textCont = $td.text()
+             if(textCont != 'Running') {
+                textCont.should('eq', 'Finished');
+            } 
+            return textCont
+        });
+    } */
+    cy.get('td').eq(4).then(($td) => {
+        if ($td.text() == 'Finished') {
+            cy.wrap($td.text()).should('eq', 'Finished');
+        } else {
+            cy.wait(10000);
+            cy.reload(true);
+            verify_element_exists();
+        }  
+    })
+}
+
 Cypress.Commands.add('login', (userName, password, loginTest) => {
     /**
      * Method to fill and submit the DOI CKAN Login form
@@ -136,8 +168,9 @@ Cypress.Commands.add('start_harvest_job', (harvestName) => {
     cy.visit('/harvest/' + harvestName)
     cy.contains('Admin').click()
     cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
-    cy.wait(150000)
-    cy.reload(true)
-    cy.contains('0 not modified').should('have.class', 'label')
-    cy.get('td').should('contain', 'Finished')
+    verify_element_exists();
+    //cy.wait(150000)
+    //cy.reload(true)
+    //cy.contains('0 not modified').should('have.class', 'label')
+    //cy.get('td').should('contain', 'Finished')
 })

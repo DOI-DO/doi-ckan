@@ -1,11 +1,3 @@
-function rtrim(x, characters) {
-    var start = 0;
-    var end = x.length - 1;
-    while (characters.indexOf(x[end]) >= 0) {
-      end -= 1;
-    }
-    return x.substr(0, end + 1);
-}
 
 describe('iso metadata validation in dcat-us file', () => {
     const harvestOrg = 'cypress-validation-org';

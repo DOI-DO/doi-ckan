@@ -58,7 +58,7 @@ describe('Harvest Dataset Validation', () => {
         let time2 = performance.now();
         let cachedVisit = 0
 
-        cy.request('/cache_data.json')
+        cy.request('/data.json')
         cy.wrap(performance.now()).then(time3 => {
             cachedVisit = time3-time2
             //cy.writeFile('performance_log1.txt', `PERFORMANCE SPEED FOR CACHED VISIT: ${time3-time2}`)
