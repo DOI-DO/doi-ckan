@@ -1,0 +1,25 @@
+---
+# Seed the production cache daily
+
+
+name: 'Seed Production Cache'
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '00 01 * * *'
+
+jobs:
+  seed-cache:
+    name: 'seed-cache'
+    runs-on: ubuntu-latest
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    # Checkout the repository to the GitHub Actions runner
+    steps:
+      - name: seed-cache
+        run: curl https://data.doi.gov/cache_data.json
