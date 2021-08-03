@@ -38,6 +38,14 @@ do
             echo "Updating \`test.ini\` reference to \`test-core.ini\` for plugin $i"
             paster --plugin=ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
         fi
+
+        # Add configuration file to testing data json extension if applicable
+        if [ $i = 'ckanext-datajson' ];
+        then
+            # Add configuration file
+            echo "Copying datajson configuration export map to development space"
+            cp src/ckanext-datajson/ckanext/datajson/export_map/export.map.json $i/ckanext-datajson/ckanext/datajson/export_map/export.map.json
+        fi
     fi
 done
 

@@ -5,8 +5,7 @@
 -e git+https://github.com/doi-open-data/ckanext-datajson.git@master#egg=ckanext-datajson
 -e git+https://github.com/ckan/ckanext-dcat@master#egg=ckanext-dcat
 ckanext-envvars
--e git+https://github.com/GSA/ckanext-geodatagov.git@master#egg=ckanext-geodatagov
--e git+https://github.com/GSA/ckanext-googleanalyticsbasic.git@master#egg=ckanext-googleanalyticsbasic
+-e git+https://github.com/GSA/ckanext-geodatagov.git@main#egg=ckanext-geodatagov
 -e git+https://github.com/ckan/ckanext-harvest.git@master#egg=ckanext-harvest
 -e git+https://github.com/ckan/ckanext-spatial.git@master#egg=ckanext-spatial
 
