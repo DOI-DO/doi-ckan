@@ -31,5 +31,8 @@ else
   "$@"
 fi
 
+# We need to tell supervisor what jobs to run
+cp ${APP_DIR}/supervisor.worker.conf /etc/supervisord.d/worker.conf
+
 chown root:root /etc/crontabs/root && /usr/sbin/crond -f & 
 supervisord --configuration /etc/supervisord.conf
