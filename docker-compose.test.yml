@@ -2,8 +2,8 @@ version: "3"
 
 services:
     ckan-web:
-        image: doi-ckan:dev
-        command: "/srv/app/start_ckan_web_dev.sh"
+        image: doi-ckan:latest
+        command: "/srv/app/start_ckan_web.sh"
         environment:
             - CKAN_SITE_URL=http://ckan-web:5000 # Setup redirects to work inside docker-compose
         volumes:
@@ -12,13 +12,13 @@ services:
             - ckan_storage:/var/lib/ckan
             - ./requirements:/requirements
     ckan-worker:
-        image: doi-ckan:dev
+        image: doi-ckan:latest
     cypress:
         image: cypress/included:7.3.0
         entrypoint: []
         command: /bin/bash -c "npx wait-on http://ckan-web:5000 && cypress run"
         # To run specific test, use the following syntax:
-        # command: /bin/bash -c "npx wait-on http://ckan-web:5000 && cypress run --spec cypress/integration/dcat_us.spec.js"
+        # command: /bin/bash -c "npx wait-on http://ckan-web:5000/dataset && cypress run --spec cypress/integration/security.spec.js"
         working_dir: /e2e
         depends_on:
         - ckan-web

@@ -31,9 +31,7 @@ COPY start_ckan_web.sh ${APP_DIR}
 COPY prerun.py ${APP_DIR}
 
 COPY start_ckan_worker.sh ${APP_DIR}
-COPY supervisor.worker.conf ${APP_DIR}
-COPY supervisor.wsgi.conf ${APP_DIR}
-RUN rm -rf /etc/supervisord.d/*.conf
+COPY supervisor.worker.conf /etc/supervisord.d/worker.conf
 COPY harvest-run-cron /etc/crontabs/root
 
 COPY configs/export.map.json src/ckanext-datajson/ckanext/datajson/export_map/export.map.json

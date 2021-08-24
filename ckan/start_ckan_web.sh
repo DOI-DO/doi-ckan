@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Set debug to false
+echo "Disabling debug mode"
+paster --plugin=ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
+
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
 paster --plugin=ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
@@ -28,11 +32,11 @@ then
     done
 fi
 
-# We need to tell supervisor what jobs to run
-cp ${APP_DIR}/supervisor.wsgi.conf /etc/supervisord.d/wsgi.conf
+# Set the common uwsgi options
+UWSGI_OPTS="--plugins http,python,gevent --socket /tmp/uwsgi.sock --uid 92 --gid 92 --http :8080 --master --enable-threads --paste config:/srv/app/production.ini --paste-logger --lazy-apps --gevent 2000 -p 2 -L -b 32768"
 
-# Turn on supervisor to run wsgi server and nginx as reverse proxy
-supervisord --configuration /etc/supervisord.conf &
+# Start uwsgi
+sudo -u ckan -EH uwsgi $UWSGI_OPTS &
 nginx -g 'daemon off;'
 
 echo "Need to sleep before starting. zzzz...."
