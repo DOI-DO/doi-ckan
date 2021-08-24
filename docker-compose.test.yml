@@ -14,12 +14,14 @@ services:
             - ./requirements:/requirements
     ckan-worker:
         image: doi-ckan:latest
+        environment:
+            - RAPID_TEST=1
     cypress:
         image: cypress/included:7.3.0
         entrypoint: []
         command: /bin/bash -c "npx wait-on http://ckan-web:5000 && cypress run"
         # To run specific test, use the following syntax:
-        # command: /bin/bash -c "npx wait-on http://ckan-web:5000/dataset && cypress run --spec cypress/integration/security.spec.js"
+        # command: /bin/bash -c "npx wait-on http://ckan-web:5000/dataset && cypress run --spec cypress/integration/dcat_iso_validation.spec.js"
         working_dir: /e2e
         depends_on:
         - ckan-web

@@ -91,8 +91,7 @@ Cypress.Commands.add('create_organization', (orgName, orgDesc, orgTest) => {
             $field_url.type(orgName)
         }
     })
-    //cy.get('input[type="file"]').attachFile(cy.fixture('org_photo.jpg'))
-    cy.screenshot()
+
     cy.get('button[type=submit]').click()
 })
 

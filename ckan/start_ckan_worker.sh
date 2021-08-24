@@ -31,5 +31,9 @@ else
   "$@"
 fi
 
+if [ ${RAPID_TEST} = "1" ] ; then
+  sed -i 's/\*\/15/*\/1/g' /etc/crontabs/root;
+fi
+
 chown root:root /etc/crontabs/root && /usr/sbin/crond -f & 
 supervisord --configuration /etc/supervisord.conf

@@ -10,25 +10,6 @@ describe('Harvest Dataset Validation', () => {
          */
         cy.login('cypress-user', 'cypress-user-password', false)
         // Make sure organization does not exist before creating
-        cy.delete_organization(harvestOrg)
-        // Create the organization
-        cy.create_organization(harvestOrg, 'cypress harvest org description', false)
-        cy.create_harvest_source('https://ecos.fws.gov/ServCat/OpenData/FWS_ServCat_v1_1.json',
-                        dataJsonHarvestSoureName,
-                        'cypress test datajson',
-                        'datajson',
-                        harvestOrg,
-                        false,
-                        false)
-        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/south-atlantic/iso2/',
-                        wafIsoHarvestSourceName,
-                        'cypress test waf iso',
-                        'waf',
-                        harvestOrg,
-                        false,
-                        false)
-        cy.start_harvest_job(dataJsonHarvestSoureName)
-        cy.start_harvest_job(wafIsoHarvestSourceName)  
     })
     
     beforeEach(() => {
@@ -39,9 +20,9 @@ describe('Harvest Dataset Validation', () => {
     })
 
     after(() => {
-        cy.delete_harvest_source(wafIsoHarvestSourceName)
-        cy.delete_harvest_source(dataJsonHarvestSoureName)
-        cy.delete_organization(harvestOrg)
+        // cy.delete_harvest_source(wafIsoHarvestSourceName)
+        // cy.delete_harvest_source(dataJsonHarvestSoureName)
+        // cy.delete_organization(harvestOrg)
     })
 
     it('Can validate that the dcat-us file is cached', () => {

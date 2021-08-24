@@ -1,27 +1,5 @@
-let attempts = 5
-function wait_for_element_to_exist () {
-    /**
-     * Incomplete method. Will finish method on 2021-06-21
-     * Method to find element on page in cypress test after set amount of refreshes
-     * :return Boolean: Returns the found element containing the correct value
-     * TODO: Need to work around cy.wrap($td) being registered as undefined
-     */
-    let $label = Cypress.$('label')
-    cy.reload(true)
-    if ($label.length >= 1) {
-        //let tdBool = $td.length >= 5
-        //cy.log("Table log: "+ tdBool)
-        cy.log('Found label element')
-        return $label
-    } else if (--attempts) {
-        cy.wait(18000)
-        cy.log('Label not found yet. Remaining attempts: ' + attempts);
-        return wait_for_element_to_exist()
-    }
-}
-
-
 describe('Datajson Harvest', () => {
+    // Rename this only if necessary, various test dependencies
     const harvestOrg = 'cypress-harvest-org'
     const dataJsonHarvestSoureName = 'cypress-harvest-datajson'
     const wafIsoHarvestSourceName = 'cypress-harvest-waf-iso'
@@ -44,11 +22,11 @@ describe('Datajson Harvest', () => {
     })
     after(() => {
         /**
-         * Clear harvest sources
+         * Do not clear harvest sources so other tests can use
          */
-        cy.delete_harvest_source(wafIsoHarvestSourceName)
-        cy.delete_harvest_source(dataJsonHarvestSoureName)
-        cy.delete_organization(harvestOrg)
+        // cy.delete_harvest_source(wafIsoHarvestSourceName)
+        // cy.delete_harvest_source(dataJsonHarvestSoureName)
+        // cy.delete_organization(harvestOrg)
     })
     it('Create datajson Harvest Source VALID', () => {
         /**
@@ -65,11 +43,9 @@ describe('Datajson Harvest', () => {
                         harvestOrg,
                         true,
                         false)
-        cy.screenshot()
-       // cy.visit('/harvest/'+dataJsonHarvestSoureName)
+
         // harvestTitle must not contain spaces, otherwise the URL redirect will not confirm
         cy.location('pathname').should('eq', '/harvest/' + dataJsonHarvestSoureName)
-        cy.screenshot()
     })
     it('Create a datajson harvest source INVALID', () => {
         cy.visit('/organization/'+harvestOrg)
@@ -84,7 +60,6 @@ describe('Datajson Harvest', () => {
                         true,
                         true)
         cy.contains('URL: Missing value')
-        cy.screenshot()
     })
     it('Search harvest source', () => {
         cy.visit('/harvest')
@@ -92,20 +67,7 @@ describe('Datajson Harvest', () => {
         cy.contains('1 harvest found')
     })
     it('Start datajson Harvest Job', () => {
-        /**
-         * Test running the datajson harvest job
-         */
-        //cy.visit('/harvest/' + dataJsonHarvestSoureName)
-        //cy.contains('Admin').click()
-        //cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
-        //cy.wait(120000)
-        //cy.reload(true)
-        //cy.contains('0 not modified').should('have.class', 'label')
-        //cy.get('td').should('contain', 'Finished')
         cy.start_harvest_job(dataJsonHarvestSoureName)
-        // Should re-check each minute up to 5 minutes for completion:
-        // https://stackoverflow.com/questions/62051641/cypress-reload-page-until-element-visible
-        cy.screenshot()
     })
     it('Create WAF ISO Harvest Source', () => {
         /**
@@ -127,15 +89,6 @@ describe('Datajson Harvest', () => {
     })
 
     it('Start WAF ISO Harvest Job', () => {
-        //cy.visit('/harvest/' + wafIsoHarvestSourceName)
         cy.start_harvest_job(wafIsoHarvestSourceName)
-        //cy.contains('Admin').click()
-        //cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
-        //cy.wait(120000)
-        //cy.reload(true)
-        //cy.contains('0 not modified').should('have.class', 'label')
-        //cy.get('td').should('contain', 'Finished')
-        //cy.screenshot()
-        
     })
 })
