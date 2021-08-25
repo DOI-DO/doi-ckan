@@ -10,17 +10,17 @@ describe('Cleanup site', () => {
         cy.login('cypress-user', 'cypress-user-password', false)
 
         // Clear and remove all harvested data
-        // cy.delete_harvest_source(dataJsonHarvestSoureName)
-        // cy.delete_harvest_source(wafIsoHarvestSourceName)
+        cy.delete_harvest_source(dataJsonHarvestSoureName);
+        cy.delete_harvest_source(wafIsoHarvestSourceName);
 
-        // // Make sure organization does not exist before creating
-        // cy.delete_organization(harvestOrg)
-    })
-    beforeEach(() => {
-        /**
-         * Preserve the cookies to stay logged in
-         */
-        Cypress.Cookies.preserveOnce('auth_tkt', 'ckan')
+        // Sometimes things are left in the DB locally, you can use this to delete 1-off datasets
+        // cy.delete_dataset("invasive-plant-prioritization-for-inventory-and-early-detection-at-guadalupe-nipomo-dunes-");
+
+        // Make sure DB is fully cleared
+        cy.wait(1000);
+
+        // Remove organization
+        cy.delete_organization(harvestOrg)
     })
 
     it('Confirms empty site', () => {

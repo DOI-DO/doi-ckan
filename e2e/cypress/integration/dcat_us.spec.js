@@ -34,7 +34,6 @@ describe('Harvest Dataset Validation', () => {
             firstVisit = time1-time0
             //cy.writeFile('performance_log.txt', `PERFORMANCE SPEED FOR FIRST VISIT: ${time1-time0}`)
         })
-        cy.screenshot()
 
         let time2 = performance.now();
         let cachedVisit = 0
@@ -45,7 +44,6 @@ describe('Harvest Dataset Validation', () => {
             //cy.writeFile('performance_log1.txt', `PERFORMANCE SPEED FOR CACHED VISIT: ${time3-time2}`)
         })
         cy.wrap(firstVisit).should('be.gte', 1.5*cachedVisit)
-        cy.screenshot()
     })
 
     it('Can generate a dcat-us file', () => {
@@ -58,7 +56,6 @@ describe('Harvest Dataset Validation', () => {
         //let jsonVar = JSON.parse(query)
         //cy.wrap(jsonVar['dataset'].length).should('be.gte', 172)
 
-        cy.screenshot()
         cy.request('/cache_data.json').should((response) => {
             expect(response.status).to.eq(200)
             //let dcat_us = JSON.parse(response.body)

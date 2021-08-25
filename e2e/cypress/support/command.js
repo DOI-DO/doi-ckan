@@ -24,26 +24,6 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 function verify_element_exists() {
-
-    /* for (let i = 0; i < 5; i++) {
-
-        if(tdText == 'Finishe') {
-            cy.wrap(tdText).should('eq', 'Finished');
-            break;
-        }
-        
-        cy.wait(30000);
-        cy.reload(true);
-        tdText = cy.get('td').eq(4).then(($td) => {
-
-            cy.log(`tdText1=${$td.text()}`);
-            let textCont = $td.text()
-             if(textCont != 'Running') {
-                textCont.should('eq', 'Finished');
-            } 
-            return textCont
-        });
-    } */
     cy.get('td').eq(4).then(($td) => {
         if ($td.text() == 'Finished') {
             cy.wrap($td.text()).should('eq', 'Finished');
@@ -156,10 +136,26 @@ Cypress.Commands.add('create_harvest_source', (dataSourceUrl, harvestTitle, harv
 
 
 Cypress.Commands.add('delete_harvest_source', (harvestName) => {
-    cy.visit('/harvest/admin/' + harvestName)
-    cy.contains('Clear').click({force:true})
-    cy.visit('/harvest/delete/'+harvestName+'?clear=True')
-    
+    cy.visit('/harvest/admin/' + harvestName);
+    cy.contains('Clear').click({force:true});
+    cy.visit('/harvest/delete/'+harvestName+'?clear=True');
+    // Validate harvest is completely removed before returning
+    cy.wait(1000);
+})
+
+Cypress.Commands.add('delete_dataset', (datasetName) => {
+    /**
+     * Method to purge a dataset from the current state
+     * :PARAM datasetName String: Name of the dataset to purge from the current state
+     * :RETURN null:
+     */
+     cy.request({
+        url: '/api/action/dataset_purge',
+        method: 'POST',
+        body: {
+            "id": datasetName
+        }
+    })
 })
 
 
