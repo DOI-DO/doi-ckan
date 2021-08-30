@@ -6,8 +6,13 @@ http {
     proxy_temp_path /tmp/nginx_proxy 1 2;
 
     server {
+        # root /srv/app;
         listen 5000 default_server;
         client_max_body_size 100M;
+        location = /data.json {
+            alias /var/www/datajson/data.json;
+            # autoindex off;
+        }
         location / {
             proxy_pass http://127.0.0.1:8080/;
             proxy_set_header X-Forwarded-For $remote_addr;
@@ -22,6 +27,10 @@ http {
             port_in_redirect off;
             # In emergency comment out line to force caching
             # proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+        }
+
+        location /internal/data.json {
+           deny all;
         }
     }
 }

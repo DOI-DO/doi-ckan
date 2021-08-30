@@ -39,6 +39,8 @@ COPY configs/export.map.json src/ckanext-datajson/ckanext/datajson/export_map/ex
 RUN apk update && apk add nginx
 RUN adduser -D -g 'www' www && chown -R www:www /var/lib/nginx
 
+RUN mkdir /var/www/datajson/ && chown -R www /var/www/datajson/
+
 COPY nginx_ckan /etc/nginx/nginx.conf
 
 # Dev additions
