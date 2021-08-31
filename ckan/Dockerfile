@@ -26,13 +26,17 @@ RUN apk add --no-cache libffi-dev openssl-dev python3-dev
 RUN pip install "pip>=0.20.3.4,<21.0" && pip install -r requirements.txt
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
+COPY harvest-run-cron ${APP_DIR}
+COPY datajson-wget-cron ${APP_DIR}
+
 COPY start_ckan_web.sh ${APP_DIR}
 
 COPY prerun.py ${APP_DIR}
 
 COPY start_ckan_worker.sh ${APP_DIR}
 COPY supervisor.worker.conf /etc/supervisord.d/worker.conf
-COPY harvest-run-cron /etc/crontabs/root
+
+COPY wget_datajson.sh ${APP_DIR}
 
 COPY configs/export.map.json src/ckanext-datajson/ckanext/datajson/export_map/export.map.json
 
@@ -48,7 +52,7 @@ RUN if [ "${CKAN_ENV}" = "development" ]; then \
         apk add vim; \
         pip install --no-binary :all: -r https://raw.githubusercontent.com/ckan/ckan/${GIT_BRANCH}/dev-requirements.txt; \
         mkdir $SRC_EXTENSIONS_DIR; \
-        sed -i 's/\*\/15/*\/1/g' /etc/crontabs/root; \
+        # sed -i 's/\*\/15/*\/1/g' /etc/crontabs/root; \
     fi
 
 COPY start_ckan_web_dev.sh ${APP_DIR}

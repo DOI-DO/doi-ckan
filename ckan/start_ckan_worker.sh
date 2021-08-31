@@ -31,5 +31,6 @@ else
   "$@"
 fi
 
+cp /srv/app/harvest-run-cron /etc/crontabs/root
 chown root:root /etc/crontabs/root && /usr/sbin/crond -f & 
 supervisord --configuration /etc/supervisord.conf

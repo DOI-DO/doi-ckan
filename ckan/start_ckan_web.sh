@@ -34,10 +34,12 @@ fi
 
 # Set the common uwsgi options
 UWSGI_OPTS="--plugins http,python,gevent --socket /tmp/uwsgi.sock --uid 92 --gid 92 --http :8080 --master --enable-threads --paste config:/srv/app/production.ini --paste-logger --lazy-apps --gevent 2000 -p 2 -L -b 32768"
-
+cp /srv/app/datajson-wget-cron /etc/crontabs/root
+chown root:root /etc/crontabs/root && /usr/sbin/crond -f & 
 # Start uwsgi
 sudo -u ckan -EH uwsgi $UWSGI_OPTS &
 nginx -g 'daemon off;'
 
+# supervisord --configuration /etc/supervisord.conf
 echo "Need to sleep before starting. zzzz...."
 sleep 60
