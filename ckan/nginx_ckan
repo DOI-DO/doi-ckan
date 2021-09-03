@@ -25,6 +25,8 @@ http {
             proxy_cache_key $host$scheme$proxy_host$request_uri;
             # Handles redirects properly to point to same port
             port_in_redirect off;
+            # HSTS compliance
+            add_header Strict-Transport-Security "max-age=31536000;" always;
             # In emergency comment out line to force caching
             # proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
         }

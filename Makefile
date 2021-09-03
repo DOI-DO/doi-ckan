@@ -8,6 +8,10 @@ build-dev:
 	docker build --build-arg CKAN_ENV=development -t doi-ckan:dev ckan/
 	docker-compose build
 
+cypress:
+	# Turn on cypress interactive mode
+	cd e2e && CYPRESS_BASE_URL=http://localhost:5000 npx cypress open
+
 check-harvests:
 	python tools/harvest_source_import/list_harvest_sources.py --file_name report-prod
 	python tools/harvest_source_import/list_harvest_sources.py --origin_url http://localhost:5000 --file_name report-local

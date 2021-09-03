@@ -10,25 +10,6 @@ describe('Harvest Dataset Validation', () => {
          */
         cy.login('cypress-user', 'cypress-user-password', false)
         // Make sure organization does not exist before creating
-        cy.delete_organization(harvestOrg)
-        // Create the organization
-        cy.create_organization(harvestOrg, 'cypress harvest org description', false)
-        cy.create_harvest_source('https://ecos.fws.gov/ServCat/OpenData/FWS_ServCat_v1_1.json',
-                        dataJsonHarvestSoureName,
-                        'cypress test datajson',
-                        'datajson',
-                        harvestOrg,
-                        false,
-                        false)
-        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/south-atlantic/iso2/',
-                        wafIsoHarvestSourceName,
-                        'cypress test waf iso',
-                        'waf',
-                        harvestOrg,
-                        false,
-                        false)
-        cy.start_harvest_job(dataJsonHarvestSoureName)
-        cy.start_harvest_job(wafIsoHarvestSourceName)  
     })
     
     beforeEach(() => {
@@ -39,9 +20,9 @@ describe('Harvest Dataset Validation', () => {
     })
 
     after(() => {
-        cy.delete_harvest_source(wafIsoHarvestSourceName)
-        cy.delete_harvest_source(dataJsonHarvestSoureName)
-        cy.delete_organization(harvestOrg)
+        // cy.delete_harvest_source(wafIsoHarvestSourceName)
+        // cy.delete_harvest_source(dataJsonHarvestSoureName)
+        // cy.delete_organization(harvestOrg)
     })
 
     it('Can validate that the dcat-us file is cached', () => {
@@ -53,7 +34,6 @@ describe('Harvest Dataset Validation', () => {
             firstVisit = time1-time0
             //cy.writeFile('performance_log.txt', `PERFORMANCE SPEED FOR FIRST VISIT: ${time1-time0}`)
         })
-        cy.screenshot()
 
         let time2 = performance.now();
         let cachedVisit = 0
@@ -64,7 +44,6 @@ describe('Harvest Dataset Validation', () => {
             //cy.writeFile('performance_log1.txt', `PERFORMANCE SPEED FOR CACHED VISIT: ${time3-time2}`)
         })
         cy.wrap(firstVisit).should('be.gte', 1.5*cachedVisit)
-        cy.screenshot()
     })
 
     it('Can generate a dcat-us file', () => {
@@ -77,7 +56,6 @@ describe('Harvest Dataset Validation', () => {
         //let jsonVar = JSON.parse(query)
         //cy.wrap(jsonVar['dataset'].length).should('be.gte', 172)
 
-        cy.screenshot()
         cy.request('/cache_data.json').should((response) => {
             expect(response.status).to.eq(200)
             //let dcat_us = JSON.parse(response.body)

@@ -31,6 +31,13 @@ else
   "$@"
 fi
 
+# Run harvest run via cron.
 cp /srv/app/harvest-run-cron /etc/crontabs/root
+
+# Run harvest_run every minute for testing
+if [ ${RAPID_TEST} = "1" ] ; then
+  sed -i 's/\*\/15/*\/1/g' /etc/crontabs/root;
+fi
+
 chown root:root /etc/crontabs/root && /usr/sbin/crond -f & 
 supervisord --configuration /etc/supervisord.conf
