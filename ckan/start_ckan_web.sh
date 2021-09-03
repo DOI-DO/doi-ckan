@@ -96,7 +96,7 @@ chown root:root /etc/crontabs/root && /usr/sbin/crond -f &
 ./wget_datajson.sh &
 
 # Set the common uwsgi options
-UWSGI_OPTS="--plugins http,python,gevent --socket /tmp/uwsgi.sock --uid 92 --gid 92 --http :8080 --master --enable-threads --paste config:/srv/app/production.ini --paste-logger --lazy-apps --gevent 2000 -p 2 -L -b 32768"
+UWSGI_OPTS="--plugins http,python,gevent --socket /tmp/uwsgi.sock --uid 92 --gid 92 --http :5001 --master --enable-threads --paste config:/srv/app/production.ini --paste-logger --lazy-apps --gevent 2000 -p 2 -L -b 32768"
 # Start uwsgi
 sudo -u ckan -EH uwsgi $UWSGI_OPTS &
 nginx -g 'daemon off;'
