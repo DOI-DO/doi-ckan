@@ -162,10 +162,11 @@ Cypress.Commands.add('delete_dataset', (datasetName) => {
 Cypress.Commands.add('start_harvest_job', (harvestName) => {
     cy.visit('/harvest/' + harvestName)
     cy.contains('Admin').click()
+    cy.wait(3000)
+    
     cy.get('.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle)').click({force:true})
+    // Confirm harvest start
+    cy.wait(1000)
+    cy.contains(/^Confirm$/).click()
     verify_element_exists();
-    //cy.wait(150000)
-    //cy.reload(true)
-    //cy.contains('0 not modified').should('have.class', 'label')
-    //cy.get('td').should('contain', 'Finished')
 })

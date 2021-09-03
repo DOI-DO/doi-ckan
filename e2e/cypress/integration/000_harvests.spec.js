@@ -8,7 +8,7 @@ describe('Harvest', () => {
         /**
          * Login as cypress user and create an organization for testing harvest source creation and running the jobs
          */
-        cy.login('cypress-user', 'cypress-user-password', false)
+        cy.login('admin', 'password', false)
         // Make sure organization does not exist before creating
         cy.delete_organization(harvestOrg)
         // Create the organization
@@ -36,7 +36,7 @@ describe('Harvest', () => {
         cy.get('a[class="btn btn-primary"]').click()
         cy.get('a[href="/harvest?organization='+harvestOrg+'"]').click()
         cy.get('a[class="btn btn-primary"]').click()
-        cy.create_harvest_source('https://ecos.fws.gov/ServCat/OpenData/FWS_ServCat_v1_1.json',
+        cy.create_harvest_source('http://nginx-harvest-source/data.json',
                         dataJsonHarvestSoureName,
                         'cypress test datajson',
                         'datajson',
@@ -77,7 +77,7 @@ describe('Harvest', () => {
         cy.get('a[class="btn btn-primary"]').click()
         cy.get('a[href="/harvest?organization='+harvestOrg+'"]').click()
         cy.get('a[class="btn btn-primary"]').click()
-        cy.create_harvest_source('https://www.sciencebase.gov/data/lcc/california/iso2/',
+        cy.create_harvest_source('http://nginx-harvest-source/iso-waf/',
            wafIsoHarvestSourceName,
            'cypress test waf iso',
            'waf',

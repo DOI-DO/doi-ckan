@@ -7,7 +7,7 @@ describe('Cleanup site', () => {
         /**
          * Login as cypress user and create an organization for testing harvest source creation and running the jobs
          */
-        cy.login('cypress-user', 'cypress-user-password', false)
+        cy.login('admin', 'password', false)
 
         // Clear and remove all harvested data
         cy.delete_harvest_source(dataJsonHarvestSoureName);

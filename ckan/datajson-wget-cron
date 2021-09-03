@@ -1,1 +1,1 @@
-*/1 * * * * nohup bash /srv/app/wget_datajson.sh &
+10 2 * * * nohup bash /srv/app/wget_datajson.sh &

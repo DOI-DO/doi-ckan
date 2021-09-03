@@ -4,11 +4,11 @@ describe('iso metadata validation in dcat-us file', () => {
 
     it('should validate distribution field within each dataset', () => {
         cy.request('/data.json').should((response) => {
-            const dcatUsObj = response.body
+            const dcatUsObj = JSON.parse(response.body)
 
             let dcatUsObjMap = {};
 
-            for (let dataset of dcatUsObj['dataset']) {
+            dcatUsObj['dataset'].forEach(function (dataset) {
                 try {
                     // Get last distribution; for iso should be ckan download link
                     const downloadURL = dataset["distribution"][dataset["distribution"].length - 1]['downloadURL'];
@@ -21,14 +21,18 @@ describe('iso metadata validation in dcat-us file', () => {
                         dcatUsObjMap[guid] = null;
                     }
                 } catch(e) {
-                    cy.log('there was an error:');
-                    cy.log(e);
-                    cy.log(dataset["distribution"], dataset["distribution"].slice(-1)[0]);
+                    cy.log('This must be harvested from dcat-us:');
+                    cy.log(dataset.title);
+                    if(dataset["distribution"]) {
+                        cy.log(dataset["distribution"], dataset["distribution"].slice(-1)[0]);
+                    }
                 }
-            }
+            })
             // Use function to validate, as called multiple times
             const validate_guid = function(guid, dataset_title) {
                 const matched_dataset = dcatUsObj['dataset'].find(d => d.title === dataset_title);
+                cy.log(matched_dataset, dataset_title);
+                cy.log(dcatUsObjMap)
                 if(matched_dataset) {
                     expect(dcatUsObjMap[guid]).to.not.be.undefined;
                     // Validate that the url is the same as the download metadata link

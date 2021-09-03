@@ -22,6 +22,7 @@ services:
       - ./src:/srv/app/src_extensions
       - ckan_storage:/var/lib/ckan
       - ./requirements:/requirements
+      - ./ckan/nginx_ckan:/etc/nginx/nginx.conf
 
   ckan-worker:
     image: doi-ckan:latest
@@ -55,6 +56,12 @@ services:
 
   redis:
     image: redis:alpine
+
+  nginx-harvest-source:
+    image: nginx
+    volumes:
+      - ./harvest_test/harvest-sources:/usr/share/nginx/html
+      - ./harvest_test/nginx.conf:/etc/nginx/conf.d/default.conf
 
 volumes:
   ckan_storage:

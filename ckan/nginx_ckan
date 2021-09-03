@@ -11,7 +11,9 @@ http {
         client_max_body_size 100M;
         location = /data.json {
             alias /var/www/datajson/data.json;
-            # autoindex off;
+        }
+        location ~* /organization/(.+)/data.json {
+            alias /var/www/datajson/$1-data.json;
         }
         location / {
             proxy_pass http://127.0.0.1:8080/;

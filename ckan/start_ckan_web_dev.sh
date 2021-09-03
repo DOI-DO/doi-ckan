@@ -91,6 +91,4 @@ then
     done
 fi
 
-cp /srv/app/datajson-wget-cron /etc/crontabs/root
-chown root:root /etc/crontabs/root && /usr/sbin/crond -f & 
 sudo -u ckan -EH paster serve --reload $CKAN_INI

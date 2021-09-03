@@ -21,7 +21,7 @@ COPY requirements.txt ${APP_DIR}/requirements.txt
 
 # some errors installing cryptography with the ckan-base image see:
 # https://github.com/geerlingguy/JJG-Ansible-Windows/issues/28#ref-commit-b854e7a
-RUN apk add --no-cache libffi-dev openssl-dev python3-dev
+RUN apk add --no-cache libffi-dev openssl-dev python3-dev jq
 
 RUN pip install "pip>=0.20.3.4,<21.0" && pip install -r requirements.txt
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
@@ -52,7 +52,6 @@ RUN if [ "${CKAN_ENV}" = "development" ]; then \
         apk add vim; \
         pip install --no-binary :all: -r https://raw.githubusercontent.com/ckan/ckan/${GIT_BRANCH}/dev-requirements.txt; \
         mkdir $SRC_EXTENSIONS_DIR; \
-        # sed -i 's/\*\/15/*\/1/g' /etc/crontabs/root; \
     fi
 
 COPY start_ckan_web_dev.sh ${APP_DIR}
