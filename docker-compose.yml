@@ -35,6 +35,7 @@ services:
       - solr
       - redis
       - ckan-web
+      - nginx-harvest-source
     volumes:
       - ./src:/srv/app/src_extensions
 

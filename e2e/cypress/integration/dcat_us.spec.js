@@ -1,4 +1,4 @@
-describe('Harvest Dataset Validation', () => {
+describe('DCAT-US file export', () => {
     const harvestOrg = 'cypress-harvest-org'
 
     it('Can validate that the dcat-us file is cached', () => {

@@ -1,4 +1,4 @@
-describe('Harvest Dataset Validation', () => {
+describe('Dataset', () => {
 
     it('show that datasets exist on main page', () => {
         /**
