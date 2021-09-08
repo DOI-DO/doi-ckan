@@ -2,8 +2,8 @@
 
 
 sleep 10
-wget -qO /var/www/datajson/data.json localhost:8080/internal/data.json
+wget -qO /var/www/datajson/data.json localhost:5001/internal/data.json
 
-curl localhost:8080/api/action/organization_list | \
+curl localhost:5001/api/action/organization_list | \
 jq -r '.result[]' | xargs -I'{}' \
-wget -qO '/var/www/datajson/{}-data.json' 'localhost:8080/organization/{}/data.json'
+wget -qO '/var/www/datajson/{}-data.json' 'localhost:5001/organization/{}/data.json'
