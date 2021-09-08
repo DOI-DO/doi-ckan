@@ -1,86 +1,76 @@
-
 describe('iso metadata validation in dcat-us file', () => {
     const harvestOrg = 'cypress-validation-org';
     const wafIsoHarvestSourceName = 'cypress-harvest-waf-iso';
-    
-    before(() => {
-        cy.login('cypress-user', 'cypress-user-password', false);
-        cy.delete_organization(harvestOrg);
-        cy.create_organization(harvestOrg, 'cypress harvest org description', false);
-        cy.create_harvest_source(
-          "https://www.sciencebase.gov/data/lcc/south-atlantic/iso2/",
-          wafIsoHarvestSourceName,
-          "cypress test waf iso",
-          "waf",
-          harvestOrg,
-          false,
-          false
-        );
-        cy.start_harvest_job(wafIsoHarvestSourceName)
-    });
-
-    beforeEach(() => {
-        /**
-         * Preserve the cookies to stay logged in
-         */
-        Cypress.Cookies.preserveOnce('auth_tkt', 'ckan')
-    });
-
-    after(() => {
-        cy.delete_harvest_source(wafIsoHarvestSourceName);
-        cy.delete_organization(harvestOrg);
-    });
 
     it('should validate distribution field within each dataset', () => {
-        cy.request('/cache_data.json').should((response) => {
-            const dcatUsObj = response.body
+        cy.request('/data.json').should((response) => {
+            const dcatUsObj = JSON.parse(response.body)
 
-            for (let i = 0; i < dcatUsObj["dataset"].length; i++) {
+            let dcatUsObjMap = {};
 
-                let downloadURL =
-                  dcatUsObj["dataset"][i]["distribution"][
-                    dcatUsObj["dataset"][i]["distribution"].length - 1
-                  ]['downloadURL'].replace('http://ckan-web:5000', '');
-                
-                let guid = dcatUsObj['dataset'][i]['identifier'];
-                
-                let titleURL = dcatUsObj["dataset"][i]["title"]
-                  .split("(")
-                  .join("")
-                  .split(")")
-                  .join("")
-                  .split(":")
-                  .join("")
-                  .split(",")
-                  .join("")
-                  .split(".")
-                  .join("-")
-                  .split('’')
-                  .join('')
-                  .split('\'')
-                  .join('')
-                  .split(" ")
-                  .join("-")
-                  .slice(0, 95)
-                  .toLowerCase();
+            dcatUsObj['dataset'].forEach(function (dataset) {
+                try {
+                    // Get last distribution; for iso should be ckan download link
+                    const downloadURL = dataset["distribution"][dataset["distribution"].length - 1]['downloadURL'];
+                    let guid = dataset['identifier'];
 
-                //this dataset was an edge case that couldn't be transformed like the other URLs
-                if (titleURL == 'marsh-classification-vector-polygons-for-the-south-atlantic-landscape-conservation-cooperative-') {
-                    titleURL = 'marsh-classification-vector-polygons-for-the-south-atlantic-landscape-conservation-coopera-2014';
+                    if(downloadURL) {
+                        dcatUsObjMap[guid] = downloadURL.replace('http://ckan-web:5000', '').replace('http://localhost:5000', '');
+                    } else {
+                        // Must be a data json source
+                        dcatUsObjMap[guid] = null;
+                    }
+                } catch(e) {
+                    cy.log('This must be harvested from dcat-us:');
+                    cy.log(dataset.title);
+                    if(dataset["distribution"]) {
+                        cy.log(dataset["distribution"], dataset["distribution"].slice(-1)[0]);
+                    }
                 }
-
-                cy.visit('/dataset/'+titleURL);
-                cy.get('a[class="show-more"]').click();
-                //cy.wrap((cy.get('td[class="dataset-details"').eq(2))).should('contain', guid)
-                cy.get('td[class="dataset-details"').eq(2).then(($td) => {
-                    cy.wrap($td.text().trim()).should('eq', `${guid}`)
-                });
-
-                cy.get('a[href="'+downloadURL+'"]').should('contain', 'Download Metadata');
-
-
+            })
+            // Use function to validate, as called multiple times
+            const validate_guid = function(guid, dataset_title) {
+                const matched_dataset = dcatUsObj['dataset'].find(d => d.title === dataset_title);
+                cy.log(matched_dataset, dataset_title);
+                cy.log(dcatUsObjMap)
+                if(matched_dataset) {
+                    expect(dcatUsObjMap[guid]).to.not.be.undefined;
+                    // Validate that the url is the same as the download metadata link
+                    cy.get(`a[href="${dcatUsObjMap[guid]}"]`).should('contain', 'Download Metadata');
+                } else {
+                    cy.log(`${dataset_title} had an error exporting to dcat-us, ignore in this test`);
+                    expect(true).to.be.true;
+                }
             }
+
+            // Get all ISO harvest source datasets
+            cy.request('/api/action/package_search?q=harvest_source_title:cypress-harvest-waf-iso&rows=1000').then((response) => {
+                // Visit each dataset page
+                for( let dataset of response.body.result.results) {
+                    cy.visit('/dataset/'+dataset.name);
+
+                    // Get the GUID element value, check 0, 1, & 2 (normally 1)
+                    cy.get('td[class="dataset-details"').eq(1).then(($td) => {
+                        const guid = $td.text().trim();
+                        //If it doesn't exist, try a different array element
+                        if(!dcatUsObjMap[guid]) {
+                            cy.get('td[class="dataset-details"').eq(0).then(($td) => {
+                                const guid = $td.text().trim();
+                                if(!dcatUsObjMap[guid]) {
+                                    cy.get('td[class="dataset-details"').eq(2).then(($td) => {
+                                        const guid = $td.text().trim();
+                                        validate_guid(guid, dataset.title);
+                                    });
+                                } else {
+                                    validate_guid(guid, dataset.title);
+                                }
+                            });
+                        } else {
+                            validate_guid(guid, dataset.title);
+                        }
+                    });
+                }
+            }) 
         });
     });
-
 });
