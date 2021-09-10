@@ -6,3 +6,4 @@ checks/
 videos/
 output.xml
 node_modules/
+package-lock.json
