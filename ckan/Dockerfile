@@ -36,7 +36,7 @@ COPY prerun.py ${APP_DIR}
 COPY start_ckan_worker.sh ${APP_DIR}
 COPY supervisor.worker.conf /etc/supervisord.d/worker.conf
 
-COPY wget_datajson.sh ${APP_DIR}
+COPY create_datajson.sh ${APP_DIR}
 
 COPY configs/export.map.json src/ckanext-datajson/ckanext/datajson/export_map/export.map.json
 
