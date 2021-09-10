@@ -11,12 +11,9 @@ on:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/production'
     name: deploy
     environment: production
     runs-on: ubuntu-latest
-    needs:
-      - test
     steps:
       - name: checkout
         uses: actions/checkout@v2
