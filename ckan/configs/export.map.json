@@ -1,5 +1,5 @@
 {
-  "validation_enabled": true,
+  "validation_enabled": false,
   "debug": false,
   "catalog_headers": {
     "conformsTo": "https://project-open-data.cio.gov/v1.1/schema",
