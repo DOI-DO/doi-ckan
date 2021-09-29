@@ -36,6 +36,13 @@ If you need to run a one-off ckan command (like rebuild search-index), use the f
 
 `docker-compose exec ckan-worker bash -c 'paster --plugin=ckan search-index rebuild -c $CKAN_INI'`
 
+##### Debug extension locally
+If you want to debug an extension and still have easy access to your normal IDE, you
+can pull the extension into the `src/` folder. This folder is mapped via a volume in
+docker-compose, and is installed in the ckan start scripts (harvester not implemented).
+Any changes made locally should automatically be applied, if not in real time then on
+a restart of the image.
+
 ### Release
 
 To build a production ready version of the application, you will want to clean and rebuild:
