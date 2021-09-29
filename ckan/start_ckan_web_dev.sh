@@ -9,25 +9,14 @@ do
     if [ -d $i ];
     then
 
-        if [ -f $i/pip-requirements.txt ];
-        then
-            pip install -r $i/pip-requirements.txt
-            echo "Found requirements file in $i"
-        fi
-        if [ -f $i/requirements.txt ];
-        then
-            pip install -r $i/requirements.txt
-            echo "Found requirements file in $i"
-        fi
-        if [ -f $i/dev-requirements.txt ];
-        then
-            pip install -r $i/dev-requirements.txt
-            echo "Found dev-requirements file in $i"
-        fi
         if [ -f $i/setup.py ];
         then
             cd $i
-            python $i/setup.py develop
+            # Uninstall any current implementation of the code
+            echo uninstalling "${PWD##*/}"
+            pip uninstall "${PWD##*/}"
+            # Install the extension in editable mode
+            pip install -e .
             echo "Found setup.py file in $i"
             cd $APP_DIR
         fi
@@ -44,10 +33,16 @@ do
         then
             # Add configuration file
             echo "Copying datajson configuration export map to development space"
-            cp src/ckanext-datajson/ckanext/datajson/export_map/export.map.json $i/ckanext-datajson/ckanext/datajson/export_map/export.map.json
+            cp export.map.json $i/ckanext-datajson/ckanext/datajson/export_map/export.map.json
         fi
     fi
 done
+
+# Copy export.map for ckanext-datajson
+if [ -d "src/ckanext-datajson" ];
+then
+    cp export.map.json src/ckanext-datajson/ckanext/datajson/export_map/export.map.json
+fi
 
 # Set debug to true
 echo "Enabling debug mode"
