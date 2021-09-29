@@ -38,7 +38,7 @@ COPY supervisor.worker.conf /etc/supervisord.d/worker.conf
 
 COPY create_datajson.sh ${APP_DIR}
 
-COPY configs/export.map.json src/ckanext-datajson/ckanext/datajson/export_map/export.map.json
+COPY configs/export.map.json export.map.json
 
 RUN apk update && apk add nginx
 RUN adduser -D -g 'www' www && chown -R www:www /var/lib/nginx

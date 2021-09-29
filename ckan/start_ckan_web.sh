@@ -13,21 +13,6 @@ do
     if [ -d $i ];
     then
 
-        if [ -f $i/pip-requirements.txt ];
-        then
-            pip install -r $i/pip-requirements.txt
-            echo "Found requirements file in $i"
-        fi
-        if [ -f $i/requirements.txt ];
-        then
-            pip install -r $i/requirements.txt
-            echo "Found requirements file in $i"
-        fi
-        if [ -f $i/dev-requirements.txt ];
-        then
-            pip install -r $i/dev-requirements.txt
-            echo "Found dev-requirements file in $i"
-        fi
         if [ -f $i/setup.py ];
         then
             cd $i
@@ -52,10 +37,16 @@ do
         then
             # Add configuration file
             echo "Copying datajson configuration export map to development space"
-            cp src/ckanext-datajson/ckanext/datajson/export_map/export.map.json $i/ckanext/datajson/export_map/export.map.json
+            cp export.map.json $i/ckanext/datajson/export_map/export.map.json
         fi
     fi
 done
+
+# Copy export.map for ckanext-datajson
+if [ -d "src/ckanext-datajson" ];
+then
+    cp export.map.json src/ckanext-datajson/ckanext/datajson/export_map/export.map.json
+fi
 
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
