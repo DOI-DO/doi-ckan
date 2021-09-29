@@ -2,7 +2,7 @@
 # On push events this workflow will build and
 # test the changes
 
-name: 'Build and (Possibly) Release'
+name: 'Build and Test'
 
 on:
   push:
