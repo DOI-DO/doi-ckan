@@ -5,6 +5,7 @@
 name: 'Release Approved Build'
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - production
