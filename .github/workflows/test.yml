@@ -1,0 +1,29 @@
+---
+# On push events this workflow will build and
+# test the changes
+
+name: 'Build and Test'
+
+on:
+  push:
+
+jobs:
+  test:
+    name: 'Test'
+    runs-on: ubuntu-latest
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    # Checkout the repository to the GitHub Actions runner
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      
+      - name: build
+        run: make build
+      
+      - name: test
+        run: make clean test

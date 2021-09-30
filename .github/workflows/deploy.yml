@@ -1,0 +1,42 @@
+---
+# On push events to the main branch, this workflow will
+# push new image, and mark for re-deployment
+
+name: 'Release Approved Build'
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  deploy:
+    name: deploy
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Push new images
+        uses: kciter/aws-ecr-action@master
+        with:
+          access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          repo: ${{ secrets.REPO_NAME }}
+          region: ${{ secrets.REGION }}
+          tags: ckan
+          dockerfile: ckan/Dockerfile
+          path: ckan/
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.REGION }}
+
+      - name: Deploy latest images
+        run: |
+          aws ecs update-service --cluster ${{ secrets.CLUSTER }}  --service ${{ secrets.SERVICE }} --force-new-deployment
