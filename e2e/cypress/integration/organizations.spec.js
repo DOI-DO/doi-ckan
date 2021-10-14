@@ -1,6 +1,7 @@
 describe('Organization', () => {
+    const dcatOrg = 'dcat-us-org';
     before(() => {
-        cy.login('admin', 'password', false)
+        //cy.login('admin', 'password', false)
     })
     beforeEach(() => {
         Cypress.Cookies.preserveOnce('auth_tkt', 'ckan')
@@ -21,6 +22,9 @@ describe('Organization', () => {
         cy.contains('0')
         cy.get('a[href="/organization/cypress-test-org"]')
     })
+    it.skip('can use api to create an organization with extras', () => {
+        cy.create_dcat_org(dcatOrg);
+    });
     it('Edit Organization Description', () => {
         cy.visit('/organization/edit/cypress-test-org')
         //cy.get('#field-url').then($field_url => {

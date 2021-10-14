@@ -1,6 +1,6 @@
 describe('Harvest', () => {
     // Rename this only if necessary, various test dependencies
-    const harvestOrg = 'cypress-harvest-org'
+    const dcatUsOrg = 'dcat-us-org'
     const dataJsonHarvestSoureName = 'cypress-harvest-datajson'
     const wafIsoHarvestSourceName = 'cypress-harvest-waf-iso'
 
@@ -10,9 +10,9 @@ describe('Harvest', () => {
          */
         cy.login('admin', 'password', false)
         // Make sure organization does not exist before creating
-        cy.delete_organization(harvestOrg)
+        cy.delete_organization(dcatUsOrg)
         // Create the organization
-        cy.create_organization(harvestOrg, 'cypress harvest org description', false)
+        cy.create_dcat_org(dcatUsOrg);
     })
     beforeEach(() => {
         /**
@@ -33,14 +33,15 @@ describe('Harvest', () => {
          * Test creating a valid datajson harvest source
          */
         //cy.get('a[href="/organization/edit/'+harvestOrg+'"]').click()
+        cy.visit(`/organization/${dcatUsOrg}`)
         cy.get('a[class="btn btn-primary"]').click()
-        cy.get('a[href="/harvest?organization='+harvestOrg+'"]').click()
+        cy.get('a[href="/harvest?organization='+dcatUsOrg+'"]').click()
         cy.get('a[class="btn btn-primary"]').click()
         cy.create_harvest_source('http://nginx-harvest-source/data.json',
                         dataJsonHarvestSoureName,
                         'cypress test datajson',
                         'datajson',
-                        harvestOrg,
+                        dcatUsOrg,
                         true,
                         false)
 
@@ -48,15 +49,15 @@ describe('Harvest', () => {
         cy.location('pathname').should('eq', '/harvest/' + dataJsonHarvestSoureName)
     })
     it('Create a datajson harvest source INVALID', () => {
-        cy.visit('/organization/'+harvestOrg)
+        cy.visit('/organization/'+dcatUsOrg)
         cy.get('a[class="btn btn-primary"]').click()
-        cy.get('a[href="/harvest?organization='+harvestOrg+'"]').click()
+        cy.get('a[href="/harvest?organization='+dcatUsOrg+'"]').click()
         cy.get('a[class="btn btn-primary"]').click()
         cy.create_harvest_source('😀',
                         'invalid datajson',
                         'invalid datajson',
                         'datajson',
-                        harvestOrg,
+                        dcatUsOrg,
                         true,
                         true)
         cy.contains('URL: Missing value')
@@ -73,15 +74,15 @@ describe('Harvest', () => {
         /**
          * Create a WAF ISO Harvest Source
          */
-        cy.visit('/organization/'+harvestOrg)
+        cy.visit('/organization/'+dcatUsOrg)
         cy.get('a[class="btn btn-primary"]').click()
-        cy.get('a[href="/harvest?organization='+harvestOrg+'"]').click()
+        cy.get('a[href="/harvest?organization='+dcatUsOrg+'"]').click()
         cy.get('a[class="btn btn-primary"]').click()
         cy.create_harvest_source('http://nginx-harvest-source/iso-waf/',
            wafIsoHarvestSourceName,
            'cypress test waf iso',
            'waf',
-           harvestOrg,
+           dcatUsOrg,
            true,
            false)
         // harvestTitle must not contain spaces, otherwise the URL redirect will not confirm
