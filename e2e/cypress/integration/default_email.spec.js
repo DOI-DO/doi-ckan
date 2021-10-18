@@ -1,15 +1,8 @@
 describe('Distribution and ContactPoints are correct', () => {
     const dcatUsOrg = 'dcat-us-org';
-    const harvestSource = 'dcat-waf-iso';
-    
-    beforeEach(() => {
-       Cypress.Cookies.preserveOnce('auth_tkt', 'ckan'); 
-    });
 
     it('can validate default contact point fields and correct distribution fields', () => {
             let testDataset = '';
-            cy.writeFile('/home/gil/titles.txt', '');
-            cy.writeFile('/home/gil/urls.txt', '');
         cy.request('/data.json').then((response) => {
             expect(response.status).to.eq(200);
             const dcatUsObj = JSON.parse(response.body);
@@ -28,7 +21,6 @@ describe('Distribution and ContactPoints are correct', () => {
                     distribution.forEach((distSet) => {
                         let urlField = distSet['accessURL'] ? distSet['accessURL'] : distSet['downloadURL']
                         cy.log(`${urlField}`)
-                        cy.writeFile('/home/gil/urls.txt', `${urlField}\n`, {flag:'a+'})
                         try {
                             validUrls.push(new URL(urlField));
                         } catch (_) {
