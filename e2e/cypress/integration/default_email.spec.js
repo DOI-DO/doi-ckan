@@ -22,7 +22,6 @@ describe('Distribution and ContactPoints are correct', () => {
                 if (dataset['title'] == 'EK500 Water Column Sonar Data Collected During AL0001') {
                     testDataset = dataset;
                 } 
-                cy.writeFile('/home/gil/titles.txt', `${dataset['title']}\n`, {flag: 'a+'})
                 cy.log(`${dataset['contactPoint']['fn']}`);
                 const distribution = dataset['distribution'];
                 if (distribution) {
