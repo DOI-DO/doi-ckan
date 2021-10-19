@@ -2,8 +2,8 @@ describe('Distribution and ContactPoints are correct', () => {
     const dcatUsOrg = 'dcat-us-org';
 
     it('can validate default contact point fields and correct distribution fields', () => {
-            let testDataset = '';
-        cy.request('/data.json').then((response) => {
+        let testDataset = '';
+        cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200);
             const dcatUsObj = JSON.parse(response.body);
             const datasets = dcatUsObj['dataset'];
