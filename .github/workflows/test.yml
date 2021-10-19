@@ -27,6 +27,13 @@ jobs:
       
       - name: test
         run: make clean test
+      
+      - name: cypress-screenshots
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./cypress/screenshots
 
   screenshots:
     name: 'Screenshots'
