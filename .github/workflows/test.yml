@@ -21,7 +21,11 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./cypress/screenshots
+
       - name: build
         run: make build
       
