@@ -20,8 +20,10 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     steps:
       - name: checkout
-      - uses: actions/checkout@v2
-      - uses: actions/upload-artifact@v1
+        uses: actions/checkout@v2
+
+      - name: screenshots
+        uses: actions/upload-artifact@v1
         if: failure()
         with:
           name: cypress-screenshots
