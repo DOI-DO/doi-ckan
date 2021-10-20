@@ -1,5 +1,4 @@
 describe('Cleanup site', () => {
-    const harvestOrg = 'cypress-harvest-org'
     const dataJsonHarvestSoureName = 'cypress-harvest-datajson'
     const wafIsoHarvestSourceName = 'cypress-harvest-waf-iso'
     const dcatUsOrg = 'dcat-us-org';
@@ -20,7 +19,6 @@ describe('Cleanup site', () => {
         cy.wait(1000);
 
         // Remove organization
-        cy.delete_organization(harvestOrg)
         cy.delete_organization(dcatUsOrg)
     })
 

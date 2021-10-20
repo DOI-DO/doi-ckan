@@ -22,6 +22,7 @@ describe('Organization', () => {
         cy.contains('0')
         cy.get('a[href="/organization/cypress-test-org"]')
     })
+    // skipping test. harvesting uses an organization created with the API
     it.skip('can use api to create an organization with extras', () => {
         cy.create_dcat_org(dcatOrg);
     });

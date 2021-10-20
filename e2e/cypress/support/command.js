@@ -23,17 +23,19 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-function verify_element_exists() {
+function verify_element_exists(retries) {
   cy.get("td")
     .eq(4)
     .then(($td) => {
       if ($td.text() == "Finished") {
         cy.wrap($td.text()).should("eq", "Finished");
+      } else if (retries == 0) {
+        expect(true).to.be.false();
       } else {
         cy.wait(5000);
         cy.reload(true);
-        verify_element_exists();
-      }
+        verify_element_exists(retries-1);
+      } 
     });
 }
 
@@ -196,7 +198,7 @@ Cypress.Commands.add("start_harvest_job", (harvestName) => {
   // Confirm harvest start
   cy.wait(1000);
   cy.contains(/^Confirm$/).click();
-  verify_element_exists();
+  verify_element_exists(20);
 });
 
 Cypress.Commands.add('logout', () => {
