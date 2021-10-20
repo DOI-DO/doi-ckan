@@ -35,7 +35,7 @@ describe('Distribution and ContactPoints are correct', () => {
             expect(validUrls).to.have.lengthOf(16);
        // dataset page should have an invalid email for a dataset. dcat-us should have default email that is valid for
        // the same dataset
-       cy.visit('http://localhost:5000/dataset/ek500-water-column-sonar-data-collected-during-al0001');
+       cy.visit('/dataset/ek500-water-column-sonar-data-collected-during-al0001');
        cy.get('a[class="show-more"]').click();
        cy.get('a[href="mailto:invalid"]').should('contain', 'Unknown');
        cy.wrap(`${testDataset['contactPoint']['hasEmail']}`).should('eq', `mailto:jimmy_dean@${dcatUsOrg}.gov`);
