@@ -49,7 +49,7 @@
                 <gco:CharacterString>USA</gco:CharacterString>
               </gmd:country>
               <gmd:electronicMailAddress>
-                <gco:CharacterString>wcd.info@noaa.gov</gco:CharacterString>
+                <gco:CharacterString>invalid email</gco:CharacterString>
               </gmd:electronicMailAddress>
             </gmd:CI_Address>
           </gmd:address>
@@ -98,7 +98,7 @@
                 <gco:CharacterString>USA</gco:CharacterString>
               </gmd:country>
               <gmd:electronicMailAddress>
-                <gco:CharacterString>michael.jech@noaa.gov</gco:CharacterString>
+                <gco:CharacterString>invalid email</gco:CharacterString>
               </gmd:electronicMailAddress>
             </gmd:CI_Address>
           </gmd:address>
@@ -374,7 +374,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                     <gco:CharacterString>USA</gco:CharacterString>
                   </gmd:country>
                   <gmd:electronicMailAddress>
-                    <gco:CharacterString>john.galbraith@noaa.gov</gco:CharacterString>
+                    <gco:CharacterString>invalid email</gco:CharacterString>
                   </gmd:electronicMailAddress>
                 </gmd:CI_Address>
               </gmd:address>
@@ -893,7 +893,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                         <gco:CharacterString>USA</gco:CharacterString>
                       </gmd:country>
                       <gmd:electronicMailAddress>
-                        <gco:CharacterString>wcd.info@noaa.gov</gco:CharacterString>
+                        <gco:CharacterString>invalid email</gco:CharacterString>
                       </gmd:electronicMailAddress>
                     </gmd:CI_Address>
                   </gmd:address>
@@ -1081,7 +1081,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                             <gco:CharacterString>USA</gco:CharacterString>
                           </gmd:country>
                           <gmd:electronicMailAddress>
-                            <gco:CharacterString>john.galbraith@noaa.gov</gco:CharacterString>
+                            <gco:CharacterString>invalid email</gco:CharacterString>
                           </gmd:electronicMailAddress>
                         </gmd:CI_Address>
                       </gmd:address>
@@ -1168,7 +1168,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                             <gco:CharacterString>Norway</gco:CharacterString>
                           </gmd:country>
                           <gmd:electronicMailAddress>
-                            <gco:CharacterString>contact@simrad.com</gco:CharacterString>
+                            <gco:CharacterString>invalid email</gco:CharacterString>
                           </gmd:electronicMailAddress>
                         </gmd:CI_Address>
                       </gmd:address>
@@ -1291,7 +1291,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                         <gco:CharacterString>USA</gco:CharacterString>
                       </gmd:country>
                       <gmd:electronicMailAddress>
-                        <gco:CharacterString>David.A.Score@noaa.gov</gco:CharacterString>
+                        <gco:CharacterString>invalid email</gco:CharacterString>
                       </gmd:electronicMailAddress>
                     </gmd:CI_Address>
                   </gmd:address>
@@ -1409,7 +1409,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                                 <gco:CharacterString>Norway</gco:CharacterString>
                               </gmd:country>
                               <gmd:electronicMailAddress>
-                                <gco:CharacterString>contact@simrad.com</gco:CharacterString>
+                                <gco:CharacterString>invalid email</gco:CharacterString>
                               </gmd:electronicMailAddress>
                             </gmd:CI_Address>
                           </gmd:address>

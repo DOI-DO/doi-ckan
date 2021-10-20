@@ -21,9 +21,23 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      
+
       - name: build
         run: make build
       
       - name: test
         run: make clean test
+      
+      - name: cypress-screenshots
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./e2e/cypress/screenshots
+
+      - name: cypress-video
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-videos
+          path: ./e2e/cypress/videos

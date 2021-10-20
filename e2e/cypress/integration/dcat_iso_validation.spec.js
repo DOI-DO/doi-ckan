@@ -1,5 +1,4 @@
 describe('iso metadata validation in dcat-us file', () => {
-    const harvestOrg = 'cypress-validation-org';
     const wafIsoHarvestSourceName = 'cypress-harvest-waf-iso';
 
     it('should validate distribution field within each dataset', () => {

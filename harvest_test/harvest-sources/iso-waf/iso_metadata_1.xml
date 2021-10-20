@@ -25,7 +25,7 @@
           <gmd:address>
             <gmd:CI_Address>
               <gmd:electronicMailAddress>
-                <gco:CharacterString>ncei.info@noaa.gov</gco:CharacterString>
+                <gco:CharacterString>invalid email</gco:CharacterString>
               </gmd:electronicMailAddress>
             </gmd:CI_Address>
           </gmd:address>
@@ -313,7 +313,7 @@
                         <gco:CharacterString>USA</gco:CharacterString>
                       </gmd:country>
                       <gmd:electronicMailAddress>
-                        <gco:CharacterString>john.galbraith@noaa.gov</gco:CharacterString>
+                        <gco:CharacterString>invalid email</gco:CharacterString>
                       </gmd:electronicMailAddress>
                     </gmd:CI_Address>
                   </gmd:address>
@@ -387,7 +387,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
               <gmd:address>
                 <gmd:CI_Address>
                   <gmd:electronicMailAddress>
-                    <gco:CharacterString>ncei.info@noaa.gov</gco:CharacterString>
+                    <gco:CharacterString>invalid email</gco:CharacterString>
                   </gmd:electronicMailAddress>
                 </gmd:CI_Address>
               </gmd:address>
@@ -449,7 +449,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                     <gco:CharacterString>USA</gco:CharacterString>
                   </gmd:country>
                   <gmd:electronicMailAddress>
-                    <gco:CharacterString>wcd.info@noaa.gov</gco:CharacterString>
+                    <gco:CharacterString>invalid email</gco:CharacterString>
                   </gmd:electronicMailAddress>
                 </gmd:CI_Address>
               </gmd:address>
@@ -527,7 +527,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                       <gmd:onlineResource>
                         <gmd:CI_OnlineResource>
                           <gmd:linkage>
-                            <gmd:URL>https://earthdata.nasa.gov/about/gcmd/global-change-master-directory-gcmd-keywords</gmd:URL>
+                            <gmd:URL>invalid url</gmd:URL>
                           </gmd:linkage>
                           <gmd:name>
                             <gco:CharacterString>Global Change Master Directory (GCMD) Keywords</gco:CharacterString>
@@ -584,7 +584,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                       <gmd:onlineResource>
                         <gmd:CI_OnlineResource>
                           <gmd:linkage>
-                            <gmd:URL>http://www.iho-ohi.net/iho_pubs/standard/S-23/S23_1953.pdf</gmd:URL>
+                            <gmd:URL>invalid url</gmd:URL>
                           </gmd:linkage>
                           <gmd:name>
                             <gco:CharacterString>International Hydrographic Organization (IHO) Sea Area ("Limits of Oceans and Seas" publication S-23)</gco:CharacterString>
@@ -650,7 +650,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                       <gmd:onlineResource>
                         <gmd:CI_OnlineResource>
                           <gmd:linkage>
-                            <gmd:URL>https://earthdata.nasa.gov/about/gcmd/global-change-master-directory-gcmd-keywords</gmd:URL>
+                            <gmd:URL>invalid URL</gmd:URL>
                           </gmd:linkage>
                           <gmd:name>
                             <gco:CharacterString>Global Change Master Directory (GCMD) Keywords</gco:CharacterString>
@@ -710,7 +710,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                       <gmd:onlineResource>
                         <gmd:CI_OnlineResource>
                           <gmd:linkage>
-                            <gmd:URL>https://earthdata.nasa.gov/about/gcmd/global-change-master-directory-gcmd-keywords</gmd:URL>
+                            <gmd:URL>invalidURL</gmd:URL>
                           </gmd:linkage>
                           <gmd:name>
                             <gco:CharacterString>Global Change Master Directory (GCMD) Keywords</gco:CharacterString>
@@ -770,7 +770,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                       <gmd:onlineResource>
                         <gmd:CI_OnlineResource>
                           <gmd:linkage>
-                            <gmd:URL>https://earthdata.nasa.gov/about/gcmd/global-change-master-directory-gcmd-keywords</gmd:URL>
+                            <gmd:URL>invalid url</gmd:URL>
                           </gmd:linkage>
                           <gmd:name>
                             <gco:CharacterString>Global Change Master Directory (GCMD) Keywords</gco:CharacterString>
@@ -947,14 +947,14 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                   <gmd:address>
                     <gmd:CI_Address>
                       <gmd:electronicMailAddress>
-                        <gco:CharacterString>ncei.info@noaa.gov</gco:CharacterString>
+                        <gco:CharacterString>invalid email</gco:CharacterString>
                       </gmd:electronicMailAddress>
                     </gmd:CI_Address>
                   </gmd:address>
                   <gmd:onlineResource>
                     <gmd:CI_OnlineResource>
                       <gmd:linkage>
-                        <gmd:URL>https://www.ncei.noaa.gov/contact</gmd:URL>
+                        <gmd:URL>invalid url</gmd:URL>
                       </gmd:linkage>
                       <gmd:name>
                         <gco:CharacterString>NCEI Contact Information</gco:CharacterString>
@@ -1188,7 +1188,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                             <gco:CharacterString>USA</gco:CharacterString>
                           </gmd:country>
                           <gmd:electronicMailAddress>
-                            <gco:CharacterString>john.galbraith@noaa.gov</gco:CharacterString>
+                            <gco:CharacterString>invalid email</gco:CharacterString>
                           </gmd:electronicMailAddress>
                         </gmd:CI_Address>
                       </gmd:address>
@@ -1257,7 +1257,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                             <gco:CharacterString>Norway</gco:CharacterString>
                           </gmd:country>
                           <gmd:electronicMailAddress>
-                            <gco:CharacterString>contact@simrad.com</gco:CharacterString>
+                            <gco:CharacterString>invalid email</gco:CharacterString>
                           </gmd:electronicMailAddress>
                         </gmd:CI_Address>
                       </gmd:address>
@@ -1380,7 +1380,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                         <gco:CharacterString>USA</gco:CharacterString>
                       </gmd:country>
                       <gmd:electronicMailAddress>
-                        <gco:CharacterString>David.A.Score@noaa.gov</gco:CharacterString>
+                        <gco:CharacterString>invalid email</gco:CharacterString>
                       </gmd:electronicMailAddress>
                     </gmd:CI_Address>
                   </gmd:address>
@@ -1498,7 +1498,7 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
                                 <gco:CharacterString>Norway</gco:CharacterString>
                               </gmd:country>
                               <gmd:electronicMailAddress>
-                                <gco:CharacterString>contact@simrad.com</gco:CharacterString>
+                                <gco:CharacterString>invalid email</gco:CharacterString>
                               </gmd:electronicMailAddress>
                             </gmd:CI_Address>
                           </gmd:address>

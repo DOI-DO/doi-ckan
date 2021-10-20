@@ -1,8 +1,7 @@
 describe('Cleanup site', () => {
-    const harvestOrg = 'cypress-harvest-org'
     const dataJsonHarvestSoureName = 'cypress-harvest-datajson'
     const wafIsoHarvestSourceName = 'cypress-harvest-waf-iso'
-
+    const dcatUsOrg = 'dcat-us-org';
     before(() => {
         /**
          * Login as cypress user and create an organization for testing harvest source creation and running the jobs
@@ -20,7 +19,7 @@ describe('Cleanup site', () => {
         cy.wait(1000);
 
         // Remove organization
-        cy.delete_organization(harvestOrg)
+        cy.delete_organization(dcatUsOrg)
     })
 
     it('Confirms empty site', () => {

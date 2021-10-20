@@ -1,5 +1,5 @@
 describe('DCAT-US file export', () => {
-    const harvestOrg = 'cypress-harvest-org'
+    const harvestOrg = 'dcat-us-org'
 
     it('Can validate that the dcat-us file is valid JSON', () => {
         cy.request(`/data.json`).should((response) => {
