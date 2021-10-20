@@ -35,18 +35,9 @@ jobs:
           name: cypress-screenshots
           path: ./e2e/cypress/screenshots
 
-  screenshots:
-    name: 'Screenshots'
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        shell: bash
-    
-    steps:
-      - name: cypress-screenshots
+      - name: cypress-video
         uses: actions/upload-artifact@v1
         if: failure()
         with:
-          name: cypress-screenshots
-          path: ./e2e/cypress/screenshots
+          name: cypress-videos
+          path: ./e2e/cypress/videos

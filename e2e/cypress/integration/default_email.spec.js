@@ -7,15 +7,15 @@ describe('Distribution and ContactPoints are correct', () => {
             expect(response.status).to.eq(200);
             const dcatUsObj = JSON.parse(response.body);
             const datasets = dcatUsObj['dataset'];
-            cy.log(dcatUsObj)
+            cy.log('dcat-us object: ' + dcatUsObj)
             let validUrls = [];
             let invalidUrls = [];
             datasets.forEach((dataset) => {
-                cy.log(`${dataset['contactPoint']['hasEmail']}`)
+                cy.log(`contactPont hasEmail: ${dataset['contactPoint']['hasEmail']}`)
                 if (dataset['title'] == 'EK500 Water Column Sonar Data Collected During AL0001') {
                     testDataset = dataset;
                 } 
-                cy.log(`${dataset['contactPoint']['fn']}`);
+                cy.log(`contactPoint fn: ${dataset['contactPoint']['fn']}`);
                 const distribution = dataset['distribution'];
                 if (distribution) {
                     distribution.forEach((distSet) => {
