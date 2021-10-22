@@ -6,6 +6,7 @@ describe('DCAT-US file export', () => {
             expect(response.status).to.eq(200)
             //let dcat_us = JSON.parse(response.body)
             cy.wrap(JSON.parse(response.body)['dataset'].length).should('eq', 8)
+
         })
     })
 

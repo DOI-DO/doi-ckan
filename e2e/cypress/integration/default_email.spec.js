@@ -41,4 +41,24 @@ describe('Distribution and ContactPoints are correct', () => {
        cy.wrap(`${testDataset['contactPoint']['hasEmail']}`).should('eq', `mailto:jimmy_dean@${dcatUsOrg}.gov`);
        }); 
     });
+
+    it('can verify data.json is not empty without default emails', () => {
+        cy.request('/data.json').should((response) => {
+            expect(response.status).to.eq(200);
+            const dcatUsObj = JSON.parse(response.body);
+            const datasets = dcatUsObj['dataset'];
+            cy.wrap(datasets.length).should('be.gte', 1); 
+       });
+    });
+
+    it('can validate that urls with invalid characters are not in the data.json distribution field', () => {
+        cy.request('/data.json').should((response) => {
+            expect(response.status).to.eq(200);
+            const dcatUsObj = JSON.parse(response.body);
+            const datasets = dcatUsObj['dataset'];
+            datasets.forEach((dataset) => {
+                expect(dataset['title']).to.not.have.string('Gulf');    
+            });
+        });
+    });
 });

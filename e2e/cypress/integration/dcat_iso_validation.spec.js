@@ -3,7 +3,7 @@ describe('iso metadata validation in dcat-us file', () => {
 
     it('should validate distribution field within each dataset', () => {
         cy.request('/data.json').should((response) => {
-            const dcatUsObj = JSON.parse(response.body)
+            const dcatUsObj = JSON.parse(response.body);
 
             let dcatUsObjMap = {};
 

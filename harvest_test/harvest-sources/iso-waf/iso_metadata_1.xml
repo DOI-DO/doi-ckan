@@ -1025,6 +1025,29 @@ collect samples of ichthyoplankton and zooplankton; and (5) make data and sample
               <gmd:onLine>
                 <gmd:CI_OnlineResource>
                   <gmd:linkage>
+                    <gmd:URL>https://gis.boem.gov/arcgis/rest/services/GOM Deepwater Bathymetry and Hill shade â Tiled/Mapserver</gmd:URL>
+                  </gmd:linkage>
+                  <gmd:protocol>
+                    <gco:CharacterString>HTTPS</gco:CharacterString>
+                  </gmd:protocol>
+                  <gmd:name>
+                    <gco:CharacterString>Gulf of Mexico Deepwater Bathymetry with Hillshade</gco:CharacterString>
+                  </gmd:name>
+                  <gmd:description>
+                    <gco:CharacterString>Interactive map viewer to allow discovery and access to water column sonar data</gco:CharacterString>
+                  </gmd:description>
+                  <gmd:function>
+                    <gmd:CI_OnLineFunctionCode codeList="https://data.noaa.gov/resources/iso19139/schema/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="search">search</gmd:CI_OnLineFunctionCode>
+                  </gmd:function>
+                </gmd:CI_OnlineResource>
+              </gmd:onLine>
+            </gmd:MD_DigitalTransferOptions>
+          </gmd:distributorTransferOptions>
+          <gmd:distributorTransferOptions>
+            <gmd:MD_DigitalTransferOptions>
+              <gmd:onLine>
+                <gmd:CI_OnlineResource>
+                  <gmd:linkage>
                     <gmd:URL>https://registry.opendata.aws/ncei-wcsd-archive/</gmd:URL>
                   </gmd:linkage>
                   <gmd:protocol>

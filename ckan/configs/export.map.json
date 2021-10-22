@@ -168,7 +168,7 @@
     "theme": {
       "type": "array",
       "extra": true,
-      "field": "Category",
+      "field": "metadata_type",
       "split": ","
     }
   }
