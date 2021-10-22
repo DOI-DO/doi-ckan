@@ -5,8 +5,7 @@ describe('Distribution and ContactPoints are correct', () => {
         let testDataset = '';
         cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200);
-            //const dcatUsObj = JSON.parse(response.body);
-            const dcatUsObj = response.body;
+            const dcatUsObj = JSON.parse(response.body);
             const datasets = dcatUsObj['dataset'];
             cy.log('dcat-us object: ' + dcatUsObj)
             let validUrls = [];
