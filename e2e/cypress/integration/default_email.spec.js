@@ -6,7 +6,7 @@ describe('Distribution and ContactPoints are correct', () => {
         cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200);
             const dcatUsObj = JSON.parse(response.body);
-            const datasets = JSON.parse(dcatUsObj['dataset']);
+            const datasets = dcatUsObj['dataset'];
             cy.log('dcat-us object: ' + dcatUsObj)
             let validUrls = [];
             let invalidUrls = [];
@@ -44,7 +44,7 @@ describe('Distribution and ContactPoints are correct', () => {
     it('can verify data.json is not empty without default emails', () => {
         cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200);
-            const dcatUsObj = response.body;
+            const dcatUsObj = JSON.parse(response.body);
             const datasets = dcatUsObj['dataset'];
             cy.wrap(datasets.length).should('be.gte', 1); 
        });
@@ -53,7 +53,7 @@ describe('Distribution and ContactPoints are correct', () => {
     it('can validate that urls with invalid characters are not in the data.json distribution field', () => {
         cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200);
-            const dcatUsObj = response.body;
+            const dcatUsObj = JSON.parse(response.body);
             const datasets = dcatUsObj['dataset'];
             datasets.forEach((dataset) => {
                 expect(dataset['title']).to.not.have.string('Gulf');    
