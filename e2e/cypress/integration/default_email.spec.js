@@ -29,9 +29,8 @@ describe('Distribution and ContactPoints are correct', () => {
                     });
                 }
             });
-            //there is a URL in validURLs, such that url='http://invalidURL'. This is considered valid, but was meant to
-            //be registered as invalid for testing
-            expect(invalidUrls).to.have.lengthOf(4);
+            //there should be no invalid urls because they would have been removed
+            expect(invalidUrls).to.have.lengthOf(0);
             expect(validUrls).to.have.lengthOf(16);
        // dataset page should have an invalid email for a dataset. dcat-us should have default email that is valid for
        // the same dataset
