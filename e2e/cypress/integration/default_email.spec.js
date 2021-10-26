@@ -6,7 +6,7 @@ describe('Distribution and ContactPoints are correct', () => {
         cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200);
             const dcatUsObj = JSON.parse(response.body);
-            const datasets = dcatUsObj['dataset'];
+            const datasets = JSON.parse(dcatUsObj['dataset']);
             cy.log('dcat-us object: ' + dcatUsObj)
             let validUrls = [];
             let invalidUrls = [];
@@ -29,9 +29,8 @@ describe('Distribution and ContactPoints are correct', () => {
                     });
                 }
             });
-            //there is a URL in validURLs, such that url='http://invalidURL'. This is considered valid, but was meant to
-            //be registered as invalid for testing
-            expect(invalidUrls).to.have.lengthOf(4);
+            //there should be no invalid urls because they would have been removed
+            expect(invalidUrls).to.have.lengthOf(0);
             expect(validUrls).to.have.lengthOf(16);
        // dataset page should have an invalid email for a dataset. dcat-us should have default email that is valid for
        // the same dataset
@@ -45,7 +44,7 @@ describe('Distribution and ContactPoints are correct', () => {
     it('can verify data.json is not empty without default emails', () => {
         cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200);
-            const dcatUsObj = JSON.parse(response.body);
+            const dcatUsObj = response.body;
             const datasets = dcatUsObj['dataset'];
             cy.wrap(datasets.length).should('be.gte', 1); 
        });
@@ -54,7 +53,7 @@ describe('Distribution and ContactPoints are correct', () => {
     it('can validate that urls with invalid characters are not in the data.json distribution field', () => {
         cy.request('/data.json').should((response) => {
             expect(response.status).to.eq(200);
-            const dcatUsObj = JSON.parse(response.body);
+            const dcatUsObj = response.body;
             const datasets = dcatUsObj['dataset'];
             datasets.forEach((dataset) => {
                 expect(dataset['title']).to.not.have.string('Gulf');    
