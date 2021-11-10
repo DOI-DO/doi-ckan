@@ -7,7 +7,7 @@ boto==2.49.0
 certifi==2021.5.30
 cffi==1.12.3
 chardet==3.0.4
--e git+https://github.com/ckan/ckan.git@41cc308bfce8fa6005571ac086f82d9ae91b62de#egg=ckan
+-e git+https://github.com/ckan/ckan.git@ckan-2.8.9#egg=ckan
 -e git+https://github.com/GSA/ckanext-datagovcatalog.git@2225231e129e4aacb35939dcd2765ed7f9216bb1#egg=ckanext_datagovcatalog
 -e git+https://github.com/doi-open-data/ckanext-datagovtheme.git@eb35ab84b7a581a1b5c3a4fcf0a842ee00ff8530#egg=ckanext_datagovtheme
 -e git+https://github.com/doi-open-data/ckanext-datajson.git@c3c2d512c383f9e24043ea570d92a28a47cdf81e#egg=ckanext_datajson
