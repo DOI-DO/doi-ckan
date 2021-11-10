@@ -18,6 +18,8 @@ RUN cd /geos && \
     make install
 
 COPY requirements.txt ${APP_DIR}/requirements.txt
+# COPY requirements.sh ${APP_DIR}/src/ckan/requirements.sh
+# COPY requirements.in.txt ${APP_DIR}/src/ckan/requirements.in.txt
 
 # some errors installing cryptography with the ckan-base image see:
 # https://github.com/geerlingguy/JJG-Ansible-Windows/issues/28#ref-commit-b854e7a

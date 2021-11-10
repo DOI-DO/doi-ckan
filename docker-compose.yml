@@ -19,9 +19,11 @@ services:
       # wsgi server endpoint
       - "0.0.0.0:5001:5001"
     volumes:
+      - ./ckan/requirements.txt:/srv/app/requirements.txt
+      - ./ckan/requirements.in.txt:/srv/app/requirements.in.txt
+      - ./ckan/requirements.sh:/srv/app/requirements.sh
       - ./src:/srv/app/src_extensions
       - ckan_storage:/var/lib/ckan
-      - ./requirements:/requirements
       - ./ckan/nginx_ckan:/etc/nginx/nginx.conf
 
   ckan-worker:

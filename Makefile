@@ -33,7 +33,7 @@ prune:
 	docker system prune -a
 
 requirements:
-	docker-compose run --rm -T ckan-web /requirements/requirements.sh
+	docker-compose run --rm -T ckan-web /srv/app/requirements.sh
 
 seed-harvests:
 	python tools/harvest_source_import/import_harvest_sources.py
