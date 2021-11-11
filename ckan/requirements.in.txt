@@ -5,9 +5,9 @@
 -e git+https://github.com/doi-open-data/ckanext-datajson.git@doi/main#egg=ckanext-datajson
 -e git+https://github.com/ckan/ckanext-dcat@master#egg=ckanext-dcat
 ckanext-envvars
--e git+https://github.com/GSA/ckanext-geodatagov.git@main#egg=ckanext-geodatagov
+-e git+https://github.com/GSA/ckanext-geodatagov.git@ded11ffd3e4c97b8d418e45bfeeea0c3f4f10796#egg=ckanext-geodatagov
 -e git+https://github.com/ckan/ckanext-harvest.git@master#egg=ckanext-harvest
--e git+https://github.com/ckan/ckanext-spatial.git@master#egg=ckanext-spatial
+-e git+https://github.com/ckan/ckanext-spatial.git@4ac25f19aa4eb9c798451f5eeb3084f907ccc003#egg=ckanext-spatial
 
 # ckanext-harvest
 cffi==1.12.3
