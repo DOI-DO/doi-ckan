@@ -12,7 +12,7 @@ describe('Distribution and ContactPoints are correct', () => {
             let invalidUrls = [];
             datasets.forEach((dataset) => {
                 cy.log(`contactPont hasEmail: ${dataset['contactPoint']['hasEmail']}`)
-                if (dataset['title'] == 'EK500 Water Column Sonar Data Collected During AL0001') {
+                if (dataset['title'] == "NEFSC 2000 Spring Bottom Trawl Survey (AL0002, EK500)") {
                     testDataset = dataset;
                 } 
                 cy.log(`contactPoint fn: ${dataset['contactPoint']['fn']}`);
@@ -29,12 +29,13 @@ describe('Distribution and ContactPoints are correct', () => {
                     });
                 }
             });
+
             //there should be no invalid urls because they would have been removed
             expect(invalidUrls).to.have.lengthOf(0);
             expect(validUrls).to.have.lengthOf(16);
        // dataset page should have an invalid email for a dataset. dcat-us should have default email that is valid for
        // the same dataset
-       cy.visit('/dataset/ek500-water-column-sonar-data-collected-during-al0001');
+       cy.visit('/dataset/nefsc-2000-spring-bottom-trawl-survey-al0002-ek500');
        cy.get('a[class="show-more"]').click();
        cy.get('a[href="mailto:invalid"]').should('contain', 'Unknown');
        cy.wrap(`${testDataset['contactPoint']['hasEmail']}`).should('eq', `mailto:jimmy_dean@${dcatUsOrg}.gov`);
