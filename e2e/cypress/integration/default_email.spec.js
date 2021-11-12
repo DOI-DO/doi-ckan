@@ -32,7 +32,7 @@ describe('Distribution and ContactPoints are correct', () => {
 
             //there should be no invalid urls because they would have been removed
             expect(invalidUrls).to.have.lengthOf(0);
-            expect(validUrls).to.have.lengthOf(10);
+            expect(validUrls).to.have.lengthOf(16);
        // dataset page should have an invalid email for a dataset. dcat-us should have default email that is valid for
        // the same dataset
        cy.visit('/dataset/nefsc-2000-spring-bottom-trawl-survey-al0002-ek500');
