@@ -9,6 +9,8 @@ on:
   push:
     branches:
       - production
+  schedule:
+    - cron: '27 1 * * 6'
 
 jobs:
   deploy:
