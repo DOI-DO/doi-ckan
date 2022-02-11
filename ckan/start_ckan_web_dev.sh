@@ -14,9 +14,9 @@ do
             cd $i
             # Uninstall any current implementation of the code
             echo uninstalling "${PWD##*/}"
-            pip uninstall "${PWD##*/}"
+            pip3 uninstall "${PWD##*/}"
             # Install the extension in editable mode
-            pip install -e .
+            pip3 install -e .
             echo "Found setup.py file in $i"
             cd $APP_DIR
         fi
@@ -25,7 +25,7 @@ do
         if [ -f $i/test.ini ];
         then
             echo "Updating \`test.ini\` reference to \`test-core.ini\` for plugin $i"
-            paster --plugin=ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
+            ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
         fi
 
         # Add configuration file to testing data json extension if applicable
@@ -46,16 +46,15 @@ fi
 
 # Set debug to true
 echo "Enabling debug mode"
-paster --plugin=ckan config-tool $CKAN_INI -s DEFAULT "debug = true"
-
+ckan config-tool $CKAN_INI -s DEFAULT "debug = true"
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
-paster --plugin=ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
+ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
 
 
 # Update test-core.ini DB, SOLR & Redis settings
 echo "Loading test settings into test-core.ini"
-paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini \
+ckan config-tool $SRC_DIR/ckan/test-core.ini \
     "sqlalchemy.url = $TEST_CKAN_SQLALCHEMY_URL" \
     "ckan.datastore.write_url = $TEST_CKAN_DATASTORE_WRITE_URL" \
     "ckan.datastore.read_url = $TEST_CKAN_DATASTORE_READ_URL" \
@@ -63,7 +62,7 @@ paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini \
     "ckan.redis.url = $TEST_CKAN_REDIS_URL"
 
 # Update the theme for DOI
-paster --plugin=ckan config-tool $CKAN_INI \
+ckan config-tool $CKAN_INI \
     "ckan.site_title = $CKAN__SITE_TITLE" \
     "ckan.site_description = $CKAN__SITE_DESCRIPTION" \
     "ckan.site_intro_text = $CKAN__SITE_INTRO_TEXT" \
@@ -86,4 +85,5 @@ then
     done
 fi
 
-sudo -u ckan -EH paster serve --reload $CKAN_INI
+echo "serving"
+sudo -u ckan -EH ckan serve --reload $CKAN_INI
