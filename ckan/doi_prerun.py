@@ -1,20 +1,17 @@
   
 import os
+import re
+import subprocess
+import sys
+import time
+import urllib
 
 import prerun as pr
+import psycopg2
 
-# import re
-# import subprocess
-# import sys
-# import time
-# import urllib
+ckan_ini = os.environ.get('CKAN_INI', '/srv/app/production.ini')
 
-# import psycopg2
-
-
-# ckan_ini = os.environ.get('CKAN_INI', '/srv/app/production.ini')
-
-# RETRY = 5
+RETRY = 5
 
 # def update_plugins():
 
@@ -213,7 +210,5 @@ if __name__ == '__main__':
         pr.check_main_db_connection()
         pr.init_db()
         pr.update_plugins()
-        pr.check_datastore_db_connection()
-        pr.init_datastore_db()
         pr.check_solr_connection()
         pr.create_sysadmin()

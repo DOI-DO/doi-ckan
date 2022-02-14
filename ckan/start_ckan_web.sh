@@ -63,7 +63,7 @@ ckan config-tool $CKAN_INI \
 # Run the prerun script to init CKAN and create the default admin user
 # sleep 1000
 # sudo -u ckan -EH python prerun.py
-python prerun.py
+python doi_prerun.py
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
 then

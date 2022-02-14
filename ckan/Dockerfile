@@ -25,7 +25,7 @@ COPY harvest-run-cron ${APP_DIR}
 COPY datajson-wget-cron ${APP_DIR}
 COPY start_ckan_web.sh ${APP_DIR}
 
-COPY prerun.py ${APP_DIR}
+COPY doi_prerun.py ${APP_DIR}
 
 COPY start_ckan_worker.sh ${APP_DIR}
 
