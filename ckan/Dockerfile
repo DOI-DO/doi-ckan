@@ -8,6 +8,7 @@ ARG CKAN_ENV=PROD
 ENV GIT_BRANCH=2.9
 
 ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
+RUN chown ckan -R ${APP_DIR}
 
 RUN apk add geos-dev proj proj-util proj-dev
 
@@ -22,7 +23,6 @@ COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
 COPY harvest-run-cron ${APP_DIR}
 COPY datajson-wget-cron ${APP_DIR}
-
 COPY start_ckan_web.sh ${APP_DIR}
 
 COPY prerun.py ${APP_DIR}

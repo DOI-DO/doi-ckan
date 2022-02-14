@@ -61,8 +61,9 @@ ckan config-tool $CKAN_INI \
     "who.timeout = 43200"
 
 # Run the prerun script to init CKAN and create the default admin user
-sudo -u ckan -EH python prerun.py
-
+# sleep 1000
+# sudo -u ckan -EH python prerun.py
+python prerun.py
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
 then
@@ -89,7 +90,7 @@ chown root:root /etc/crontabs/root && /usr/sbin/crond -f &
 # Set the common uwsgi options
 UWSGI_OPTS="--plugins http,python,gevent --socket /tmp/uwsgi.sock --uid 92 --gid 92 --http :5000 --master --enable-threads --paste config:/srv/app/ckan.ini --paste-logger --lazy-apps --gevent 2000 -p 2 -L -b 32768"
 # Start uwsgi
-sudo -u ckan -EH uwsgi $UWSGI_OPTS &
+uwsgi $UWSGI_OPTS &
 nginx -g 'daemon off;'
 
 # supervisord --configuration /etc/supervisord.conf
