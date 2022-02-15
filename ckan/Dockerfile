@@ -8,7 +8,7 @@ ARG CKAN_ENV=PROD
 ENV GIT_BRANCH=2.9
 
 ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
-RUN chown ckan -R ${APP_DIR}
+RUN chown root -R ${APP_DIR}
 
 RUN apk add geos-dev proj proj-util proj-dev
 

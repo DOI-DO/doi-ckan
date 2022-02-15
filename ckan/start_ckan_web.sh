@@ -2,7 +2,7 @@
 
 # Set debug to false
 echo "Disabling debug mode"
-ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
+sudo -u root -EH ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
 
 # Install any local extensions in the src_extensions volume
 echo "Looking for local extensions to install..."
@@ -29,7 +29,7 @@ do
         if [ -f $i/test.ini ];
         then
             echo "Updating \`test.ini\` reference to \`test-core.ini\` for plugin $i"
-            ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
+            sudo -u root -EH ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
         fi
 
         # Add configuration file to testing data json extension if applicable
@@ -50,20 +50,23 @@ fi
 
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
-ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
+sudo -u root -EH ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
 
 
 # Lock down user view/create & set timeout to 12 hours
 echo "Loading test settings into our ini file"
-ckan config-tool $CKAN_INI \
+sudo -u root -EH ckan config-tool $CKAN_INI \
     "ckan.auth.public_user_details = false" \
     "ckan.auth.create_user_via_web = false" \
+    "ckan.devserver.host = " \
+    "ckan.devserver.port = 5005" \
     "who.timeout = 43200"
 
 # Run the prerun script to init CKAN and create the default admin user
 # sleep 1000
 # sudo -u ckan -EH python prerun.py
-python doi_prerun.py
+# sleep 1000
+sudo -u root -EH python doi_prerun.py
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
 then
