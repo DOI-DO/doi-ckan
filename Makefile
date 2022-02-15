@@ -37,7 +37,7 @@ requirements:
 
 seed-harvests:
 	python tools/harvest_source_import/import_harvest_sources.py
-	docker-compose exec ckan-worker bash -c 'paster --plugin=ckanext-harvest harvester job-all -c $CKAN_INI'
+	docker-compose exec ckan-worker bash -c 'ckan harvester job-all -c $CKAN_INI'
 
 test:
 	docker-compose -f docker-compose.yml -f docker-compose.test.yml run cypress 
@@ -51,11 +51,11 @@ test-import-tool:
 		python -m pytest --vcr-record=none tests/
 
 test-user:
-	docker-compose exec ckan-worker paster --plugin=ckan user add test-user password=test-user-password email=test@doi.gov -c /srv/app/production.ini | grep -oP "apikey.: u.\K.+" | cut -d "'" -f1 > api.key
-	docker-compose exec ckan-worker paster --plugin=ckan sysadmin add test-user -c /srv/app/production.ini
+	docker-compose exec ckan-worker ckan user add test-user password=test-user-password email=test@doi.gov -c /srv/app/production.ini | grep -oP "apikey.: u.\K.+" | cut -d "'" -f1 > api.key
+	docker-compose exec ckan-worker ckan sysadmin add test-user -c /srv/app/production.ini
 
 test-user-remove:
-	docker-compose exec ckan-worker paster --plugin=ckan user remove test-user
+	docker-compose exec ckan-worker ckan user remove test-user
 	docker-compose exec ckan-worker bash -c 'psql $$CKAN_SQLALCHEMY_URL -c "DELETE FROM ONLY public.user where state != '"'active'"';"'
 
 up:

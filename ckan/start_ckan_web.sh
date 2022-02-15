@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Set debug to false
+chown ckan -R /srv/app
 echo "Disabling debug mode"
-sudo -u root -EH ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
+ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
 
 # Install any local extensions in the src_extensions volume
 echo "Looking for local extensions to install..."
@@ -29,7 +30,7 @@ do
         if [ -f $i/test.ini ];
         then
             echo "Updating \`test.ini\` reference to \`test-core.ini\` for plugin $i"
-            sudo -u root -EH ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
+            ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
         fi
 
         # Add configuration file to testing data json extension if applicable
@@ -50,12 +51,12 @@ fi
 
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
-sudo -u root -EH ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
+ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
 
 
 # Lock down user view/create & set timeout to 12 hours
 echo "Loading test settings into our ini file"
-sudo -u root -EH ckan config-tool $CKAN_INI \
+ckan config-tool $CKAN_INI \
     "ckan.auth.public_user_details = false" \
     "ckan.auth.create_user_via_web = false" \
     "ckan.devserver.host = " \
@@ -64,9 +65,9 @@ sudo -u root -EH ckan config-tool $CKAN_INI \
 
 # Run the prerun script to init CKAN and create the default admin user
 # sleep 1000
-# sudo -u ckan -EH python prerun.py
+# python prerun.py
 # sleep 1000
-sudo -u root -EH python doi_prerun.py
+python doi_prerun.py
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
 then
@@ -91,7 +92,16 @@ chown root:root /etc/crontabs/root && /usr/sbin/crond -f &
 ./create_datajson.sh &
 
 # Set the common uwsgi options
-UWSGI_OPTS="--plugins http,python,gevent --socket /tmp/uwsgi.sock --uid 92 --gid 92 --http :5000 --master --enable-threads --paste config:/srv/app/ckan.ini --paste-logger --lazy-apps --gevent 2000 -p 2 -L -b 32768"
+UWSGI_OPTS="--plugins http,python \
+            --socket /tmp/uwsgi.sock \
+            --wsgi-file /srv/app/wsgi.py \
+            --module wsgi:application \
+            --uid 92 --gid 92 \
+            --http 0.0.0.0:5001 \
+            --master --enable-threads \
+            --lazy-apps \
+            -p 2 -L -b 32768 --vacuum \
+            --harakiri $UWSGI_HARAKIRI"
 # Start uwsgi
 uwsgi $UWSGI_OPTS &
 nginx -g 'daemon off;'

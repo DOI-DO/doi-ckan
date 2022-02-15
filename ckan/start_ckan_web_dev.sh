@@ -70,7 +70,7 @@ ckan config-tool $CKAN_INI \
     "ckan.site_about = $CKAN__SITE_ABOUT" \
 
 # Run the prerun script to init CKAN and create the default admin user
-sudo -u ckan -EH python prerun.py
+python prerun.py
 
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
@@ -86,4 +86,4 @@ then
 fi
 
 echo "serving"
-sudo -u ckan -EH ckan serve --reload $CKAN_INI
+ckan serve --reload $CKAN_INI
