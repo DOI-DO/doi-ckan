@@ -9,7 +9,9 @@ ENV GIT_BRANCH=2.9
 
 ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
 RUN chown root -R ${APP_DIR}
+# RUN chown ckan -R /var/lib/ckan
 
+# RUN chmod -R 775 /var/lib/ckan
 RUN apk add geos-dev proj proj-util proj-dev
 
 
