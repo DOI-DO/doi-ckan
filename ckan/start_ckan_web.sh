@@ -3,7 +3,7 @@
 # Set debug to false
 echo "Disabling debug mode"
 ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
-
+sudo chown ckan -R ${APP_DIR}
 # Install any local extensions in the src_extensions volume
 echo "Looking for local extensions to install..."
 echo "Extension dir contents:"
@@ -58,6 +58,8 @@ echo "Loading test settings into our ini file"
 ckan config-tool $CKAN_INI \
     "ckan.auth.public_user_details = false" \
     "ckan.auth.create_user_via_web = false" \
+    "ckan.devserver.host = " \
+    "ckan.devserver.port = " \
     "who.timeout = 43200"
 
 # Run the prerun script to init CKAN and create the default admin user
