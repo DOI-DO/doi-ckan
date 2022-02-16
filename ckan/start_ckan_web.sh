@@ -1,8 +1,12 @@
 #!/bin/bash
 
 # Set debug to false
-chown ckan -R /srv/app
-chown root -R /var/lib/ckan
+# chown ckan -R /srv/app
+# chown root -R /var/lib/ckan
+# chown root -R /usr/lib/python3.8
+# chown root -R /srv/app
+# chown root -R /srv/app/./wsgi.py
+# chown root -R /usr/sbin
 echo "Disabling debug mode"
 
 ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
@@ -61,8 +65,8 @@ echo "Loading test settings into our ini file"
 ckan config-tool $CKAN_INI \
     "ckan.auth.public_user_details = false" \
     "ckan.auth.create_user_via_web = false" \
-    "ckan.devserver.host = " \
-    "ckan.devserver.port = 5005" \
+    # "ckan.devserver.host = " \
+    # "ckan.devserver.port = 5005" \
     "who.timeout = 43200"
 
 # Run the prerun script to init CKAN and create the default admin user

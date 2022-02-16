@@ -3,6 +3,12 @@
 # Install any local extensions in the src_extensions volume
 echo "Looking for local extensions to install..."
 echo "Extension dir contents:"
+# chown root -R /var/lib/ckan
+# chown root -R /usr/lib/python3.8
+# chown root -R /srv/app
+# chown root -R /usr/sbin
+# chown root /srv/app/./wsgi.py
+
 ls -la $SRC_EXTENSIONS_DIR
 for i in $SRC_EXTENSIONS_DIR/*
 do

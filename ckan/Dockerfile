@@ -1,5 +1,6 @@
 # FROM openknowledge/ckan-base:2.8 -- in future, may use this as well
 FROM openknowledge/ckan-base:2.9
+USER root
 
 ARG APP_DIR=/srv/app
 # specify the build arg (either development or prod)
@@ -8,7 +9,11 @@ ARG CKAN_ENV=PROD
 ENV GIT_BRANCH=2.9
 
 ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
+
+# USER root
 RUN chown root -R ${APP_DIR}
+RUN chown root -R /var/lib/ckan
+RUN mkdir /var/lib/ckan/webassets
 # RUN chown ckan -R /var/lib/ckan
 
 # RUN chmod -R 775 /var/lib/ckan
@@ -26,6 +31,7 @@ COPY docker-entrypoint.d/* /docker-entrypoint.d/
 COPY harvest-run-cron ${APP_DIR}
 COPY datajson-wget-cron ${APP_DIR}
 COPY start_ckan_web.sh ${APP_DIR}
+RUN chown root -R /usr/lib/python3.8
 
 COPY doi_prerun.py ${APP_DIR}
 
@@ -43,7 +49,8 @@ RUN apk update && apk add nginx
 RUN adduser -D -g 'www' www && chown -R www:www /var/lib/nginx
 
 RUN mkdir /var/www/datajson/ && chown -R www /var/www/datajson/
-
+RUN chown root -R /srv/app/.
+RUN chown root -R /usr/sbin
 COPY nginx_ckan /etc/nginx/nginx.conf
 
 # Dev additions
