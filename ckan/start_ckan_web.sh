@@ -2,9 +2,8 @@
 
 # Set debug to false
 chown ckan -R /srv/app
-# chown root -R /var/lib/ckan #delete this if it  doesnt work
-echo "Disabling debug mode"
 chown root -R /var/lib/ckan
+echo "Disabling debug mode"
 
 ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
 
