@@ -30,7 +30,6 @@ COPY docker-entrypoint.d/* /docker-entrypoint.d/
 COPY harvest-run-cron ${APP_DIR}
 COPY datajson-wget-cron ${APP_DIR}
 COPY start_ckan_web.sh ${APP_DIR}
-RUN chown root -R /usr/lib/python3.8
 
 COPY doi_prerun.py ${APP_DIR}
 
@@ -48,8 +47,7 @@ RUN apk update && apk add nginx
 RUN adduser -D -g 'www' www && chown -R www:www /var/lib/nginx
 
 RUN mkdir /var/www/datajson/ && chown -R www /var/www/datajson/
-RUN chown root -R /srv/app/.
-RUN chown root -R /usr/sbin
+RUN chown root -R /srv/app/
 COPY nginx_ckan /etc/nginx/nginx.conf
 
 # Dev additions

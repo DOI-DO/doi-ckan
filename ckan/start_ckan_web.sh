@@ -103,7 +103,6 @@ UWSGI_OPTS="--plugins http,python \
             --socket /tmp/uwsgi.sock \
             --wsgi-file /srv/app/wsgi.py \
             --module wsgi:application \
-            --uid 92 --gid 92 \
             --http 0.0.0.0:5001 \
             --master --enable-threads \
             --lazy-apps \
