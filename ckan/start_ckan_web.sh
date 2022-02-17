@@ -1,15 +1,9 @@
 #!/bin/bash
 
-# Set debug to false
-# chown ckan -R /srv/app
-# chown root -R /var/lib/ckan
-# chown root -R /usr/lib/python3.8
-# chown root -R /srv/app
-# chown root -R /srv/app/./wsgi.py
-# chown root -R /usr/sbin
+
 mkdir /var/lib/ckan/webassets
 echo "Disabling debug mode"
-
+# Set debug to false
 ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
 
 # Install any local extensions in the src_extensions volume

@@ -3,11 +3,8 @@
 # Install any local extensions in the src_extensions volume
 echo "Looking for local extensions to install..."
 echo "Extension dir contents:"
-# chown root -R /var/lib/ckan
-# chown root -R /usr/lib/python3.8
-# chown root -R /srv/app
-# chown root -R /usr/sbin
-# chown root /srv/app/./wsgi.py
+mkdir /var/lib/ckan/webassets
+
 
 ls -la $SRC_EXTENSIONS_DIR
 for i in $SRC_EXTENSIONS_DIR/*
@@ -52,7 +49,7 @@ fi
 
 # Set debug to true
 echo "Enabling debug mode"
-ckan config-tool $CKAN_INI -s DEFAULT "debug = true"
+# ckan config-tool $CKAN_INI -s DEFAULT "debug = true"
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
 ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
@@ -76,7 +73,7 @@ ckan config-tool $CKAN_INI \
     "ckan.site_about = $CKAN__SITE_ABOUT" \
 
 # Run the prerun script to init CKAN and create the default admin user
-python prerun.py
+python doi_prerun.py
 
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
@@ -90,6 +87,18 @@ then
         echo
     done
 fi
+./create_datajson.sh &
 
-echo "serving"
-ckan serve --reload $CKAN_INI
+UWSGI_OPTS="--plugins http,python \
+            --socket /tmp/uwsgi.sock \
+            --wsgi-file /srv/app/wsgi.py \
+            --module wsgi:application \
+            --http 0.0.0.0:5001 \
+            --master --enable-threads \
+            --lazy-apps \
+            -p 2 -L -b 32768 --vacuum \
+            --harakiri $UWSGI_HARAKIRI"
+# Start uwsgi
+uwsgi $UWSGI_OPTS &
+nginx -g 'daemon off;'
+sleep 60
