@@ -13,7 +13,6 @@ ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
 # USER root
 RUN chown root -R ${APP_DIR}
 RUN chown root -R /var/lib/ckan
-RUN mkdir /var/lib/ckan/webassets
 # RUN chown ckan -R /var/lib/ckan
 
 # RUN chmod -R 775 /var/lib/ckan

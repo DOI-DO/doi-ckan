@@ -7,6 +7,7 @@
 # chown root -R /srv/app
 # chown root -R /srv/app/./wsgi.py
 # chown root -R /usr/sbin
+mkdir /var/lib/ckan/webassets
 echo "Disabling debug mode"
 
 ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
