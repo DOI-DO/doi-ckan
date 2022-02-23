@@ -2,11 +2,7 @@
 
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
-# chown root -R /var/lib/ckan
-# chown root -R /usr/lib/python3.8
-# chown root -R /srv/app
-# chown root -R /usr/sbin
-# chown root /srv/app/./wsgi.py
+
 ckan config-tool $CKAN_INI \
   "ckan.plugins = $CKAN__PLUGINS" \
   "ckanext.geodatagov.fgdc2iso_service = $CKANEXT__GEODATAGOV__FGDC2ISO__SERVICE"
