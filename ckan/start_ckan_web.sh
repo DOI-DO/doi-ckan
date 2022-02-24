@@ -60,14 +60,9 @@ echo "Loading test settings into our ini file"
 ckan config-tool $CKAN_INI \
     "ckan.auth.public_user_details = false" \
     "ckan.auth.create_user_via_web = false" \
-    # "ckan.devserver.host = " \
-    # "ckan.devserver.port = 5005" \
     "who.timeout = 43200"
 
 # Run the prerun script to init CKAN and create the default admin user
-# sleep 1000
-# python prerun.py
-# sleep 1000
 python doi_prerun.py
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]

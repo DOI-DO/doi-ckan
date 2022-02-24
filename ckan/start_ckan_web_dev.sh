@@ -93,12 +93,11 @@ UWSGI_OPTS="--plugins http,python \
             --socket /tmp/uwsgi.sock \
             --wsgi-file /srv/app/wsgi.py \
             --module wsgi:application \
-            --http 0.0.0.0:5001 \
+            --http 0.0.0.0:5000 \
             --master --enable-threads \
             --lazy-apps \
             -p 2 -L -b 32768 --vacuum \
             --harakiri $UWSGI_HARAKIRI"
 # Start uwsgi
-uwsgi $UWSGI_OPTS &
-nginx -g 'daemon off;'
+uwsgi $UWSGI_OPTS
 sleep 60
