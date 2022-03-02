@@ -176,7 +176,7 @@ schema. In this case the version should be set to the next CKAN version number.
 
 <uniqueKey>index_id</uniqueKey>
 <df>text</df>
-<solrQueryParser q.op="AND"/>
+<solrQueryParser defaultOperator="AND"/>
 
 <copyField source="url" dest="urls"/>
 <copyField source="title" dest="title_ngram"/>
