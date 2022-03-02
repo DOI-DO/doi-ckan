@@ -52,7 +52,7 @@ test-import-tool:
 
 test-user:
 	docker-compose exec ckan-worker ckan user add test-user password=test-user-password email=test@doi.gov -c /srv/app/production.ini | grep -oP "apikey.: u.\K.+" | cut -d "'" -f1 > api.key
-	docker-compose exec ckan-worker ckan sysadmin add test-user -c /srv/app/production.ini
+	docker-compose exec ckan-worker ckan sysadmin add test-user 
 
 test-user-remove:
 	docker-compose exec ckan-worker ckan user remove test-user
