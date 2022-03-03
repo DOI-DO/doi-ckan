@@ -51,9 +51,8 @@ test-import-tool:
 		python -m pytest --vcr-record=none tests/
 
 test-user:
-	docker-compose exec ckan-worker ckan user add test-user password=test-user-password email=test@doi.gov -c /srv/app/production.ini | grep -oP "apikey.: u.\K.+" | cut -d "'" -f1 > api.key
-	docker-compose exec ckan-worker ckan sysadmin add test-user 
-
+	docker-compose exec ckan-worker ckan -c /srv/app/ckan.ini user add test-user password=test-user-password email=test@doi.gov | grep -oP "apikey.: u.\K.+" | cut -d "'" -f1 > api.key
+	docker-compose exec ckan-worker ckan -c /srv/app/ckan.ini sysadmin add test-user
 test-user-remove:
 	docker-compose exec ckan-worker ckan user remove test-user
 	docker-compose exec ckan-worker bash -c 'psql $$CKAN_SQLALCHEMY_URL -c "DELETE FROM ONLY public.user where state != '"'active'"';"'
