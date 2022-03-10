@@ -125,6 +125,13 @@ schema. In this case the version should be set to the next CKAN version number.
     <field name="groups" type="string" indexed="true" stored="true" multiValued="true"/>
     <field name="organization" type="string" indexed="true" stored="true" multiValued="false"/>
 
+    <!-- SOLR GeoSpatial -->
+    <field name="bbox_area" type="float" indexed="true" stored="true" />
+    <field name="maxx" type="float" indexed="true" stored="true" />
+    <field name="maxy" type="float" indexed="true" stored="true" />
+    <field name="minx" type="float" indexed="true" stored="true" />
+    <field name="miny" type="float" indexed="true" stored="true" />
+
     <field name="capacity" type="string" indexed="true" stored="true" multiValued="false"/>
     <field name="permission_labels" type="string" indexed="true" stored="false" multiValued="true"/>
 
@@ -175,8 +182,8 @@ schema. In this case the version should be set to the next CKAN version number.
 </fields>
 
 <uniqueKey>index_id</uniqueKey>
-<df>text</df>
-<solrQueryParser q.op="AND"/>
+<defaultSearchField>text</defaultSearchField>
+<solrQueryParser defaultOperator="AND"/>
 
 <copyField source="url" dest="urls"/>
 <copyField source="title" dest="title_ngram"/>

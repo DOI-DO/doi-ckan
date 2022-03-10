@@ -1,24 +1,15 @@
-FROM solr:8
+FROM ckan/ckan-solr:2.9-solr8
 
-EXPOSE 8983
-
-# TODO: Update with new release branch when merged
-ARG CKAN_BRANCH="master"
+USER root
 
 ENV SOLR_CONFIG_DIR="/opt/solr/server/solr/configsets"
 ENV SOLR_SCHEMA_FILE="$SOLR_CONFIG_DIR/ckan/conf/managed-schema"
 
-USER root
+ADD managed-schema $SOLR_SHEMA_FILE
 
-# Create a CKAN configset by copying the default one
-RUN cp -R $SOLR_CONFIG_DIR/_default $SOLR_CONFIG_DIR/ckan
-
-# Update the schema
-ADD managed-schema $SOLR_SCHEMA_FILE
 RUN sed -i "s/<defaultSearchField>text<\/defaultSearchField>/<df>text<\/df>/" $SOLR_SCHEMA_FILE
 RUN sed -i "s/<solrQueryParser defaultOperator=\"AND\"\/>/<solrQueryParser q.op=\"AND\"\/>/" $SOLR_SCHEMA_FILE
-RUN chmod 644 $SOLR_SCHEMA_FILE 
+
+
 
 USER solr
-
-CMD ["sh", "-c", "solr-precreate ckan $SOLR_CONFIG_DIR/ckan"]

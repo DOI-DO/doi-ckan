@@ -55,8 +55,6 @@ services:
       context: solr/
     ports:
       - "8983:8983"
-    volumes:
-      - solr_data:/opt/solr/server/solr/ckan/data
   # solr:
   #   build:
   #     context: solr6/
