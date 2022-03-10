@@ -50,11 +50,20 @@ services:
       - pg_data:/var/lib/postgresql/data
 
   solr:
-    image: ckan/ckan-solr:2.9-solr8
+    # image: ckan/ckan-solr:2.9-solr8
+    build:
+      context: solr/
     ports:
       - "8983:8983"
     volumes:
       - solr_data:/opt/solr/server/solr/ckan/data
+  # solr:
+  #   build:
+  #     context: solr6/
+  #   ports:
+  #     - "8983:8983"
+  #   volumes:
+  #     - solr_data:/opt/solr/server/solr/ckan/data
 
   redis:
     image: redis:alpine
