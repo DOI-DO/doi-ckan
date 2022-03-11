@@ -24,7 +24,7 @@ RUN /usr/bin/python3 -m pip install --upgrade pip
 # some errors installing cryptography with the ckan-base image see:
 # https://github.com/geerlingguy/JJG-Ansible-Windows/issues/28#ref-commit-b854e7a
 RUN apk add --no-cache openssl-dev python3-dev jq
-RUN apk add libressl-dev musl-dev xmlsec vim xmlsec-dev openjdk11-jre zip libffi-dev
+RUN apk add libressl-dev musl-dev xmlsec vim xmlsec-dev openjdk11-jre zip libffi-dev geos-dev proj proj-util proj-dev
 # Download Saxon jar for FGDC2ISO transform (geodatagov)
 ARG saxon_ver=9.9.1-7
 ADD \
@@ -32,8 +32,6 @@ ADD \
   /usr/lib/jvm/java-11-openjdk/saxon/saxon.jar
 
 ENV CLASSPATH=${CLASSPATH}:/usr/lib/jvm/java-11-openjdk/saxon/saxon.jar
-
-RUN apk add geos-dev proj proj-util proj-dev
 
 RUN pip3 install --upgrade pip && pip3 install -r requirements.txt --ignore-installed
 COPY docker-entrypoint.d/* /docker-entrypoint.d/

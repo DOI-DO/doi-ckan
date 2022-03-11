@@ -27,7 +27,7 @@ describe('Dataset', () => {
         cy.get('span').should('contain', 'General Services Administration')
     })
 
-    it('waf dataset validation', () => {
+    it('waf iso dataset validation', () => {
         // Go to the harvest list, and select the first dataset
         cy.visit('/harvest/cypress-harvest-waf-iso');
         cy.get('a[href*="/dataset/ek500-water-column-sonar-data-collected-during-al0001"]').first().click();
@@ -37,4 +37,14 @@ describe('Dataset', () => {
         cy.get('td').contains('eng; USA')
         cy.get('td').contains('geospatial')
     })
+
+    if('waf fgdc dataset validation', () => {
+        cy.visit('/harvest/cypress-harvest-waf-iso');
+        cy.get('a[href*="/dataset/blm-rea-nwp-2011-ae-c-aquatic-ecosystem-threats-ag"]').first().click();
+
+        cy.get('a').should('contain', 'Download Metadata')
+        cy.get('a[class="show-more"]').click()
+        cy.get('td').contains('eng; USA')
+        cy.get('td').contains('geospatial')
+    });
 })
