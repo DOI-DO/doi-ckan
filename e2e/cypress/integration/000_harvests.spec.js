@@ -99,7 +99,7 @@ describe('Harvest', () => {
         cy.get('a[class="btn btn-primary"]').click()
         cy.get('a[href="/harvest?organization='+dcatUsOrg+'"]').click()
         cy.get('a[class="btn btn-primary"]').click()
-        cy.create_harvest_source('http://nginx-harvest-source/fgdc/',
+        cy.create_harvest_source('http://nginx-harvest-source/fgdc-waf/',
             wafFgdcHarvestSourceName,
            'cypress test waf fgdc',
            'waf',
