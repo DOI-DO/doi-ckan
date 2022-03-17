@@ -54,6 +54,8 @@ services:
       context: solr/
     ports:
       - "8983:8983"
+    volumes:
+      - solr_data:/var/solr/data
 
   redis:
     image: redis:alpine
