@@ -62,6 +62,8 @@ ckan config-tool $CKAN_INI \
     "ckan.auth.create_user_via_web = false" \
     "who.timeout = 43200"
 
+ckan -c $CKAN_INI db upgrade
+
 # Run the prerun script to init CKAN and create the default admin user
 python doi_prerun.py
 # Run any startup scripts provided by images extending this one
