@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+	<idinfo>
+		<citation>
+			<citeinfo>
+				<origin>SAIC, SAIC GIS Lead</origin>
+				<title>BLM REA NWP 2011 AE C Aquatic Ecosystem Threats Ag</title>
+				<geoform>raster digital data</geoform>
+				<onlink>https://landscape.blm.gov/NWP_2011_layerpackages/NGP_AE_C_Ratings_Based_on_Percent_Ag_in_HUC_10.lpk</onlink>
+				<pubdate>Unknown</pubdate>
+			<pubinfo><publish>Bureau of Land Management</publish></pubinfo></citeinfo>
+		</citation>
+		<descript>
+			<abstract>This geodatabse set contains the attributes and indicators associated with aquatic EI were categorized by size, landscape context, and conditionset in the Northwestern Plains Ecoregion. The data for the Aquatic EI used information from the Aquatic Threat analysis performed by the Missouri River Assesment Program (MoRAP). The MoRAP aquatic threat analysis contains information about each threat analysis attribute, indicator and metric arbitrarily quantified (1,2,3) for the 6th level Hydrological Unit (HUC12). These attributes were calculated for the entire HUC 12, the streams within the HUC 12, or the riparian corridor within the HUC 12. For this analysis MoRAP used arbitrary values were assigned good =3, fair =2 and poor = 1. When referring the to document reader should refer to the categorical values of good, fair and poor. The attributes were calculated using ArcMap Tools. HUC12s make up larger HUC10 watersheds, thus,for the Aquatic EI selected HUC12 metrics were chosen then averaged by the HUC10. Since the data was averaged equal intervals were used in classifying good, fair and poor.</abstract>
+			<purpose>This data set was created for use in the BLM Rapid Ecoregional Assesment for the Northwestern Plains Ecoregion. This data set is part of the Aquatic Ecological Intactness (EI) Analysis. The Aquatic EI analysis shows the overall habitat condition based on the size, condition, and context at the HUC10 watershed level .   This data is intended for use at the ecoregional level.</purpose>
+		</descript>
+		<status>
+			<progress>Complete</progress>
+			<update>None planned</update>
+		</status>
+		<spdom>
+			<bounding>
+				<westbc>-113.700045479</westbc>
+				<eastbc>-97.351067741</eastbc>
+				<northbc>49.0015235406</northbc>
+				<southbc>41.9268667166</southbc>
+			</bounding>
+		</spdom>
+		<keywords>
+			<theme>
+				<themekt>ISO 19115 Topic Category</themekt>
+				<themekey>farming</themekey>
+				<themekey>inlandWaters</themekey>
+			</theme>
+			<theme>
+				<themekt>BLM-Theme</themekt>
+				<themekey>Range</themekey>
+				<themekey>Hydrology</themekey>
+			<themekey>Geospatial</themekey></theme>
+			<theme>
+				<themekt>BLM-REA</themekt>
+				<themekey>NWP 2011</themekey>
+				<themekey>Northwestern Plains</themekey>
+			</theme>
+			<place>
+				<placekt>BLM-State</placekt>
+				<placekey>Montana</placekey>
+				<placekey>Nebraska</placekey>
+				<placekey>North Dakota</placekey>
+				<placekey>South Dakota</placekey>
+				<placekey>Wyoming</placekey>
+			</place>
+			<theme>
+				<themekt>None</themekt>
+				<themekey>DOI</themekey>
+				<themekey>Bureau of Land Management</themekey>
+				<themekey>BLM</themekey>
+				<themekey>Rapid Ecoregional Assessment</themekey>
+				<themekey>REA</themekey>
+			</theme>
+			<theme>
+				<themekt>none</themekt>
+				<themekey>Northwestern Plains Ecoregion</themekey>
+			</theme>
+			<place>
+				<placekt>BLM-State</placekt>
+				<placekey>Montana, North Dakota, South Dakota, Wyoming, Nebraska</placekey>
+			</place>
+			<theme>
+				<themekt>ISO 19115 Topic Categories</themekt>
+				<themekey>biota</themekey>
+				<themekey>boundaries</themekey>
+			</theme>
+		</keywords>
+		<ptcontac>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>SAIC</cntorg>
+					<cntper>SAIC GIS Lead</cntper>
+				</cntorgp>
+				<cntaddr>
+					<addrtype>physical</addrtype>
+					<address>13397 Lakefront Drive Suite 100</address>
+					<city>Earth City</city>
+					<state>Missouri</state>
+					<postal>63045</postal>
+					<country>USA</country>
+				</cntaddr>
+				<cntvoice>314 770 3046</cntvoice>
+				<cntpos>Unknown</cntpos>
+				<cntemail>Unknown</cntemail>
+			</cntinfo>
+		</ptcontac>
+		<native>Microsoft Windows XP Version 5.1 (Build 2600) Service Pack 3; ESRI ArcGIS 10.0.3.3600</native>
+		<timeperd>
+			<timeinfo>
+				<sngdate>
+					<caldate>unknown</caldate>
+				</sngdate>
+			</timeinfo>
+			<current>Unknown</current>
+		</timeperd>
+	<accconst>None, these data are considered public domain</accconst><useconst>These data are provided by Bureau of Land Management (BLM) "as is" and may contain errors or omissions. The User assumes the entire risk associated with its use of these data and bears all responsibility in determining whether these data are fit for the User's intended use. The information contained in these data is dynamic and may change over time. The data are not better than the original sources from which they were derived, and both scale and accuracy may vary across the data set. These data may not have the accuracy, resolution, completeness, timeliness, or other characteristics appropriate for applications that potential users of the data may contemplate. The User is encouraged to carefully consider the content of the metadata file associated with these data. These data are neither legal documents nor land surveys, and must not be used as such. Official records may be referenced at most BLM offices. Please report any errors in the data to the BLM office for which it was obtained. The BLM should be cited as the data source in any products derived from these data. Any Users wishing to modify the data should describe the types of modifications they have performed. The User should not misrepresent the data, nor imply that changes made were approved or endorsed by BLM. This information may be updated without notification.</useconst></idinfo>
+	<dataqual>
+		<attracc>
+			<attraccr>No additional checks performed</attraccr>
+		</attracc>
+		<logic>Geoprocessing steps in models were quality checked to ensure spatial units. Rasters were aligned using a snap raster and edges defined with ecoregion boundaries.</logic>
+		<complete>Data are complete for the respective contract</complete>
+		<lineage>
+			<srcinfo>
+				<srccontr>NHD HUCs</srccontr>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>unknown</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>Unknown</srccurr>
+				</srctime>
+				<srccitea>Unknown</srccitea>
+				<srccite>
+					<citeinfo>
+						<origin>Unknown</origin>
+						<pubdate>Unknown</pubdate>
+						<title>Unknown</title>
+					</citeinfo>
+				</srccite>
+				<srcscale>Unknown</srcscale>
+				<typesrc>Unknown</typesrc>
+			</srcinfo>
+			<procstep>
+				<procdesc>CalculateField NGPAquaticThreatHUC10 Total_Rank "[Ave_GAP12_R] + [Ave_NAT_RC_R] + [Ave_OIL_GAS_R] + [Ave_S303D_R] + [Ave_STRM_RD_R] + [Ave_DAMS_R] + [Ave_MINE_R] + [Ave_TRI_R] + [Ave_POP_R] + [Ave_AG_HUC_R] + [Ave_CROP_RC_R] + [Ave_IMP_HUC_R] + [Ave_IMP_RC_R]" VB #</procdesc>
+				<proccont>
+					<cntinfo>
+						<cntorgp>
+							<cntorg>Unknown</cntorg>
+							<cntper>Unknown</cntper>
+						</cntorgp>
+					<cntpos>Unknown</cntpos><cntaddr><country>Unknown</country><addrtype>Unknown</addrtype><address>Unknown</address><city>Unknown</city><state>Unknown</state><postal>Unknown</postal></cntaddr><cntvoice>Unknown</cntvoice></cntinfo>
+				</proccont>
+				<procdate>Unknown</procdate>
+			</procstep>
+		</lineage>
+		<posacc>
+			<horizpa>
+				<horizpar>Unknown</horizpar>
+			</horizpa>
+			<vertacc>
+				<vertaccr>Unknown</vertaccr>
+			</vertacc>
+		</posacc>
+	</dataqual>
+	<spdoinfo>
+		<direct>Raster</direct>
+		<ptvctinf>
+			<sdtsterm>
+				<sdtstype>GT-polygon composed of chains</sdtstype>
+				<ptvctcnt>1194</ptvctcnt>
+			</sdtsterm>
+		</ptvctinf>
+	</spdoinfo>
+	<eainfo>
+		<detailed>
+			<enttyp>
+				<enttypl>NGP_AE_C_Aquatic_Ecosystem_Threats</enttypl>
+			<enttypd>Unknown</enttypd></enttyp>
+			<attr>
+				<attrlabl>OBJECTID</attrlabl>
+				<attrdef>Internal feature number.</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<udom>Sequential unique whole numbers that are automatically generated.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Shape</attrlabl>
+				<attrdef>Feature geometry.</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<udom>Coordinates defining the features.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>HUC_10</attrlabl>
+			</attr>
+			<attr>
+				<attrlabl>OBJECTID_1</attrlabl>
+			</attr>
+			<attr>
+				<attrlabl>HUC_10_11</attrlabl>
+			</attr>
+			<attr>
+				<attrlabl>Cnt_HUC_10</attrlabl>
+			</attr>
+			<attr>
+				<attrlabl>Ave_GAP12_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of GAP 1 and 2 lands at the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_NAT_RC_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of Natual landcover at the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_OIL_GAS_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of number of mines at the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_S303D_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings percent 303d streams at the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_STRM_RD_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of percent streams withing 40m of a road rolled up to the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_DAMS_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of number of dams at the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_MINE_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of number of mines in the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_TRI_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of TRI sites in the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_POP_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of population rolled up to the  HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_AG_HUC_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of percent AG rolled up to the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_CROP_RC_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of percent AG in riparian area rolled up to the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_IMP_HUC_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of percent imperviousness rolled up to the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Ave_IMP_RC_R</attrlabl>
+				<attrdef>Average of HUC 12 Rankings of percent imperviousness in the riparian area rolled up to the HUC10.</attrdef>
+			</attr>
+			<attr>
+				<attrlabl>Shape_Length</attrlabl>
+				<attrdef>Length of feature in internal units.</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<udom>Positive real numbers that are automatically generated.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Shape_Area</attrlabl>
+				<attrdef>Area of feature in internal units squared.</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<udom>Positive real numbers that are automatically generated.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Total_Rank</attrlabl>
+				<attrdef>Total of all the individual ranks.</attrdef>
+			</attr>
+		</detailed>
+		<overview>
+			<eaover>Unknown</eaover>
+		</overview>
+	</eainfo>
+	<metainfo>
+		<metd>20160907</metd>
+		<metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+		<metstdv>FGDC-STD-001-1998</metstdv>
+		<mettc>local time</mettc>
+		<metc>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>Unknown</cntorg>
+					<cntper>Unknown</cntper>
+				</cntorgp>
+				<cntaddr>
+					<country>Unknown</country>
+					<address>Unknown</address>
+					<addrtype>Unknown</addrtype>
+					<state>Unknown</state>
+					<city>Unknown</city>
+					<postal>Unknown</postal>
+				</cntaddr>
+				<cntemail>Unknown</cntemail>
+				<cntvoice>Unknown</cntvoice>
+				<cntpos>Unknown</cntpos>
+			</cntinfo>
+		</metc>
+		<metrd>20130129</metrd>
+	</metainfo>
+	<spref>
+		<horizsys>
+			<geodetic>
+				<semiaxis>6378137.0</semiaxis>
+				<horizdn>D North American 1983</horizdn>
+				<denflat>298.257222101</denflat>
+				<ellips>GRS 1980</ellips>
+			</geodetic>
+			<planar>
+				<mapproj>
+					<albers>
+						<fnorth>0.0</fnorth>
+						<stdparll>29.5</stdparll>
+						<stdparll>45.5</stdparll>
+						<feast>0.0</feast>
+						<longcm>-96.0</longcm>
+						<latprjo>23.0</latprjo>
+					</albers>
+					<mapprojn>Albers Conical Equal Area</mapprojn>
+				</mapproj>
+				<planci>
+					<coordrep>
+						<absres>0.0001</absres>
+						<ordres>0.0001</ordres>
+					</coordrep>
+					<plandu>meters</plandu>
+					<plance>coordinate pair</plance>
+				</planci>
+			</planar>
+		</horizsys>
+	</spref>
+	<distinfo>
+		<stdorder>
+			<digform>
+				<digtopt>
+					<onlinopt>
+						<accinstr>Download from Landscape Approach Data Portal</accinstr><computer><networka><networkr>https://landscape.blm.gov/NWP_2011_layerpackages/NGP_AE_C_Ratings_Based_on_Percent_Ag_in_HUC_10.lpk</networkr></networka></computer></onlinopt>
+				</digtopt>
+				<digtinfo>
+					<formspec>Varies</formspec>
+					<filedec>No compression applied</filedec>
+				<formname>ESRI Layer Package (LPK)</formname></digtinfo>
+			</digform>
+			<fees>N/A</fees>
+		<ordering>Download from Landscape Approach Data Portal</ordering></stdorder>
+		<distliab>The BLM assumes no responsibility for errors or omissions.  No warranty is made by the BLM as to the accuracy, reliability, or completeness of these data for individual use or aggregate use with other data; nor shall the act of distribution to contractors, partners, or beyond, constitute any such warranty for individual or aggregate data use with other data.  Although these data have been processed successfully on computers of BLM, no warranty, expressed or implied, is made by BLM regarding the use of these data on any other system, or for general or scientific purposes, nor does the fact of distribution constitute or imply any such warranty.  In no event shall the BLM have any liability whatsoever for payment of any consequential, incidental, indirect, special, or tort damages of any kind, including, but not limited to, any loss of profits arising out of the use or reliance on the geographic data or arising out of the delivery, installation, operation, or support by BLM.</distliab>
+		<techpreq>ESRI ArcGIS software, version 10.0 or greater</techpreq>
+		<resdesc>Downloadable Data</resdesc>
+	<availabl><timeinfo><sngdate><caldate>2014</caldate></sngdate></timeinfo></availabl><distrib><cntinfo><cntaddr><postal>80225-0047</postal><address>Building 50, Denver Federal Center</address><address>P.O. Box 25047</address><city>Denver</city><addrtype>mailing and physical address</addrtype><state>Colorado</state><country>USA</country></cntaddr><cntemail>blm_oc_rea_data_portal_feedback_team@blm.gov</cntemail><cntvoice>Please email</cntvoice><cntpos>Resource Programs Data Coordinator, OC-530</cntpos><cntorgp><cntorg>Bureau of Land Management</cntorg></cntorgp></cntinfo></distrib></distinfo>
+	<Binary>
+		<Thumbnail>
+			<Data EsriPropertyType="PictureX">/9j/4AAQSkZJRgABAQEAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCACFAMgDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii
+gClqGrafpSq19dxQB87Q55bHXA6nrUdtr2kXmPs+pWrk9F80BvyPNYnxElmj8KOsSbkeVFlbP3Vz
+nP5gD8a80h1Szg0WSzbS4555NyvKTtO0+h5IPuB2FeNj8yqYWqoRhzbeRjGpfEKlKSin1Z7uCCAQ
+cg96K8J8Narqnhjw7LqMlsTbvOip5xdSxxwV9BgnnHPr2rf1bxderDd3Wi+IF3QxR3DW8ojkU7jy
+itzyO49wKzjntP2nJKDte11qr6fdue/UyTEKryUvejzcvNsumu701PV6K8T074xazDNGL+0tLiDP
+zmNSj49ucfpXpmoeKo9P0qPUGtHkhbaSFYZAYcH+X512TzbCU5RjUlZy20ZhmOVYnL0pV1p3TudB
+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
+AKKKKACiiigAooooAKKKKAP/2Q==</Data>
+		</Thumbnail>
+	</Binary>
+</metadata>

@@ -2,7 +2,8 @@
 
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
-paster --plugin=ckan config-tool $CKAN_INI \
+
+ckan config-tool $CKAN_INI \
   "ckan.plugins = $CKAN__PLUGINS" \
   "ckanext.geodatagov.fgdc2iso_service = $CKANEXT__GEODATAGOV__FGDC2ISO__SERVICE"
 
