@@ -3,7 +3,6 @@ describe('Harvest', () => {
     const dcatUsOrg = 'dcat-us-org'
     const dataJsonHarvestSoureName = 'cypress-harvest-datajson'
     const wafIsoHarvestSourceName = 'cypress-harvest-waf-iso'
-    const wafFgdcHarvestSourceName = 'cypress-harvest-waf-fgdc'
 
     before(() => {
         /**
@@ -93,22 +92,4 @@ describe('Harvest', () => {
     it('Start WAF ISO Harvest Job', () => {
         cy.start_harvest_job(wafIsoHarvestSourceName)
     })
-
-    it('Create a WAF FGDC Harvest Source', () => {
-        cy.visit('/organization/'+dcatUsOrg)
-        cy.get('a[class="btn btn-primary"]').click()
-        cy.get('a[href="/harvest?organization='+dcatUsOrg+'"]').click()
-        cy.get('a[class="btn btn-primary"]').click()
-        cy.create_harvest_source('http://nginx-harvest-source/fgdc-waf/',
-            wafFgdcHarvestSourceName,
-           'cypress test waf fgdc',
-           'waf',
-           dcatUsOrg,
-           true,
-           false);
-    });
-
-    it('Start WAF FGDC harvest Job', () => {
-        cy.start_harvest_job(wafFgdcHarvestSourceName)
-    });
 })

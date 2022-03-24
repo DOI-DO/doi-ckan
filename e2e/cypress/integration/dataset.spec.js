@@ -18,7 +18,7 @@ describe('Dataset', () => {
     it('validates data json metadata', () => {
         // Go to the harvest list, and select the first dataset
         cy.visit('/harvest/cypress-harvest-datajson');
-        cy.get('a[href*="/dataset/concur-travel-parent"]').click();
+        cy.get('a[href*="/dataset/"]').first().click();
         cy.get('a').should('contain', 'Download Metadata')
         cy.contains('Data.json Metadata')
         cy.get('a[class="show-more"]').click()
@@ -27,24 +27,14 @@ describe('Dataset', () => {
         cy.get('span').should('contain', 'General Services Administration')
     })
 
-    it('waf iso dataset validation', () => {
+    it('waf dataset validation', () => {
         // Go to the harvest list, and select the first dataset
         cy.visit('/harvest/cypress-harvest-waf-iso');
-        cy.get('a[href*="/dataset/ek500-water-column-sonar-data-collected-during-al0001"]').first().click();
+        cy.get('a[href*="/dataset/"]').first().click();
 
         cy.get('a').should('contain', 'Download Metadata')
         cy.get('a[class="show-more"]').click()
         cy.get('td').contains('eng; USA')
         cy.get('td').contains('geospatial')
     })
-
-    if('waf fgdc dataset validation', () => {
-        cy.visit('/harvest/cypress-harvest-waf-iso');
-        cy.get('a[href*="/dataset/blm-rea-nwp-2011-ae-c-aquatic-ecosystem-threats-ag"]').first().click();
-
-        cy.get('a').should('contain', 'Download Metadata')
-        cy.get('a[class="show-more"]').click()
-        cy.get('td').contains('eng; USA')
-        cy.get('td').contains('geospatial')
-    });
 })

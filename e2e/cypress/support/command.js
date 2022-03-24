@@ -148,7 +148,14 @@ Cypress.Commands.add(
 
     cy.get("#field-notes").type(harvestDesc);
     cy.get('[type="radio"]').check(harvestType);
- 
+    if (harvestType == "waf") {
+      // cy.get('#text').then($text => {
+      //    if($text.val() == 'Validation'){
+      
+      //    }
+      // })
+      cy.get('[type="radio"]').check("iso19139ngdc");
+    }
 
     // Set harvest to be public always, per best practices
     cy.get("#field-private_datasets").select("False");

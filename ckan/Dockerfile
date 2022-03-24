@@ -1,52 +1,40 @@
 # FROM openknowledge/ckan-base:2.8 -- in future, may use this as well
-FROM openknowledge/ckan-base:2.9
-USER root
+FROM openknowledge/ckan-base:2.8
 
 ARG APP_DIR=/srv/app
 # specify the build arg (either development or prod)
 ARG CKAN_ENV=PROD
 
-ENV GIT_BRANCH=2.9
+ENV GIT_BRANCH=2.8
 
 ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
 
-# USER root
-RUN chown root -R ${APP_DIR}
-RUN chown root -R /var/lib/ckan
-# RUN chown ckan -R /var/lib/ckan
-
-# RUN chmod -R 775 /var/lib/ckan
-RUN apk add geos-dev proj proj-util proj-dev
-
+# Shapely Error
+ADD http://download.osgeo.org/geos/geos-3.7.0.tar.bz2 /geos/geos.tar.bz2
+RUN tar xf /geos/geos.tar.bz2 -C /geos --strip-components=1
+RUN cd /geos && \
+    ./configure && \
+    make -j 1 && \
+    make install
 
 COPY requirements.txt ${APP_DIR}/requirements.txt
-RUN /usr/bin/python3 -m pip install --upgrade pip
+
 # some errors installing cryptography with the ckan-base image see:
 # https://github.com/geerlingguy/JJG-Ansible-Windows/issues/28#ref-commit-b854e7a
-RUN apk add --no-cache openssl-dev python3-dev jq
-RUN apk add libressl-dev musl-dev xmlsec vim xmlsec-dev openjdk11-jre zip libffi-dev geos-dev proj proj-util proj-dev
-# Download Saxon jar for FGDC2ISO transform (geodatagov)
-ARG saxon_ver=9.9.1-7
-ADD \
-  https://repo1.maven.org/maven2/net/sf/saxon/Saxon-HE/${saxon_ver}/Saxon-HE-${saxon_ver}.jar \
-  /usr/lib/jvm/java-11-openjdk/saxon/saxon.jar
+RUN apk add --no-cache libffi-dev openssl-dev python3-dev jq
 
-ENV CLASSPATH=${CLASSPATH}:/usr/lib/jvm/java-11-openjdk/saxon/saxon.jar
-
-RUN pip3 install --upgrade pip && pip3 install -r requirements.txt --ignore-installed
+RUN pip install "pip>=0.20.3.4,<21.0" && pip install -r requirements.txt
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
 COPY harvest-run-cron ${APP_DIR}
 COPY datajson-wget-cron ${APP_DIR}
+
 COPY start_ckan_web.sh ${APP_DIR}
 
-COPY doi_prerun.py ${APP_DIR}
+COPY prerun.py ${APP_DIR}
 
 COPY start_ckan_worker.sh ${APP_DIR}
-
 COPY supervisor.worker.conf /etc/supervisord.d/worker.conf
-
-RUN ln -s /usr/bin/python3 /usr/bin/python
 
 COPY create_datajson.sh ${APP_DIR}
 
@@ -56,7 +44,7 @@ RUN apk update && apk add nginx
 RUN adduser -D -g 'www' www && chown -R www:www /var/lib/nginx
 
 RUN mkdir /var/www/datajson/ && chown -R www /var/www/datajson/
-RUN chown root -R /srv/app/
+
 COPY nginx_ckan /etc/nginx/nginx.conf
 
 # Dev additions

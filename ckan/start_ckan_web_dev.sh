@@ -3,9 +3,6 @@
 # Install any local extensions in the src_extensions volume
 echo "Looking for local extensions to install..."
 echo "Extension dir contents:"
-mkdir /var/lib/ckan/webassets
-
-
 ls -la $SRC_EXTENSIONS_DIR
 for i in $SRC_EXTENSIONS_DIR/*
 do
@@ -17,9 +14,9 @@ do
             cd $i
             # Uninstall any current implementation of the code
             echo uninstalling "${PWD##*/}"
-            pip3 uninstall "${PWD##*/}"
+            pip uninstall "${PWD##*/}"
             # Install the extension in editable mode
-            pip3 install -e .
+            pip install -e .
             echo "Found setup.py file in $i"
             cd $APP_DIR
         fi
@@ -28,7 +25,7 @@ do
         if [ -f $i/test.ini ];
         then
             echo "Updating \`test.ini\` reference to \`test-core.ini\` for plugin $i"
-            ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
+            paster --plugin=ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
         fi
 
         # Add configuration file to testing data json extension if applicable
@@ -49,15 +46,16 @@ fi
 
 # Set debug to true
 echo "Enabling debug mode"
-# ckan config-tool $CKAN_INI -s DEFAULT "debug = true"
+paster --plugin=ckan config-tool $CKAN_INI -s DEFAULT "debug = true"
+
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
-ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
+paster --plugin=ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
 
 
 # Update test-core.ini DB, SOLR & Redis settings
 echo "Loading test settings into test-core.ini"
-ckan config-tool $SRC_DIR/ckan/test-core.ini \
+paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini \
     "sqlalchemy.url = $TEST_CKAN_SQLALCHEMY_URL" \
     "ckan.datastore.write_url = $TEST_CKAN_DATASTORE_WRITE_URL" \
     "ckan.datastore.read_url = $TEST_CKAN_DATASTORE_READ_URL" \
@@ -65,7 +63,7 @@ ckan config-tool $SRC_DIR/ckan/test-core.ini \
     "ckan.redis.url = $TEST_CKAN_REDIS_URL"
 
 # Update the theme for DOI
-ckan config-tool $CKAN_INI \
+paster --plugin=ckan config-tool $CKAN_INI \
     "ckan.site_title = $CKAN__SITE_TITLE" \
     "ckan.site_description = $CKAN__SITE_DESCRIPTION" \
     "ckan.site_intro_text = $CKAN__SITE_INTRO_TEXT" \
@@ -73,7 +71,7 @@ ckan config-tool $CKAN_INI \
     "ckan.site_about = $CKAN__SITE_ABOUT" \
 
 # Run the prerun script to init CKAN and create the default admin user
-python doi_prerun.py
+sudo -u ckan -EH python prerun.py
 
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
@@ -87,17 +85,5 @@ then
         echo
     done
 fi
-./create_datajson.sh &
 
-UWSGI_OPTS="--plugins http,python \
-            --socket /tmp/uwsgi.sock \
-            --wsgi-file /srv/app/wsgi.py \
-            --module wsgi:application \
-            --http 0.0.0.0:5000 \
-            --master --enable-threads \
-            --lazy-apps \
-            -p 2 -L -b 32768 --vacuum \
-            --harakiri $UWSGI_HARAKIRI"
-# Start uwsgi
-uwsgi $UWSGI_OPTS
-sleep 60
+sudo -u ckan -EH paster serve --reload $CKAN_INI

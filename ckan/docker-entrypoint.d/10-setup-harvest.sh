@@ -1,2 +1,2 @@
 echo "Init Harvest database tables"
-ckan harvester initdb
+paster --plugin=ckanext-harvest harvester initdb --config=$CKAN_INI

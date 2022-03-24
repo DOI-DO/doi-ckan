@@ -5,7 +5,7 @@ describe('DCAT-US file export', () => {
         cy.request(`/data.json`).should((response) => {
             expect(response.status).to.eq(200)
             //let dcat_us = JSON.parse(response.body)
-            cy.wrap(JSON.parse(response.body)['dataset'].length).should('eq', 9)
+            cy.wrap(JSON.parse(response.body)['dataset'].length).should('eq', 8)
 
         })
     })
@@ -14,7 +14,7 @@ describe('DCAT-US file export', () => {
         cy.request(`/organization/${harvestOrg}/data.json`).should((response) => {
             expect(response.status).to.eq(200)
             //let dcat_us = JSON.parse(response.body)
-            cy.wrap(JSON.parse(response.body)['dataset'].length).should('eq', 9)
+            cy.wrap(JSON.parse(response.body)['dataset'].length).should('eq', 8)
         })
     })
 })

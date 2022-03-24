@@ -34,7 +34,7 @@ If you want to be able to use pdb to debug the code, after running build and up 
 
 If you need to run a one-off ckan command (like rebuild search-index), use the following syntax:
 
-`docker-compose exec ckan-worker bash -c 'ckan search-index rebuild -c $CKAN_INI'`
+`docker-compose exec ckan-worker bash -c 'paster --plugin=ckan search-index rebuild -c $CKAN_INI'`
 
 ##### Debug extension locally
 If you want to debug an extension and still have easy access to your normal IDE, you
