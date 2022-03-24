@@ -21,18 +21,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: checkout
-        uses: actions/checkout@v2
-        with:
-          access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-          repo: ${{ secrets.REPO_NAME }}
-          region: ${{ secrets.REGION }}
-          tags: solr
-          dockerfile: solr/Dockerfile
-          path: solr/
-
       - name: Push new images
         uses: kciter/aws-ecr-action@master
         with:

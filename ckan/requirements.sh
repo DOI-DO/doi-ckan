@@ -19,6 +19,6 @@ trap cleanup EXIT
 
 pip install virtualenv
 virtualenv $venv -p /usr/bin/python
-${venv}/bin/pip install -r $mydir/requirements.in.txt --ignore-installed
+${venv}/bin/pip install -r $mydir/requirements.in.txt
 
 ${venv}/bin/pip freeze --quiet > $mydir/requirements.txt

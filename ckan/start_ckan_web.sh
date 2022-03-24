@@ -1,10 +1,8 @@
 #!/bin/bash
 
-
-mkdir /var/lib/ckan/webassets
-echo "Disabling debug mode"
 # Set debug to false
-ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
+echo "Disabling debug mode"
+paster --plugin=ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
 
 # Install any local extensions in the src_extensions volume
 echo "Looking for local extensions to install..."
@@ -20,9 +18,9 @@ do
             cd $i
             # Uninstall any current implementation of the code
             echo uninstalling "${PWD##*/}"
-            pip3 uninstall "${PWD##*/}"
+            pip uninstall "${PWD##*/}"
             # Install the extension in editable mode
-            pip3 install -e .
+            pip install -e .
             echo "Found setup.py file in $i"
             cd $APP_DIR
         fi
@@ -31,7 +29,7 @@ do
         if [ -f $i/test.ini ];
         then
             echo "Updating \`test.ini\` reference to \`test-core.ini\` for plugin $i"
-            ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
+            paster --plugin=ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
         fi
 
         # Add configuration file to testing data json extension if applicable
@@ -52,20 +50,19 @@ fi
 
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
-ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
+paster --plugin=ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
 
 
 # Lock down user view/create & set timeout to 12 hours
 echo "Loading test settings into our ini file"
-ckan config-tool $CKAN_INI \
+paster --plugin=ckan config-tool $CKAN_INI \
     "ckan.auth.public_user_details = false" \
     "ckan.auth.create_user_via_web = false" \
     "who.timeout = 43200"
 
-ckan -c $CKAN_INI db upgrade
-
 # Run the prerun script to init CKAN and create the default admin user
-python doi_prerun.py
+sudo -u ckan -EH python prerun.py
+
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
 then
@@ -90,17 +87,9 @@ chown root:root /etc/crontabs/root && /usr/sbin/crond -f &
 ./create_datajson.sh &
 
 # Set the common uwsgi options
-UWSGI_OPTS="--plugins http,python \
-            --socket /tmp/uwsgi.sock \
-            --wsgi-file /srv/app/wsgi.py \
-            --module wsgi:application \
-            --http 0.0.0.0:5001 \
-            --master --enable-threads \
-            --lazy-apps \
-            -p 2 -L -b 32768 --vacuum \
-            --harakiri $UWSGI_HARAKIRI"
+UWSGI_OPTS="--plugins http,python,gevent --socket /tmp/uwsgi.sock --uid 92 --gid 92 --http :5001 --master --enable-threads --paste config:/srv/app/production.ini --paste-logger --lazy-apps --gevent 2000 -p 2 -L -b 32768 --http-timeout 15000"
 # Start uwsgi
-uwsgi $UWSGI_OPTS &
+sudo -u ckan -EH uwsgi $UWSGI_OPTS &
 nginx -g 'daemon off;'
 
 # supervisord --configuration /etc/supervisord.conf

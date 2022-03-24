@@ -2,7 +2,6 @@ describe('Cleanup site', () => {
     const dataJsonHarvestSoureName = 'cypress-harvest-datajson'
     const wafIsoHarvestSourceName = 'cypress-harvest-waf-iso'
     const dcatUsOrg = 'dcat-us-org';
-    const wafFgdcHarvestSourceName = 'cypress-harvest-waf-fgdc'
     before(() => {
         /**
          * Login as cypress user and create an organization for testing harvest source creation and running the jobs
@@ -12,7 +11,6 @@ describe('Cleanup site', () => {
         // Clear and remove all harvested data
         cy.delete_harvest_source(dataJsonHarvestSoureName);
         cy.delete_harvest_source(wafIsoHarvestSourceName);
-        cy.delete_harvest_source(wafFgdcHarvestSourceName);
 
         // Sometimes things are left in the DB locally, you can use this to delete 1-off datasets
         // cy.delete_dataset("invasive-plant-prioritization-for-inventory-and-early-detection-at-guadalupe-nipomo-dunes-");
