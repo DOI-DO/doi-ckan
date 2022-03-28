@@ -21,18 +21,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: Push new images
-        uses: kciter/aws-ecr-action@master
-        with:
-          access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-          repo: ${{ secrets.REPO_NAME }}
-          region: ${{ secrets.REGION }}
-          tags: ckan
-          dockerfile: ckan/Dockerfile
-          path: ckan/
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -40,6 +28,32 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.REGION }}
 
-      - name: Deploy latest images
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push ckan image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: doi-ckan
+          IMAGE_TAG: ckan
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ckan/
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Build, tag, and push solr image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: doi-ckan
+          IMAGE_TAG: solr
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG solr/
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Deploy latest ckan images
         run: |
           aws ecs update-service --cluster ${{ secrets.CLUSTER }}  --service ${{ secrets.SERVICE }} --force-new-deployment
+
+      - name: Deploy latest solr images
+        run: |
+          aws ecs update-service --cluster ${{ secrets.CLUSTER }}  --service doi-solr --force-new-deployment
