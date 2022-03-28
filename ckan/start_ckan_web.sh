@@ -4,6 +4,8 @@
 mkdir /var/lib/ckan/webassets
 echo "Disabling debug mode"
 # Set debug to false
+ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
+echo "ckan.ini location $CKAN_INI"
 ckan config-tool $CKAN_INI -s DEFAULT "debug = false"
 
 # Install any local extensions in the src_extensions volume

@@ -1,3 +1,4 @@
+  
 import os
 import sys
 import time
@@ -38,18 +39,15 @@ def check_solr_connection(retry=None):
         except TypeError:
             pass
 
+if __name__ == '__main__':
 
-if __name__ == "__main__":
-
-    maintenance = os.environ.get("MAINTENANCE_MODE", "").lower() == "true"
+    maintenance = os.environ.get('MAINTENANCE_MODE', '').lower() == 'true'
 
     if maintenance:
-        print("[prerun] Maintenance mode, skipping setup...")
+        print('[prerun] Maintenance mode, skipping setup...')
     else:
+        pr.update_plugins()
         pr.check_main_db_connection()
         pr.init_db()
-        pr.update_plugins()
-        pr.check_datastore_db_connection()
-        pr.init_datastore_db()
         check_solr_connection()
         pr.create_sysadmin()
