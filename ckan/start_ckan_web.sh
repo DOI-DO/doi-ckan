@@ -58,7 +58,9 @@ echo "Loading test settings into our ini file"
 paster --plugin=ckan config-tool $CKAN_INI \
     "ckan.auth.public_user_details = false" \
     "ckan.auth.create_user_via_web = false" \
-    "who.timeout = 43200"
+    "who.timeout = 43200" \
+    "who.secure = True" \
+    "who.httponly = False"
 
 # Run the prerun script to init CKAN and create the default admin user
 sudo -u ckan -EH python prerun.py
