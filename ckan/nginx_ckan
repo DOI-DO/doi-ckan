@@ -10,8 +10,8 @@ http {
         add_header X-Frame-Options SAMEORIGIN always;
         # root /srv/app;
         listen 5000 default_server;
-        add_header Cache-Control "must-revalidate, no-store"
-        add_header Cache-Control "must-revalidate, no-cache"
+        add_header Cache-Control "must-revalidate, no-store";
+        add_header Cache-Control "must-revalidate, no-cache";
         client_max_body_size 100M;
         location = /data.json {
             alias /var/www/datajson/data.json;
