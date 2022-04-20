@@ -12,6 +12,7 @@ http {
         listen 5000 default_server;
         add_header Cache-Control "must-revalidate, no-store";
         add_header Cache-Control "must-revalidate, no-cache";
+        add_header Strict-Transport-Security "max-age=31536000;" always;
         client_max_body_size 100M;
         location = /data.json {
             alias /var/www/datajson/data.json;
@@ -32,7 +33,6 @@ http {
             # Handles redirects properly to point to same port
             port_in_redirect off;
             # HSTS compliance
-            add_header Strict-Transport-Security "max-age=31536000;" always;
             # In emergency comment out line to force caching
             # proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
         }
