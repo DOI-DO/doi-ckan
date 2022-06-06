@@ -11,6 +11,7 @@ http {
         # root /srv/app;
         listen 5000 default_server;
         add_header Cache-Control "must-revalidate, no-store";
+        add_header Content-Security-Policy "default-src 'self';" always;
         add_header Cache-Control "must-revalidate, no-cache";
         add_header Strict-Transport-Security "max-age=31536000;" always;
         client_max_body_size 100M;
