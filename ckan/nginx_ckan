@@ -11,7 +11,7 @@ http {
         # root /srv/app;
         listen 5000 default_server;
         add_header Cache-Control "must-revalidate, no-store";
-        add_header Content-Security-Policy "default-src 'self' 'unsafe-inline'; style-src-elem 'self' https://fonts.googleapis.com; img-src 'self' https://lccnetwork.org/ https://onrr.gov https://www.fws.gov https://gravatar.com https://*.gravatar.com https://*.tile.openstreetmap.org https://www.bia.gov https://upload.wikimedia.org ; font-src 'self' https://netdna.bootstrapcdn.com https://fonts.gstatic.com; script-src 'self' 'unsafe-eval' 'unsafe-inline';" always;
+        add_header Content-Security-Policy "default-src 'self' 'unsafe-inline'; style-src-elem 'self' https://fonts.googleapis.com; img-src 'self' https://lccnetwork.org/ https://onrr.gov https://www.fws.gov https://gravatar.com https://*.gravatar.com https://www.boem.gov https://*.tile.openstreetmap.org https://www.bia.gov https://upload.wikimedia.org ; font-src 'self' https://netdna.bootstrapcdn.com https://fonts.gstatic.com; script-src 'self' 'unsafe-eval' 'unsafe-inline';" always;
         add_header Cache-Control "must-revalidate, no-cache";
         add_header Strict-Transport-Security "max-age=31536000;" always;
         client_max_body_size 100M;
