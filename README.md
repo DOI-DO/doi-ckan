@@ -45,13 +45,22 @@ a restart of the image.
 
 ### Release
 
+Pushing to aws is now automated through github actions. It will build, run tests, and deploy to aws upon a push to the `production` branch.
+
+The following environment secrets need to be setup:
+
+- AWS_ACCESS_KEY_ID
+- AWS_SECRET_ACCESS_KEY
+- AWS_ACCOUNT_ID
+- CLUSTER (Currently `doi-prod-ecs-only-v2-ECSCluster-5ErNpXGDX2pq`)
+- REGION (Currently `us-east-1`)
+- SERVICE (Currently `doi-ckan-stack`)
+
+#### Manual Release
+
 To build a production ready version of the application, you will want to clean and rebuild:
 `clean build-prod up-prod`. This will clean and rebuild the ckan image
 for production, ignoring any cache.
-
-Pushing to aws is now automated through github actions. It will build, run tests, and deploy to aws upon a push to the `production` branch.
-
-If you need to manually push your image, follow the steps below.
 
 Then, you can push this image to AWS for deployment by following the following steps. For many commands, you'll need the ecr-uri which you can find by running `aws ecr describe-repositories` and referencing the `repositoryUri` field.
 
